@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="三叶草实验室“期末任务”任务一(第六课)任务一：完成加密僵尸的游戏6.应用前端和Web3.js①介绍 Web3.js完成第五课以后，我们的僵尸 DApp 的 Solidity 合约部分就完成了。现在我们来做一个基本的网页好让你的用户能玩它。 要做到这一点，我们将使用以太坊基金发布的 JavaScript 库 —— Web3.js. 什么是 Web3.js? 还记得么？以太坊网络是由节点组成的，每一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="僵尸游戏第六课">
+<meta property="og:url" content="https://formikasaever.github.io./post/8cc639b3.html">
+<meta property="og:site_name" content="ForMikasaEver&#39;s blog">
+<meta property="og:description" content="三叶草实验室“期末任务”任务一(第六课)任务一：完成加密僵尸的游戏6.应用前端和Web3.js①介绍 Web3.js完成第五课以后，我们的僵尸 DApp 的 Solidity 合约部分就完成了。现在我们来做一个基本的网页好让你的用户能玩它。 要做到这一点，我们将使用以太坊基金发布的 JavaScript 库 —— Web3.js. 什么是 Web3.js? 还记得么？以太坊网络是由节点组成的，每一">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-03-27T10:42:05.000Z">
+<meta property="article:modified_time" content="2023-03-27T10:42:57.717Z">
+<meta property="article:author" content="ForMikasaEver">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>僵尸游戏第六课</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/4c73e1c2.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/e9c8726a.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://formikasaever.github.io./post/8cc639b3.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://formikasaever.github.io./post/8cc639b3.html&text=僵尸游戏第六课"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://formikasaever.github.io./post/8cc639b3.html&title=僵尸游戏第六课"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://formikasaever.github.io./post/8cc639b3.html&is_video=false&description=僵尸游戏第六课"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=僵尸游戏第六课&body=Check out this article: https://formikasaever.github.io./post/8cc639b3.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://formikasaever.github.io./post/8cc639b3.html&title=僵尸游戏第六课"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://formikasaever.github.io./post/8cc639b3.html&title=僵尸游戏第六课"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://formikasaever.github.io./post/8cc639b3.html&title=僵尸游戏第六课"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://formikasaever.github.io./post/8cc639b3.html&title=僵尸游戏第六课"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://formikasaever.github.io./post/8cc639b3.html&name=僵尸游戏第六课&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://formikasaever.github.io./post/8cc639b3.html&t=僵尸游戏第六课"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E5%8F%B6%E8%8D%89%E5%AE%9E%E9%AA%8C%E5%AE%A4%E2%80%9C%E6%9C%9F%E6%9C%AB%E4%BB%BB%E5%8A%A1%E2%80%9D%E4%BB%BB%E5%8A%A1%E4%B8%80-%E7%AC%AC%E5%85%AD%E8%AF%BE"><span class="toc-number">1.</span> <span class="toc-text">三叶草实验室“期末任务”任务一(第六课)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9A%E5%AE%8C%E6%88%90%E5%8A%A0%E5%AF%86%E5%83%B5%E5%B0%B8%E7%9A%84%E6%B8%B8%E6%88%8F"><span class="toc-number">1.1.</span> <span class="toc-text">任务一：完成加密僵尸的游戏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%BA%94%E7%94%A8%E5%89%8D%E7%AB%AF%E5%92%8CWeb3-js"><span class="toc-number">1.1.1.</span> <span class="toc-text">6.应用前端和Web3.js</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A0%E4%BB%8B%E7%BB%8D-Web3-js"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">①介绍 Web3.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A1Web3-%E6%8F%90%E4%BE%9B%E8%80%85"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">②Web3 提供者</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%83%E5%BE%97"><span class="toc-number">1.1.2.</span> <span class="toc-text">心得</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A0"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">①</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        僵尸游戏第六课
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">ForMikasaEver</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-03-27T10:42:05.000Z" class="dt-published" itemprop="datePublished">2023-03-27</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="三叶草实验室“期末任务”任务一-第六课"><a href="#三叶草实验室“期末任务”任务一-第六课" class="headerlink" title="三叶草实验室“期末任务”任务一(第六课)"></a>三叶草实验室“期末任务”任务一(第六课)</h1><h2 id="任务一：完成加密僵尸的游戏"><a href="#任务一：完成加密僵尸的游戏" class="headerlink" title="任务一：完成加密僵尸的游戏"></a>任务一：完成加密僵尸的游戏</h2><h3 id="6-应用前端和Web3-js"><a href="#6-应用前端和Web3-js" class="headerlink" title="6.应用前端和Web3.js"></a>6.应用前端和Web3.js</h3><h4 id="①介绍-Web3-js"><a href="#①介绍-Web3-js" class="headerlink" title="①介绍 Web3.js"></a>①介绍 Web3.js</h4><p>完成第五课以后，我们的僵尸 DApp 的 Solidity 合约部分就完成了。现在我们来做一个基本的网页好让你的用户能玩它。 要做到这一点，我们将使用以太坊基金发布的 JavaScript 库 —— <code>Web3.js.</code></p>
+<p><strong>什么是 Web3.js?</strong></p>
+<p>还记得么？以太坊网络是由节点组成的，每一个节点都包含了区块链的一份拷贝。当你想要调用一份智能合约的一个方法，你需要从其中一个节点中查找并告诉它:</p>
+<ol>
+<li>智能合约的地址</li>
+<li>你想调用的方法，以及</li>
+<li>你想传入那个方法的参数</li>
+</ol>
+<p>以太坊节点只能识别一种叫做 <code>JSON-RPC</code> 的语言。这种语言直接读起来并不好懂。当你你想调用一个合约的方法的时候，需要发送的查询语句将会是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 哈……祝你写所有这样的函数调用的时候都一次通过</span><br><span class="line">// 往右边拉…… ==&gt;</span><br><span class="line">&#123;&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;eth_sendTransaction&quot;,&quot;params&quot;:[&#123;&quot;from&quot;:&quot;0xb60e8dd61c5d32be8058bb8eb970870f07233155&quot;,&quot;to&quot;:&quot;0xd46e8dd67c5d32be8058bb8eb970870f07244567&quot;,&quot;gas&quot;:&quot;0x76c0&quot;,&quot;gasPrice&quot;:&quot;0x9184e72a000&quot;,&quot;value&quot;:&quot;0x9184e72a&quot;,&quot;data&quot;:&quot;0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675&quot;&#125;],&quot;id&quot;:1&#125;</span><br></pre></td></tr></table></figure>
+<p>幸运的是 Web3.js 把这些令人讨厌的查询语句都隐藏起来了， 所以你只需要与方便易懂的 JavaScript 界面进行交互即可。</p>
+<p>你不需要构建上面的查询语句，在你的代码中调用一个函数看起来将是这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CryptoZombies.methods.createRandomZombie(&quot;Vitalik Nakamoto 🤔&quot;)</span><br><span class="line">  .send(&#123; from: &quot;0xb60e8dd61c5d32be8058bb8eb970870f07233155&quot;, gas: &quot;3000000&quot; &#125;)</span><br></pre></td></tr></table></figure>
+<p>我们将在接下来的几章详细解释这些语句，不过首先我们来把 Web3.js 环境搭建起来。</p>
+<p><strong>准备好了么？</strong><br>取决于你的项目工作流程和你的爱好，你可以用一些常用工具把 Web3.js 添加进来：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 用 NPM</span><br><span class="line">npm install web3</span><br><span class="line"></span><br><span class="line">// 用 Yarn</span><br><span class="line">yarn add web3</span><br><span class="line"></span><br><span class="line">// 用 Bower</span><br><span class="line">bower install web3</span><br><span class="line"></span><br><span class="line">// ...或者其他。</span><br></pre></td></tr></table></figure>
+<p>甚至，你可以从 <code>github</code> 直接下载压缩后的 <code>.js </code>文件 然后包含到你的项目文件中：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot; src=&quot;web3.min.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>因为我们不想让你花太多在项目环境搭建上，在本教程中我们将使用上面的 <code>script</code> 标签来将 Web3.js 引入。</p>
+<p>实战演习：<br><strong>index.html:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;CryptoZombies front-end&lt;/title&gt;</span><br><span class="line">    &lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot; src=&quot;web3.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line"></span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="②Web3-提供者"><a href="#②Web3-提供者" class="headerlink" title="②Web3 提供者"></a>②Web3 提供者</h4><hr>
+<h3 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h3><h4 id="①"><a href="#①" class="headerlink" title="①"></a>①</h4>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E5%8F%B6%E8%8D%89%E5%AE%9E%E9%AA%8C%E5%AE%A4%E2%80%9C%E6%9C%9F%E6%9C%AB%E4%BB%BB%E5%8A%A1%E2%80%9D%E4%BB%BB%E5%8A%A1%E4%B8%80-%E7%AC%AC%E5%85%AD%E8%AF%BE"><span class="toc-number">1.</span> <span class="toc-text">三叶草实验室“期末任务”任务一(第六课)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9A%E5%AE%8C%E6%88%90%E5%8A%A0%E5%AF%86%E5%83%B5%E5%B0%B8%E7%9A%84%E6%B8%B8%E6%88%8F"><span class="toc-number">1.1.</span> <span class="toc-text">任务一：完成加密僵尸的游戏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%BA%94%E7%94%A8%E5%89%8D%E7%AB%AF%E5%92%8CWeb3-js"><span class="toc-number">1.1.1.</span> <span class="toc-text">6.应用前端和Web3.js</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A0%E4%BB%8B%E7%BB%8D-Web3-js"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">①介绍 Web3.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A1Web3-%E6%8F%90%E4%BE%9B%E8%80%85"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">②Web3 提供者</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%83%E5%BE%97"><span class="toc-number">1.1.2.</span> <span class="toc-text">心得</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A0"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">①</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://formikasaever.github.io./post/8cc639b3.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://formikasaever.github.io./post/8cc639b3.html&text=僵尸游戏第六课"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://formikasaever.github.io./post/8cc639b3.html&title=僵尸游戏第六课"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://formikasaever.github.io./post/8cc639b3.html&is_video=false&description=僵尸游戏第六课"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=僵尸游戏第六课&body=Check out this article: https://formikasaever.github.io./post/8cc639b3.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://formikasaever.github.io./post/8cc639b3.html&title=僵尸游戏第六课"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://formikasaever.github.io./post/8cc639b3.html&title=僵尸游戏第六课"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://formikasaever.github.io./post/8cc639b3.html&title=僵尸游戏第六课"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://formikasaever.github.io./post/8cc639b3.html&title=僵尸游戏第六课"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://formikasaever.github.io./post/8cc639b3.html&name=僵尸游戏第六课&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://formikasaever.github.io./post/8cc639b3.html&t=僵尸游戏第六课"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    ForMikasaEver
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>

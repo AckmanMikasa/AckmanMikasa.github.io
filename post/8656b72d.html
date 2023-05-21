@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="三叶草实验室“期末任务”总结（续）(第四课)任务一：完成加密僵尸的游戏4.僵尸作战系统①可支付截至目前，我们只接触到很少的 函数修饰符。 要记住所有的东西很难，所以我们来个概览：  我们有决定函数何时和被谁调用的可见性修饰符: private 意味着它只能被合约内部调用； internal 就像 private 但是也能被继承的合约调用； external 只能从合约外部调用；最后 public">
+<meta property="og:type" content="article">
+<meta property="og:title" content="僵尸游戏第四课">
+<meta property="og:url" content="https://formikasaever.github.io./post/8656b72d.html">
+<meta property="og:site_name" content="ForMikasaEver&#39;s blog">
+<meta property="og:description" content="三叶草实验室“期末任务”总结（续）(第四课)任务一：完成加密僵尸的游戏4.僵尸作战系统①可支付截至目前，我们只接触到很少的 函数修饰符。 要记住所有的东西很难，所以我们来个概览：  我们有决定函数何时和被谁调用的可见性修饰符: private 意味着它只能被合约内部调用； internal 就像 private 但是也能被继承的合约调用； external 只能从合约外部调用；最后 public">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-03-27T10:41:09.000Z">
+<meta property="article:modified_time" content="2023-03-27T10:42:57.720Z">
+<meta property="article:author" content="ForMikasaEver">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>僵尸游戏第四课</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/e9c8726a.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/d9a0b533.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://formikasaever.github.io./post/8656b72d.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://formikasaever.github.io./post/8656b72d.html&text=僵尸游戏第四课"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://formikasaever.github.io./post/8656b72d.html&title=僵尸游戏第四课"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://formikasaever.github.io./post/8656b72d.html&is_video=false&description=僵尸游戏第四课"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=僵尸游戏第四课&body=Check out this article: https://formikasaever.github.io./post/8656b72d.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://formikasaever.github.io./post/8656b72d.html&title=僵尸游戏第四课"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://formikasaever.github.io./post/8656b72d.html&title=僵尸游戏第四课"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://formikasaever.github.io./post/8656b72d.html&title=僵尸游戏第四课"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://formikasaever.github.io./post/8656b72d.html&title=僵尸游戏第四课"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://formikasaever.github.io./post/8656b72d.html&name=僵尸游戏第四课&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://formikasaever.github.io./post/8656b72d.html&t=僵尸游戏第四课"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E5%8F%B6%E8%8D%89%E5%AE%9E%E9%AA%8C%E5%AE%A4%E2%80%9C%E6%9C%9F%E6%9C%AB%E4%BB%BB%E5%8A%A1%E2%80%9D%E6%80%BB%E7%BB%93%EF%BC%88%E7%BB%AD%EF%BC%89-%E7%AC%AC%E5%9B%9B%E8%AF%BE"><span class="toc-number">1.</span> <span class="toc-text">三叶草实验室“期末任务”总结（续）(第四课)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9A%E5%AE%8C%E6%88%90%E5%8A%A0%E5%AF%86%E5%83%B5%E5%B0%B8%E7%9A%84%E6%B8%B8%E6%88%8F"><span class="toc-number">1.1.</span> <span class="toc-text">任务一：完成加密僵尸的游戏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%83%B5%E5%B0%B8%E4%BD%9C%E6%88%98%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.1.1.</span> <span class="toc-text">4.僵尸作战系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A0%E5%8F%AF%E6%94%AF%E4%BB%98"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">①可支付</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A1%E6%8F%90%E7%8E%B0"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">②提现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A2%E5%83%B5%E5%B0%B8%E6%88%98%E6%96%97"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">③僵尸战斗</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A3%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">④随机数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A4%E5%83%B5%E5%B0%B8%E5%AF%B9%E5%86%B3"><span class="toc-number">1.1.1.5.</span> <span class="toc-text">⑤僵尸对决</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A5%E9%87%8D%E6%9E%84%E9%80%9A%E7%94%A8%E9%80%BB%E8%BE%91"><span class="toc-number">1.1.1.6.</span> <span class="toc-text">⑥重构通用逻辑</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A6%E6%9B%B4%E5%A4%9A%E9%87%8D%E6%9E%84"><span class="toc-number">1.1.1.7.</span> <span class="toc-text">⑦更多重构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A7%E5%9B%9E%E5%88%B0%E6%94%BB%E5%87%BB"><span class="toc-number">1.1.1.8.</span> <span class="toc-text">⑧回到攻击</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A8%E5%83%B5%E5%B0%B8%E7%9A%84%E8%BE%93%E8%B5%A2"><span class="toc-number">1.1.1.9.</span> <span class="toc-text">⑨僵尸的输赢</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A9%E5%83%B5%E5%B0%B8%E8%83%9C%E5%88%A9%E4%BA%86%F0%9F%98%84"><span class="toc-number">1.1.1.10.</span> <span class="toc-text">⑩僵尸胜利了😄</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%AA%E5%83%B5%E5%B0%B8%E5%A4%B1%E8%B4%A5%F0%9F%98%9E"><span class="toc-number">1.1.1.11.</span> <span class="toc-text">⑪僵尸失败😞</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%AB%E6%94%BE%E5%9C%A8%E4%B8%80%E8%B5%B7"><span class="toc-number">1.1.1.12.</span> <span class="toc-text">⑫放在一起</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%ACLesson-4-Complete%EF%BC%81"><span class="toc-number">1.1.1.13.</span> <span class="toc-text">⑬Lesson 4 Complete！</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%83%E5%BE%97"><span class="toc-number">1.1.2.</span> <span class="toc-text">心得</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A0%E7%AC%AC%E5%9B%9B%E8%AF%BE-%E7%AC%AC%E2%91%A9%E8%8A%82"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">①第四课 第⑩节</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        僵尸游戏第四课
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">ForMikasaEver</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-03-27T10:41:09.000Z" class="dt-published" itemprop="datePublished">2023-03-27</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="三叶草实验室“期末任务”总结（续）-第四课"><a href="#三叶草实验室“期末任务”总结（续）-第四课" class="headerlink" title="三叶草实验室“期末任务”总结（续）(第四课)"></a>三叶草实验室“期末任务”总结（续）(第四课)</h1><h2 id="任务一：完成加密僵尸的游戏"><a href="#任务一：完成加密僵尸的游戏" class="headerlink" title="任务一：完成加密僵尸的游戏"></a>任务一：完成加密僵尸的游戏</h2><h3 id="4-僵尸作战系统"><a href="#4-僵尸作战系统" class="headerlink" title="4.僵尸作战系统"></a>4.僵尸作战系统</h3><h4 id="①可支付"><a href="#①可支付" class="headerlink" title="①可支付"></a>①可支付</h4><p>截至目前，我们只接触到很少的 函数修饰符。 要记住所有的东西很难，所以我们来个概览：</p>
+<ol>
+<li><p>我们有决定函数何时和被谁调用的可见性修饰符: private 意味着它只能被合约内部调用； internal 就像 private 但是也能被继承的合约调用； external 只能从合约外部调用；最后 public 可以在任何地方调用，不管是内部还是外部。</p>
+</li>
+<li><p>我们也有状态修饰符， 告诉我们函数如何和区块链交互: view 告诉我们运行这个函数不会更改和保存任何数据； pure 告诉我们这个函数不但不会往区块链写数据，它甚至不从区块链读取数据。这两种在被从合约外部调用的时候都不花费任何gas（但是它们在被内部其他函数调用的时候将会耗费gas）。</p>
+</li>
+<li><p>然后我们有了自定义的 modifiers，例如在第三课学习的: onlyOwner 和 aboveLevel。 对于这些修饰符我们可以自定义其对函数的约束逻辑。</p>
+</li>
+</ol>
+<p>这些修饰符可以同时作用于一个函数定义上：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function test() external view onlyOwner anotherModifier &#123; /* ... */ &#125;</span><br></pre></td></tr></table></figure>
+<p>在这一章，我们来学习一个新的修饰符 payable.</p>
+<p><strong>payable 修饰符</strong></p>
+<p>payable 方法是让 Solidity 和以太坊变得如此酷的一部分 —— 它们是一种可以接收以太的特殊函数。</p>
+<p>先放一下。当你在调用一个普通网站服务器上的API函数的时候，你无法用你的函数传送美元——你也不能传送比特币。</p>
+<p>但是在以太坊中， 因为钱 (<em>以太</em>), 数据 (事务负载)， 以及合约代码本身都存在于以太坊。你可以在同时调用函数 并付钱给另外一个合约。</p>
+<p>这就允许出现很多有趣的逻辑， 比如向一个合约要求支付一定的钱来运行一个函数。</p>
+<p><strong>来看个例子</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">contract OnlineStore &#123;</span><br><span class="line">  function buySomething() external payable &#123;</span><br><span class="line">    // 检查以确定0.001以太发送出去来运行函数:</span><br><span class="line">    require(msg.value == 0.001 ether);</span><br><span class="line">    // 如果为真，一些用来向函数调用者发送数字内容的逻辑</span><br><span class="line">    transferThing(msg.sender);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这里，msg.value 是一种可以查看向合约发送了多少以太的方法，另外 ether 是一个內建单元。</p>
+<p>这里发生的事是，一些人会从 web3.js 调用这个函数 (从DApp的前端)， 像这样 :</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 假设 `OnlineStore` 在以太坊上指向你的合约:</span><br><span class="line">OnlineStore.buySomething().send(from: web3.eth.defaultAccount, value: web3.utils.toWei(0.001))</span><br></pre></td></tr></table></figure>
+<p>注意这个 value 字段， JavaScript 调用来指定发送多少(0.001)以太。如果把事务想象成一个信封，你发送到函数的参数就是信的内容。 添加一个 value 很像在信封里面放钱 —— 信件内容和钱同时发送给了接收者。</p>
+<blockquote>
+<p>注意： 如果一个函数没标记为payable， 而你尝试利用上面的方法发送以太，函数将拒绝你的事务。</p>
+</blockquote>
+<p>实战演习：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">uint levelUpFee = 0.001 ether;</span><br><span class="line"></span><br><span class="line">function levelUp(uint _zombieId) external payable &#123;</span><br><span class="line">    require(msg.value == levelUpFee);</span><br><span class="line">    zombies[_zombieId].level++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="②提现"><a href="#②提现" class="headerlink" title="②提现"></a>②提现</h4><p>在你发送以太之后，它将被存储进以合约的以太坊账户中， 并冻结在哪里 —— 除非你添加一个函数来从合约中把以太提现。</p>
+<p>你可以写一个函数来从合约中提现以太，类似这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">contract GetPaid is Ownable &#123;</span><br><span class="line">  function withdraw() external onlyOwner &#123;</span><br><span class="line">    owner.transfer(this.balance);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意我们使用 Ownable 合约中的 owner 和 onlyOwner，假定它已经被引入了。</p>
+<p>你可以通过 transfer 函数向一个地址发送以太， 然后 this.balance 将返回当前合约存储了多少以太。 所以如果100个用户每人向我们支付1以太， this.balance 将是100以太。</p>
+<p>你可以通过 transfer 向任何以太坊地址付钱。 比如，你可以有一个函数在 msg.sender 超额付款的时候给他们退钱：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">uint itemFee = 0.001 ether;</span><br><span class="line">msg.sender.transfer(msg.value - itemFee);</span><br></pre></td></tr></table></figure>
+<p>或者在一个有卖家和卖家的合约中， 你可以把卖家的地址存储起来， 当有人买了它的东西的时候，把买家支付的钱发送给它 seller.transfer(msg.value)。</p>
+<p>有很多例子来展示什么让以太坊编程如此之酷 —— 你可以拥有一个不被任何人控制的去中心化市场。</p>
+<p>实战演习：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function withdraw() external onlyOwner &#123;</span><br><span class="line">    owner.transfer(this.balance);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function setLevelUpFee(uint _fee) external onlyOwner &#123;</span><br><span class="line">    levelUpFee = _fee;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="③僵尸战斗"><a href="#③僵尸战斗" class="headerlink" title="③僵尸战斗"></a>③僵尸战斗</h4><p>在我们学习了可支付函数和合约余额之后，是时候为僵尸战斗添加功能了。</p>
+<p>遵循上一章的格式，我们新建一个攻击功能合约，并将代码放进新的文件中，引入上一个合约。<br>实战演习：<br>zombieattack.sol:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">import &quot;./zombiehelper.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract ZombieBattle is ZombieHelper &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="④随机数"><a href="#④随机数" class="headerlink" title="④随机数"></a>④随机数</h4><p><strong>用 keccak256 来制造随机数。</strong><br>Solidity 中最好的随机数生成器是 keccak256 哈希函数.</p>
+<p>我们可以这样来生成一些随机数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 生成一个0到100的随机数:</span><br><span class="line">uint randNonce = 0;</span><br><span class="line">uint random = uint(keccak256(now, msg.sender, randNonce)) % 100;</span><br><span class="line">randNonce++;</span><br><span class="line">uint random2 = uint(keccak256(now, msg.sender, randNonce)) % 100;</span><br></pre></td></tr></table></figure>
+<p>这个方法首先拿到 now 的时间戳、 msg.sender、 以及一个自增数 nonce （一个仅会被使用一次的数，这样我们就不会对相同的输入值调用一次以上哈希函数了）。</p>
+<p>然后利用 keccak 把输入的值转变为一个哈希值, 再将哈希值转换为 uint, 然后利用 % 100 来取最后两位, 就生成了一个0到100之间随机数了。</p>
+<p><strong>这个方法很容易被不诚实的节点攻击</strong><br>在以太坊上, 当你在和一个合约上调用函数的时候, 你会把它广播给一个节点或者在网络上的 transaction 节点们。 网络上的节点将收集很多事务, 试着成为第一个解决计算密集型数学问题的人，作为“工作证明”，然后将“工作证明”(Proof of Work, PoW)和事务一起作为一个 block 发布在网络上。</p>
+<p>一旦一个节点解决了一个PoW, 其他节点就会停止尝试解决这个 PoW, 并验证其他节点的事务列表是有效的，然后接受这个节点转而尝试解决下一个节点。</p>
+<p>这就让我们的随机数函数变得可利用了</p>
+<p>我们假设我们有一个硬币翻转合约——正面你赢双倍钱，反面你输掉所有的钱。假如它使用上面的方法来决定是正面还是反面 (random &gt;&#x3D; 50 算正面, random &lt; 50 算反面)。</p>
+<p>如果我正运行一个节点，我可以 只对我自己的节点 发布一个事务，且不分享它。 我可以运行硬币翻转方法来偷窥我的输赢 — 如果我输了，我就不把这个事务包含进我要解决的下一个区块中去。我可以一直运行这个方法，直到我赢得了硬币翻转并解决了下一个区块，然后获利。</p>
+<p><strong>所以我们该如何在以太坊上安全地生成随机数呢</strong><br>因为区块链的全部内容对所有参与者来说是透明的， 这就让这个问题变得很难，它的解决方法不在本课程讨论范围，你可以阅读 这个 StackOverflow 上的讨论 来获得一些主意。 一个方法是利用 oracle 来访问以太坊区块链之外的随机数函数。</p>
+<p>当然， 因为网络上成千上万的以太坊节点都在竞争解决下一个区块，我能成功解决下一个区块的几率非常之低。 这将花费我们巨大的计算资源来开发这个获利方法 — 但是如果奖励异常地高(比如我可以在硬币翻转函数中赢得 1个亿)， 那就很值得去攻击了。</p>
+<p>所以尽管这个方法在以太坊上不安全，在实际中，除非我们的随机函数有一大笔钱在上面，你游戏的用户一般是没有足够的资源去攻击的。</p>
+<p>因为在这个教程中，我们只是在编写一个简单的游戏来做演示，也没有真正的钱在里面，所以我们决定接受这个不足之处，使用这个简单的随机数生成函数。但是要谨记它是不安全的。</p>
+<p>实战演习：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">uint randNonce = 0;</span><br><span class="line"></span><br><span class="line">  function randMod(uint _modulus) internal returns(uint) &#123;</span><br><span class="line">    randNonce++;</span><br><span class="line">    return uint(keccak256(now, msg.sender, randNonce)) % _modulus;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="⑤僵尸对决"><a href="#⑤僵尸对决" class="headerlink" title="⑤僵尸对决"></a>⑤僵尸对决</h4><p>我们的合约已经有了一些随机性的来源，可以用进我们的僵尸战斗中去计算结果。</p>
+<p>我们的僵尸战斗看起来将是这个流程：</p>
+<ul>
+<li>你选择一个自己的僵尸，然后选择一个对手的僵尸去攻击。</li>
+<li>如果你是攻击方，你将有70%的几率获胜，防守方将有30%的几率获胜。</li>
+<li>所有的僵尸（攻守双方）都将有一个 winCount 和一个 lossCount，这两个值都将根据战斗结果增长。</li>
+<li>若攻击方获胜，这个僵尸将升级并产生一个新僵尸。</li>
+<li>如果攻击方失败，除了失败次数将加一外，什么都不会发生。</li>
+<li>无论输赢，当前僵尸的冷却时间都将被激活。</li>
+</ul>
+<p>这有一大堆的逻辑需要处理，我们将把这些步骤分解到接下来的课程中去。</p>
+<p>实战演习：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 在这里创建 attackVictoryProbability</span><br><span class="line">uint attackVictoryProbability = 70;</span><br><span class="line"></span><br><span class="line">// 在这里创建新函数</span><br><span class="line">function attack(uint _zombieId, uint _targetId) external &#123;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="⑥重构通用逻辑"><a href="#⑥重构通用逻辑" class="headerlink" title="⑥重构通用逻辑"></a>⑥重构通用逻辑</h4><p>不管谁调用我们的 attack 函数 —— 我们想确保用户的确拥有他们用来攻击的僵尸。如果你能用其他人的僵尸来攻击将是一个很大的安全问题。</p>
+<p>你能想一下我们如何添加一个检查步骤来看看调用这个函数的人就是他们传入的 _zombieId 的拥有者么？</p>
+<p>想一想，看看你能不能自己找到一些答案。</p>
+<p>花点时间…… 参考我们前面课程的代码来获得灵感。</p>
+<p><strong>答案</strong><br>我们在前面的课程里面已经做过很多次这样的检查了。 在 changeName(), changeDna(), 和 feedAndMultiply()里，我们做过这样的检查：</p>
+<p>require(msg.sender &#x3D;&#x3D; zombieToOwner[_zombieId]);<br>这和我们 attack 函数将要用到的检查逻辑是相同的。 正因我们要多次调用这个检查逻辑，让我们把它移到它自己的 modifier 中来清理代码并避免重复编码。</p>
+<p>实战演习：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 1. 在这里创建 modifier</span><br><span class="line">modifier ownerOf(uint _zombieId) &#123;</span><br><span class="line">    require(msg.sender == zombieToOwner[_zombieId]);</span><br><span class="line">    _;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">// 2. 在函数定义时增加 modifier :</span><br><span class="line">  function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) internal ownerOf(_zombieId) &#123;</span><br><span class="line">    // 3. 移除这一行</span><br><span class="line">    require(msg.sender == zombieToOwner[_zombieId]);</span><br></pre></td></tr></table></figure>
+<h4 id="⑦更多重构"><a href="#⑦更多重构" class="headerlink" title="⑦更多重构"></a>⑦更多重构</h4><p>在 zombiehelper.sol里有几处地方，需要我们实现我们新的 modifier—— ownerOf。</p>
+<p>实战演习：</p>
+<ol>
+<li><p>修改 changeName() 使其使用 ownerOf</p>
+</li>
+<li><p>修改 changeDna() 使其使用 ownerOf</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在changeName()函数与changeDna()函数的aboveLevel修饰符后面</span><br><span class="line">写上ownerOf(_zombieId)</span><br><span class="line">并删除两个函数中的</span><br><span class="line">require(msg.sender == zombieToOwner[_zombieId]);</span><br><span class="line">这一行代码即可</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="⑧回到攻击"><a href="#⑧回到攻击" class="headerlink" title="⑧回到攻击"></a>⑧回到攻击</h4><p>重构完成了，回到 zombieattack.sol。</p>
+<p>继续来完善我们的 attack 函数， 现在我们有了 ownerOf 修饰符来用了。</p>
+<p>实战演习：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function attack(uint _zombieId, uint _targetId) external ownerOf(_zombieId) &#123;</span><br><span class="line">    Zombie storage myZombie = zombies[_zombieId];</span><br><span class="line">    Zombie storage enemyZombie = zombies[_targetId];</span><br><span class="line">    uint rand = randMod(100);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="⑨僵尸的输赢"><a href="#⑨僵尸的输赢" class="headerlink" title="⑨僵尸的输赢"></a>⑨僵尸的输赢</h4><p>对我们的僵尸游戏来说，我们将要追踪我们的僵尸输赢了多少场。有了这个我们可以在游戏里维护一个 “僵尸排行榜”。</p>
+<p>有多种方法在我们的DApp里面保存一个数值 — 作为一个单独的映射，作为一个“排行榜”结构体，或者保存在 Zombie 结构体内。</p>
+<p>每个方法都有其优缺点，取决于我们打算如何和这些数据打交道。在这个教程中，简单起见我们将这个状态保存在 Zombie 结构体中，将其命名为 winCount 和 lossCount。</p>
+<p>我们跳回 zombiefactory.sol, 将这些属性添加进 Zombie 结构体.</p>
+<p>实战演习：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">struct Zombie &#123;</span><br><span class="line">      string name;</span><br><span class="line">      uint dna;</span><br><span class="line">      uint32 level;</span><br><span class="line">      uint32 readyTime;</span><br><span class="line">      uint16 winCount;</span><br><span class="line">      uint16 lossCount;</span><br><span class="line">    &#125;</span><br><span class="line">// 2. 在这里修改修改新僵尸的创建:</span><br><span class="line">uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime), 0, 0)) - 1;</span><br></pre></td></tr></table></figure>
+<h4 id="⑩僵尸胜利了😄"><a href="#⑩僵尸胜利了😄" class="headerlink" title="⑩僵尸胜利了😄"></a>⑩僵尸胜利了😄</h4><p>有了 winCount 和 lossCount，我们可以根据僵尸哪个僵尸赢了战斗来更新它们了。</p>
+<p>在第六章我们计算出来一个0到100的随机数。现在让我们用那个数来决定那谁赢了战斗，并以此更新我们的状态。</p>
+<p>实战演习：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if (rand &lt;= attackVictoryProbability) &#123;</span><br><span class="line">  myZombie.winCount++;</span><br><span class="line">  myZombie.level++;</span><br><span class="line">  enemyZombie.lossCount++;</span><br><span class="line">  feedAndMultiply(_zombieId, enemyZombie.dna, &quot;zombie&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="⑪僵尸失败😞"><a href="#⑪僵尸失败😞" class="headerlink" title="⑪僵尸失败😞"></a>⑪僵尸失败😞</h4><p>我们已经编写了你的僵尸赢了之后会发生什么， 该看看 输了 的时候要怎么做了。</p>
+<p>在我们的游戏中，僵尸输了后并不会降级 —— 只是简单地给 lossCount 加一，并触发冷却，等待一天后才能再次参战。</p>
+<p>要实现这个逻辑，我们需要一个 else 语句。</p>
+<p>else 语句和 JavaScript 以及很多其他语言的 else 语句一样。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if (zombieCoins[msg.sender] &gt; 100000000) &#123;</span><br><span class="line">  // 你好有钱!!!</span><br><span class="line">&#125; else &#123;</span><br><span class="line">  // 我们需要更多的僵尸币...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实战演习：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">else&#123;</span><br><span class="line">  myZombie.lossCount++;</span><br><span class="line">  enemyZombie.winCount++;</span><br><span class="line">  _triggerCooldown(myZombie);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="⑫放在一起"><a href="#⑫放在一起" class="headerlink" title="⑫放在一起"></a>⑫放在一起</h4><p><strong>认领你的战利品</strong><br>在赢了战斗之后：</p>
+<ol>
+<li><p>你的僵尸将会升级</p>
+</li>
+<li><p>你僵尸的 winCount 将会增加</p>
+</li>
+<li><p>你将为你的僵尸大军获得一个新的僵尸</p>
+</li>
+</ol>
+<h4 id="⑬Lesson-4-Complete！"><a href="#⑬Lesson-4-Complete！" class="headerlink" title="⑬Lesson 4 Complete！"></a>⑬Lesson 4 Complete！</h4><p>截至第四课完成，所有代码如下：<br><strong>zombieattack.sol:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">import &quot;./zombiehelper.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract ZombieBattle is ZombieHelper &#123;</span><br><span class="line">  uint randNonce = 0;</span><br><span class="line">  uint attackVictoryProbability = 70;</span><br><span class="line"></span><br><span class="line">  function randMod(uint _modulus) internal returns(uint) &#123;</span><br><span class="line">    randNonce++;</span><br><span class="line">    return uint(keccak256(now, msg.sender, randNonce)) % _modulus;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function attack(uint _zombieId, uint _targetId) external ownerOf(_zombieId) &#123;</span><br><span class="line">    Zombie storage myZombie = zombies[_zombieId];</span><br><span class="line">    Zombie storage enemyZombie = zombies[_targetId];</span><br><span class="line">    uint rand = randMod(100);</span><br><span class="line">    if (rand &lt;= attackVictoryProbability) &#123;</span><br><span class="line">      myZombie.winCount++;</span><br><span class="line">      myZombie.level++;</span><br><span class="line">      enemyZombie.lossCount++;</span><br><span class="line">      feedAndMultiply(_zombieId, enemyZombie.dna, &quot;zombie&quot;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      myZombie.lossCount++;</span><br><span class="line">      enemyZombie.winCount++;</span><br><span class="line">      _triggerCooldown(myZombie);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>zombiehelper.sol:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">import &quot;./zombiefeeding.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract ZombieHelper is ZombieFeeding &#123;</span><br><span class="line"></span><br><span class="line">  uint levelUpFee = 0.001 ether;</span><br><span class="line"></span><br><span class="line">  modifier aboveLevel(uint _level, uint _zombieId) &#123;</span><br><span class="line">    require(zombies[_zombieId].level &gt;= _level);</span><br><span class="line">    _;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function withdraw() external onlyOwner &#123;</span><br><span class="line">    owner.transfer(this.balance);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function setLevelUpFee(uint _fee) external onlyOwner &#123;</span><br><span class="line">    levelUpFee = _fee;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function levelUp(uint _zombieId) external payable &#123;</span><br><span class="line">    require(msg.value == levelUpFee);</span><br><span class="line">    zombies[_zombieId].level++;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function changeName(uint _zombieId, string _newName) external aboveLevel(2, _zombieId) ownerOf(_zombieId) &#123;</span><br><span class="line">    zombies[_zombieId].name = _newName;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20, _zombieId) ownerOf(_zombieId) &#123;</span><br><span class="line">    zombies[_zombieId].dna = _newDna;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function getZombiesByOwner(address _owner) external view returns(uint[]) &#123;</span><br><span class="line">    uint[] memory result = new uint[](ownerZombieCount[_owner]);</span><br><span class="line">    uint counter = 0;</span><br><span class="line">    for (uint i = 0; i &lt; zombies.length; i++) &#123;</span><br><span class="line">      if (zombieToOwner[i] == _owner) &#123;</span><br><span class="line">        result[counter] = i;</span><br><span class="line">        counter++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>zombiefeeding.sol:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">import &quot;./zombiefactory.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract KittyInterface &#123;</span><br><span class="line">  function getKitty(uint256 _id) external view returns (</span><br><span class="line">    bool isGestating,</span><br><span class="line">    bool isReady,</span><br><span class="line">    uint256 cooldownIndex,</span><br><span class="line">    uint256 nextActionAt,</span><br><span class="line">    uint256 siringWithId,</span><br><span class="line">    uint256 birthTime,</span><br><span class="line">    uint256 matronId,</span><br><span class="line">    uint256 sireId,</span><br><span class="line">    uint256 generation,</span><br><span class="line">    uint256 genes</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract ZombieFeeding is ZombieFactory &#123;</span><br><span class="line"></span><br><span class="line">  KittyInterface kittyContract;</span><br><span class="line"></span><br><span class="line">  modifier ownerOf(uint _zombieId) &#123;</span><br><span class="line">    require(msg.sender == zombieToOwner[_zombieId]);</span><br><span class="line">    _;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function setKittyContractAddress(address _address) external onlyOwner &#123;</span><br><span class="line">    kittyContract = KittyInterface(_address);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function _triggerCooldown(Zombie storage _zombie) internal &#123;</span><br><span class="line">    _zombie.readyTime = uint32(now + cooldownTime);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function _isReady(Zombie storage _zombie) internal view returns (bool) &#123;</span><br><span class="line">      return (_zombie.readyTime &lt;= now);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) internal ownerOf(_zombieId) &#123;</span><br><span class="line">    Zombie storage myZombie = zombies[_zombieId];</span><br><span class="line">    require(_isReady(myZombie));</span><br><span class="line">    _targetDna = _targetDna % dnaModulus;</span><br><span class="line">    uint newDna = (myZombie.dna + _targetDna) / 2;</span><br><span class="line">    if (keccak256(_species) == keccak256(&quot;kitty&quot;)) &#123;</span><br><span class="line">      newDna = newDna - newDna % 100 + 99;</span><br><span class="line">    &#125;</span><br><span class="line">    _createZombie(&quot;NoName&quot;, newDna);</span><br><span class="line">    _triggerCooldown(myZombie);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function feedOnKitty(uint _zombieId, uint _kittyId) public &#123;</span><br><span class="line">    uint kittyDna;</span><br><span class="line">    (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);</span><br><span class="line">    feedAndMultiply(_zombieId, kittyDna, &quot;kitty&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>zombiefactory.sol:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">import &quot;./ownable.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract ZombieFactory is Ownable &#123;</span><br><span class="line"></span><br><span class="line">    event NewZombie(uint zombieId, string name, uint dna);</span><br><span class="line"></span><br><span class="line">    uint dnaDigits = 16;</span><br><span class="line">    uint dnaModulus = 10 ** dnaDigits;</span><br><span class="line">    uint cooldownTime = 1 days;</span><br><span class="line"></span><br><span class="line">    struct Zombie &#123;</span><br><span class="line">      string name;</span><br><span class="line">      uint dna;</span><br><span class="line">      uint32 level;</span><br><span class="line">      uint32 readyTime;</span><br><span class="line">      uint16 winCount;</span><br><span class="line">      uint16 lossCount;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Zombie[] public zombies;</span><br><span class="line"></span><br><span class="line">    mapping (uint =&gt; address) public zombieToOwner;</span><br><span class="line">    mapping (address =&gt; uint) ownerZombieCount;</span><br><span class="line"></span><br><span class="line">    function _createZombie(string _name, uint _dna) internal &#123;</span><br><span class="line">        uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime), 0, 0)) - 1;</span><br><span class="line">        zombieToOwner[id] = msg.sender;</span><br><span class="line">        ownerZombieCount[msg.sender]++;</span><br><span class="line">        NewZombie(id, _name, _dna);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function _generateRandomDna(string _str) private view returns (uint) &#123;</span><br><span class="line">        uint rand = uint(keccak256(_str));</span><br><span class="line">        return rand % dnaModulus;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function createRandomZombie(string _name) public &#123;</span><br><span class="line">        require(ownerZombieCount[msg.sender] == 0);</span><br><span class="line">        uint randDna = _generateRandomDna(_name);</span><br><span class="line">        randDna = randDna - randDna % 100;</span><br><span class="line">        _createZombie(_name, randDna);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>ownable.sol:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @title Ownable</span><br><span class="line"> * @dev The Ownable contract has an owner address, and provides basic authorization control</span><br><span class="line"> * functions, this simplifies the implementation of &quot;user permissions&quot;.</span><br><span class="line"> */</span><br><span class="line">contract Ownable &#123;</span><br><span class="line">  address public owner;</span><br><span class="line"></span><br><span class="line">  event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * @dev The Ownable constructor sets the original `owner` of the contract to the sender</span><br><span class="line">   * account.</span><br><span class="line">   */</span><br><span class="line">  function Ownable() public &#123;</span><br><span class="line">    owner = msg.sender;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * @dev Throws if called by any account other than the owner.</span><br><span class="line">   */</span><br><span class="line">  modifier onlyOwner() &#123;</span><br><span class="line">    require(msg.sender == owner);</span><br><span class="line">    _;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * @dev Allows the current owner to transfer control of the contract to a newOwner.</span><br><span class="line">   * @param newOwner The address to transfer ownership to.</span><br><span class="line">   */</span><br><span class="line">  function transferOwnership(address newOwner) public onlyOwner &#123;</span><br><span class="line">    require(newOwner != address(0));</span><br><span class="line">    OwnershipTransferred(owner, newOwner);</span><br><span class="line">    owner = newOwner;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h3><h4 id="①第四课-第⑩节"><a href="#①第四课-第⑩节" class="headerlink" title="①第四课 第⑩节"></a>①第四课 第⑩节</h4><p>实战演习中if语句的最后一行<br>feedAndMultiply(_zombieId, enemyZombie.dna, “zombie”);<br>第二个传入’feedAndMultiply’函数的参数<br>为什么是enemyZombie.dna</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E5%8F%B6%E8%8D%89%E5%AE%9E%E9%AA%8C%E5%AE%A4%E2%80%9C%E6%9C%9F%E6%9C%AB%E4%BB%BB%E5%8A%A1%E2%80%9D%E6%80%BB%E7%BB%93%EF%BC%88%E7%BB%AD%EF%BC%89-%E7%AC%AC%E5%9B%9B%E8%AF%BE"><span class="toc-number">1.</span> <span class="toc-text">三叶草实验室“期末任务”总结（续）(第四课)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9A%E5%AE%8C%E6%88%90%E5%8A%A0%E5%AF%86%E5%83%B5%E5%B0%B8%E7%9A%84%E6%B8%B8%E6%88%8F"><span class="toc-number">1.1.</span> <span class="toc-text">任务一：完成加密僵尸的游戏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%83%B5%E5%B0%B8%E4%BD%9C%E6%88%98%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.1.1.</span> <span class="toc-text">4.僵尸作战系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A0%E5%8F%AF%E6%94%AF%E4%BB%98"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">①可支付</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A1%E6%8F%90%E7%8E%B0"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">②提现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A2%E5%83%B5%E5%B0%B8%E6%88%98%E6%96%97"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">③僵尸战斗</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A3%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">④随机数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A4%E5%83%B5%E5%B0%B8%E5%AF%B9%E5%86%B3"><span class="toc-number">1.1.1.5.</span> <span class="toc-text">⑤僵尸对决</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A5%E9%87%8D%E6%9E%84%E9%80%9A%E7%94%A8%E9%80%BB%E8%BE%91"><span class="toc-number">1.1.1.6.</span> <span class="toc-text">⑥重构通用逻辑</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A6%E6%9B%B4%E5%A4%9A%E9%87%8D%E6%9E%84"><span class="toc-number">1.1.1.7.</span> <span class="toc-text">⑦更多重构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A7%E5%9B%9E%E5%88%B0%E6%94%BB%E5%87%BB"><span class="toc-number">1.1.1.8.</span> <span class="toc-text">⑧回到攻击</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A8%E5%83%B5%E5%B0%B8%E7%9A%84%E8%BE%93%E8%B5%A2"><span class="toc-number">1.1.1.9.</span> <span class="toc-text">⑨僵尸的输赢</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A9%E5%83%B5%E5%B0%B8%E8%83%9C%E5%88%A9%E4%BA%86%F0%9F%98%84"><span class="toc-number">1.1.1.10.</span> <span class="toc-text">⑩僵尸胜利了😄</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%AA%E5%83%B5%E5%B0%B8%E5%A4%B1%E8%B4%A5%F0%9F%98%9E"><span class="toc-number">1.1.1.11.</span> <span class="toc-text">⑪僵尸失败😞</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%AB%E6%94%BE%E5%9C%A8%E4%B8%80%E8%B5%B7"><span class="toc-number">1.1.1.12.</span> <span class="toc-text">⑫放在一起</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%ACLesson-4-Complete%EF%BC%81"><span class="toc-number">1.1.1.13.</span> <span class="toc-text">⑬Lesson 4 Complete！</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%83%E5%BE%97"><span class="toc-number">1.1.2.</span> <span class="toc-text">心得</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A0%E7%AC%AC%E5%9B%9B%E8%AF%BE-%E7%AC%AC%E2%91%A9%E8%8A%82"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">①第四课 第⑩节</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://formikasaever.github.io./post/8656b72d.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://formikasaever.github.io./post/8656b72d.html&text=僵尸游戏第四课"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://formikasaever.github.io./post/8656b72d.html&title=僵尸游戏第四课"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://formikasaever.github.io./post/8656b72d.html&is_video=false&description=僵尸游戏第四课"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=僵尸游戏第四课&body=Check out this article: https://formikasaever.github.io./post/8656b72d.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://formikasaever.github.io./post/8656b72d.html&title=僵尸游戏第四课"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://formikasaever.github.io./post/8656b72d.html&title=僵尸游戏第四课"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://formikasaever.github.io./post/8656b72d.html&title=僵尸游戏第四课"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://formikasaever.github.io./post/8656b72d.html&title=僵尸游戏第四课"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://formikasaever.github.io./post/8656b72d.html&name=僵尸游戏第四课&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://formikasaever.github.io./post/8656b72d.html&t=僵尸游戏第四课"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    ForMikasaEver
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>

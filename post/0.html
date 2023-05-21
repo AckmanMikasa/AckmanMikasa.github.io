@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="RUNOOB Markdown Test学习Hello World!标题格式：一级标题二级标题三级标题四级标题五级标题六级标题我展示的是一级标题我展示的是二级标题字体格式：斜体文本斜体文本粗体文本粗体文本粗斜体文本粗斜体文本 分割线：     删除线：RUNOOB.COMGOOGLE.COMBAIDU.COM 下划线：带下划线文本 脚注：脚注格式：[^要注明的文本]创建脚注格式类似这样 [^创建]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown语言学习">
+<meta property="og:url" content="https://formikasaever.github.io./post/0.html">
+<meta property="og:site_name" content="ForMikasaEver&#39;s blog">
+<meta property="og:description" content="RUNOOB Markdown Test学习Hello World!标题格式：一级标题二级标题三级标题四级标题五级标题六级标题我展示的是一级标题我展示的是二级标题字体格式：斜体文本斜体文本粗体文本粗体文本粗斜体文本粗斜体文本 分割线：     删除线：RUNOOB.COMGOOGLE.COMBAIDU.COM 下划线：带下划线文本 脚注：脚注格式：[^要注明的文本]创建脚注格式类似这样 [^创建]">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://formikasaever.github.io./%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80">
+<meta property="og:image" content="https://formikasaever.github.io./%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80">
+<meta property="og:image" content="http://static.runoob.com/images/runoob-logo.png">
+<meta property="og:image" content="http://static.runoob.com/images/runoob-logo.png">
+<meta property="og:image" content="http://static.runoob.com/images/runoob-logo.png">
+<meta property="article:published_time" content="2023-03-14T09:25:35.215Z">
+<meta property="article:modified_time" content="2023-03-27T10:41:16.127Z">
+<meta property="article:author" content="ForMikasaEver">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://formikasaever.github.io./%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Markdown语言学习</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/d9a0b533.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/4a17b156.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://formikasaever.github.io./post/0.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://formikasaever.github.io./post/0.html&text=Markdown语言学习"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://formikasaever.github.io./post/0.html&title=Markdown语言学习"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://formikasaever.github.io./post/0.html&is_video=false&description=Markdown语言学习"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Markdown语言学习&body=Check out this article: https://formikasaever.github.io./post/0.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://formikasaever.github.io./post/0.html&title=Markdown语言学习"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://formikasaever.github.io./post/0.html&title=Markdown语言学习"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://formikasaever.github.io./post/0.html&title=Markdown语言学习"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://formikasaever.github.io./post/0.html&title=Markdown语言学习"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://formikasaever.github.io./post/0.html&name=Markdown语言学习&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://formikasaever.github.io./post/0.html&t=Markdown语言学习"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#RUNOOB-Markdown-Test%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">RUNOOB Markdown Test学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hello-World"><span class="toc-number">1.1.</span> <span class="toc-text">Hello World!</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%87%E9%A2%98%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">标题格式：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">一级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-number">3.1.</span> <span class="toc-text">二级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-number">3.1.1.</span> <span class="toc-text">三级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-number">3.1.1.1.</span> <span class="toc-text">四级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%94%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-number">3.1.1.1.1.</span> <span class="toc-text">五级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%85%AD%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-number">3.1.1.1.1.1.</span> <span class="toc-text">六级标题</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%88%91%E5%B1%95%E7%A4%BA%E7%9A%84%E6%98%AF%E4%B8%80%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">我展示的是一级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E5%B1%95%E7%A4%BA%E7%9A%84%E6%98%AF%E4%BA%8C%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-number">4.1.</span> <span class="toc-text">我展示的是二级标题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">字体格式：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E5%89%B2%E7%BA%BF%EF%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">分割线：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%BA%BF%EF%BC%9A"><span class="toc-number">7.</span> <span class="toc-text">删除线：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E5%88%92%E7%BA%BF%EF%BC%9A"><span class="toc-number">8.</span> <span class="toc-text">下划线：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%84%9A%E6%B3%A8%EF%BC%9A"><span class="toc-number">9.</span> <span class="toc-text">脚注：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8%EF%BC%88%E4%B8%89%E7%A7%8D%E5%BD%A2%E5%BC%8F%E9%83%BD%E5%8F%AF%E4%BB%A5%EF%BC%89%EF%BC%9A"><span class="toc-number">10.</span> <span class="toc-text">无序列表（三种形式都可以）：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8%EF%BC%9A"><span class="toc-number">11.</span> <span class="toc-text">有序列表：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E5%B5%8C%E5%A5%97%EF%BC%88%E9%9C%80%E8%A6%81%E5%9C%A8%E5%AD%90%E5%88%97%E8%A1%A8%E7%9A%84%E5%89%8D%E9%9D%A2%E5%8A%A0%E5%9B%9B%E4%B8%AA%E7%A9%BA%E6%A0%BC%EF%BC%89%EF%BC%9A"><span class="toc-number">12.</span> <span class="toc-text">列表嵌套（需要在子列表的前面加四个空格）：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%BA%E5%9D%97%EF%BC%88-gt-%E5%90%8E%E9%9D%A2%E9%9C%80%E8%A6%81%E5%8A%A0%E4%B8%80%E4%B8%AA%E7%A9%BA%E6%A0%BC%EF%BC%89%EF%BC%9A"><span class="toc-number">13.</span> <span class="toc-text">区块（&gt;后面需要加一个空格）：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E5%9D%97%E5%B5%8C%E5%A5%97%EF%BC%9A"><span class="toc-number">13.1.</span> <span class="toc-text">区块嵌套：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E5%9D%97%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%88%97%E8%A1%A8%EF%BC%9A"><span class="toc-number">13.2.</span> <span class="toc-text">区块中使用列表：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%8C%BA%E5%9D%97%EF%BC%9A"><span class="toc-number">13.3.</span> <span class="toc-text">列表中使用区块：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">14.</span> <span class="toc-text">代码：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%8C%BA%E5%9D%97-%E4%BB%A3%E7%A0%81%E5%8C%BA%E5%9D%97%E4%BD%BF%E7%94%A8-4-%E4%B8%AA%E7%A9%BA%E6%A0%BC%E6%88%96%E8%80%85%E4%B8%80%E4%B8%AA%E5%88%B6%E8%A1%A8%E7%AC%A6%EF%BC%88Tab-%E9%94%AE%EF%BC%89%E3%80%82-%EF%BC%9A"><span class="toc-number">14.1.</span> <span class="toc-text">代码区块(代码区块使用 4 个空格或者一个制表符（Tab 键）。)：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%A0%E4%B9%9F%E5%8F%AF%E4%BB%A5%E7%94%A8-96-96-96-%E5%8C%85%E8%A3%B9%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%EF%BC%8C%E5%B9%B6%E6%8C%87%E5%AE%9A%E4%B8%80%E7%A7%8D%E8%AF%AD%E8%A8%80%EF%BC%88%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%B8%8D%E6%8C%87%E5%AE%9A%EF%BC%89%EF%BC%9A"><span class="toc-number">14.2.</span> <span class="toc-text">你也可以用 &#96;&#96;&#96; 包裹一段代码，并指定一种语言（也可以不指定）：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-number">15.</span> <span class="toc-text">链接：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E9%93%BE%E6%8E%A5%EF%BC%88%E6%84%9F%E8%A7%89%E6%B2%A1%E5%A4%AA%E5%A4%A7%E7%94%A8%E5%A4%84%EF%BC%89%EF%BC%9A"><span class="toc-number">15.1.</span> <span class="toc-text">高级链接（感觉没太大用处）：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E7%89%87"><span class="toc-number">16.</span> <span class="toc-text">图片</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%A8%E6%A0%BC%EF%BC%9A"><span class="toc-number">17.</span> <span class="toc-text">表格：</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Markdown语言学习
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">ForMikasaEver</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-03-14T09:25:35.215Z" class="dt-published" itemprop="datePublished">2023-03-14</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="RUNOOB-Markdown-Test学习"><a href="#RUNOOB-Markdown-Test学习" class="headerlink" title="RUNOOB Markdown Test学习"></a>RUNOOB Markdown Test学习</h1><h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World!"></a>Hello World!</h2><h1 id="标题格式："><a href="#标题格式：" class="headerlink" title="标题格式："></a>标题格式：</h1><h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6><h1 id="我展示的是一级标题"><a href="#我展示的是一级标题" class="headerlink" title="我展示的是一级标题"></a>我展示的是一级标题</h1><h2 id="我展示的是二级标题"><a href="#我展示的是二级标题" class="headerlink" title="我展示的是二级标题"></a>我展示的是二级标题</h2><h1 id="字体格式："><a href="#字体格式：" class="headerlink" title="字体格式："></a>字体格式：</h1><p><em>斜体文本</em><br><em>斜体文本</em><br><strong>粗体文本</strong><br><strong>粗体文本</strong><br><em><strong>粗斜体文本</strong></em><br><em><strong>粗斜体文本</strong></em></p>
+<h1 id="分割线："><a href="#分割线：" class="headerlink" title="分割线："></a>分割线：</h1><hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<h1 id="删除线："><a href="#删除线：" class="headerlink" title="删除线："></a>删除线：</h1><p>RUNOOB.COM<br>GOOGLE.COM<br><del>BAIDU.COM</del></p>
+<h1 id="下划线："><a href="#下划线：" class="headerlink" title="下划线："></a>下划线：</h1><p><u>带下划线文本</u></p>
+<h1 id="脚注："><a href="#脚注：" class="headerlink" title="脚注："></a>脚注：</h1><p>脚注格式：[^要注明的文本]<br>创建脚注格式类似这样 [^创建]。</p>
+<p>[^创建]: 菜鸟教程 – 学的不仅是技术，更是梦想！！！</p>
+<h1 id="无序列表（三种形式都可以）："><a href="#无序列表（三种形式都可以）：" class="headerlink" title="无序列表（三种形式都可以）："></a>无序列表（三种形式都可以）：</h1><ul>
+<li>第一项</li>
+<li>第二项</li>
+<li>第三项</li>
+</ul>
+<ul>
+<li>第一项</li>
+<li>第二项</li>
+<li>第三项</li>
+</ul>
+<ul>
+<li>第一项</li>
+<li>第二项</li>
+<li>第三项</li>
+</ul>
+<h1 id="有序列表："><a href="#有序列表：" class="headerlink" title="有序列表："></a>有序列表：</h1><ol>
+<li>第一项</li>
+<li>第二项</li>
+<li>第三项</li>
+</ol>
+<h1 id="列表嵌套（需要在子列表的前面加四个空格）："><a href="#列表嵌套（需要在子列表的前面加四个空格）：" class="headerlink" title="列表嵌套（需要在子列表的前面加四个空格）："></a>列表嵌套（需要在子列表的前面加四个空格）：</h1><ol>
+<li>第一项：<ul>
+<li>第一项嵌套的第一个元素</li>
+<li>第一项嵌套的第二个元素</li>
+</ul>
+</li>
+<li>第二项：<ul>
+<li>第二项嵌套的第一个元素</li>
+<li>第二项嵌套的第二个元素</li>
+</ul>
+</li>
+</ol>
+<h1 id="区块（-gt-后面需要加一个空格）："><a href="#区块（-gt-后面需要加一个空格）：" class="headerlink" title="区块（&gt;后面需要加一个空格）："></a>区块（&gt;后面需要加一个空格）：</h1><blockquote>
+<p>区块引用<br>菜鸟教程<br>学的不仅是技术更是梦想</p>
+</blockquote>
+<h2 id="区块嵌套："><a href="#区块嵌套：" class="headerlink" title="区块嵌套："></a>区块嵌套：</h2><blockquote>
+<p>最外层</p>
+<blockquote>
+<p>第一层嵌套<br>111</p>
+<blockquote>
+<p>第二层嵌套<br>222</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="区块中使用列表："><a href="#区块中使用列表：" class="headerlink" title="区块中使用列表："></a>区块中使用列表：</h2><blockquote>
+<p>区块中使用列表</p>
+<ol>
+<li>第一项</li>
+<li>第二项</li>
+</ol>
+<ul>
+<li>第一项</li>
+<li>第二项</li>
+<li>第三项</li>
+</ul>
+</blockquote>
+<h2 id="列表中使用区块："><a href="#列表中使用区块：" class="headerlink" title="列表中使用区块："></a>列表中使用区块：</h2><ul>
+<li>第一项<blockquote>
+<p>菜鸟教程<br>学的不仅是技术更是梦想</p>
+</blockquote>
+</li>
+<li>第二项</li>
+</ul>
+<h1 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h1><p><code>printf()</code> 函数<br><code>System.out.println()</code> 函数</p>
+<h2 id="代码区块-代码区块使用-4-个空格或者一个制表符（Tab-键）。-："><a href="#代码区块-代码区块使用-4-个空格或者一个制表符（Tab-键）。-：" class="headerlink" title="代码区块(代码区块使用 4 个空格或者一个制表符（Tab 键）。)："></a>代码区块(代码区块使用 4 个空格或者一个制表符（Tab 键）。)：</h2><pre><code>System.out.println()
+public class
+public static void main
+</code></pre>
+<h2 id="你也可以用-96-96-96-包裹一段代码，并指定一种语言（也可以不指定）："><a href="#你也可以用-96-96-96-包裹一段代码，并指定一种语言（也可以不指定）：" class="headerlink" title="你也可以用 &#96;&#96;&#96; 包裹一段代码，并指定一种语言（也可以不指定）："></a>你也可以用 &#96;&#96;&#96; 包裹一段代码，并指定一种语言（也可以不指定）：</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$(<span class="variable language_">document</span>).<span class="title function_">ready</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">alert</span>(<span class="string">&#x27;RUNOOB&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="链接："><a href="#链接：" class="headerlink" title="链接："></a>链接：</h1><p>第一种形式：<a target="_blank" rel="noopener" href="https://www.runoob.com/">https://www.runoob.com</a><br>第二种形式：这是一个链接 <a target="_blank" rel="noopener" href="https://www.runoob.com/">菜鸟教程</a></p>
+<h2 id="高级链接（感觉没太大用处）："><a href="#高级链接（感觉没太大用处）：" class="headerlink" title="高级链接（感觉没太大用处）："></a>高级链接（感觉没太大用处）：</h2><p>这个链接用 1 作为网址变量 <a target="_blank" rel="noopener" href="http://www.google.com/">Google</a><br>这个链接用 runoob 作为网址变量 <a target="_blank" rel="noopener" href="http://www.runoob.com/">Runoob</a><br>然后在文档的结尾为变量赋值（网址）</p>
+<h1 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h1><p>语法格式：<br><img src="/img/loading.gif" data-original="/%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80" alt="alt 属性文本"></p>
+<p><img src="/img/loading.gif" data-original="/%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80" alt="alt 属性文本" title="可选标题"></p>
+<ol>
+<li>开头一个感叹号 !</li>
+<li>接着一个方括号，里面放上图片的替代文字</li>
+<li>接着一个普通括号，里面放上图片的网址，最后还可以用引号包住并加上选择性的<br>‘title’ 属性的文字。</li>
+</ol>
+<p><img src="/img/loading.gif" data-original="http://static.runoob.com/images/runoob-logo.png" alt="RUNOOB 图标"></p>
+<p><img src="/img/loading.gif" data-original="http://static.runoob.com/images/runoob-logo.png" alt="RUNOOB 图标" title="RUNOOB"><br>也可以像网址那样对图片网址使用变量:</p>
+<p>这个链接用 1 作为网址变量 <a target="_blank" rel="noopener" href="http://www.google.com/">RUNOOB</a>.<br>然后在文档的结尾为变量赋值（网址）</p>
+<p>Markdown 还没有办法指定图片的高度与宽度，如果你需要的话，你可以使用普通的 <img> 标签。</p>
+<img src="/img/loading.gif" data-original="http://static.runoob.com/images/runoob-logo.png" width="50%">
+
+<h1 id="表格："><a href="#表格：" class="headerlink" title="表格："></a>表格：</h1><p>Markdown 制作表格使用 | 来分隔不同的单元格，使用 - 来分隔表头和其他行。<br>语法格式如下：</p>
+<table>
+<thead>
+<tr>
+<th>表头</th>
+<th>表头</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单元格</td>
+<td>单元格</td>
+</tr>
+<tr>
+<td>单元格</td>
+<td>单元格</td>
+</tr>
+</tbody></table>
+<p>对齐方式：我们可以设置表格的对齐方式：</p>
+<p>-: 设置内容和标题栏居右对齐。<br>:- 设置内容和标题栏居左对齐。<br>:-: 设置内容和标题栏居中对齐。<br>实例如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">左对齐</th>
+<th align="right">右对齐</th>
+<th align="center">居中对齐</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">单元格11111</td>
+<td align="right">单元格11111</td>
+<td align="center">单元格11111111111</td>
+</tr>
+<tr>
+<td align="left">单元格222222</td>
+<td align="right">单元格222222222</td>
+<td align="center">单元格22</td>
+</tr>
+</tbody></table>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#RUNOOB-Markdown-Test%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">RUNOOB Markdown Test学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hello-World"><span class="toc-number">1.1.</span> <span class="toc-text">Hello World!</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%87%E9%A2%98%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">标题格式：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">一级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-number">3.1.</span> <span class="toc-text">二级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-number">3.1.1.</span> <span class="toc-text">三级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-number">3.1.1.1.</span> <span class="toc-text">四级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%94%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-number">3.1.1.1.1.</span> <span class="toc-text">五级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%85%AD%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-number">3.1.1.1.1.1.</span> <span class="toc-text">六级标题</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%88%91%E5%B1%95%E7%A4%BA%E7%9A%84%E6%98%AF%E4%B8%80%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">我展示的是一级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E5%B1%95%E7%A4%BA%E7%9A%84%E6%98%AF%E4%BA%8C%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-number">4.1.</span> <span class="toc-text">我展示的是二级标题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">字体格式：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E5%89%B2%E7%BA%BF%EF%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">分割线：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%BA%BF%EF%BC%9A"><span class="toc-number">7.</span> <span class="toc-text">删除线：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E5%88%92%E7%BA%BF%EF%BC%9A"><span class="toc-number">8.</span> <span class="toc-text">下划线：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%84%9A%E6%B3%A8%EF%BC%9A"><span class="toc-number">9.</span> <span class="toc-text">脚注：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8%EF%BC%88%E4%B8%89%E7%A7%8D%E5%BD%A2%E5%BC%8F%E9%83%BD%E5%8F%AF%E4%BB%A5%EF%BC%89%EF%BC%9A"><span class="toc-number">10.</span> <span class="toc-text">无序列表（三种形式都可以）：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8%EF%BC%9A"><span class="toc-number">11.</span> <span class="toc-text">有序列表：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E5%B5%8C%E5%A5%97%EF%BC%88%E9%9C%80%E8%A6%81%E5%9C%A8%E5%AD%90%E5%88%97%E8%A1%A8%E7%9A%84%E5%89%8D%E9%9D%A2%E5%8A%A0%E5%9B%9B%E4%B8%AA%E7%A9%BA%E6%A0%BC%EF%BC%89%EF%BC%9A"><span class="toc-number">12.</span> <span class="toc-text">列表嵌套（需要在子列表的前面加四个空格）：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%BA%E5%9D%97%EF%BC%88-gt-%E5%90%8E%E9%9D%A2%E9%9C%80%E8%A6%81%E5%8A%A0%E4%B8%80%E4%B8%AA%E7%A9%BA%E6%A0%BC%EF%BC%89%EF%BC%9A"><span class="toc-number">13.</span> <span class="toc-text">区块（&gt;后面需要加一个空格）：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E5%9D%97%E5%B5%8C%E5%A5%97%EF%BC%9A"><span class="toc-number">13.1.</span> <span class="toc-text">区块嵌套：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E5%9D%97%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%88%97%E8%A1%A8%EF%BC%9A"><span class="toc-number">13.2.</span> <span class="toc-text">区块中使用列表：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%8C%BA%E5%9D%97%EF%BC%9A"><span class="toc-number">13.3.</span> <span class="toc-text">列表中使用区块：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">14.</span> <span class="toc-text">代码：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%8C%BA%E5%9D%97-%E4%BB%A3%E7%A0%81%E5%8C%BA%E5%9D%97%E4%BD%BF%E7%94%A8-4-%E4%B8%AA%E7%A9%BA%E6%A0%BC%E6%88%96%E8%80%85%E4%B8%80%E4%B8%AA%E5%88%B6%E8%A1%A8%E7%AC%A6%EF%BC%88Tab-%E9%94%AE%EF%BC%89%E3%80%82-%EF%BC%9A"><span class="toc-number">14.1.</span> <span class="toc-text">代码区块(代码区块使用 4 个空格或者一个制表符（Tab 键）。)：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%A0%E4%B9%9F%E5%8F%AF%E4%BB%A5%E7%94%A8-96-96-96-%E5%8C%85%E8%A3%B9%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%EF%BC%8C%E5%B9%B6%E6%8C%87%E5%AE%9A%E4%B8%80%E7%A7%8D%E8%AF%AD%E8%A8%80%EF%BC%88%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%B8%8D%E6%8C%87%E5%AE%9A%EF%BC%89%EF%BC%9A"><span class="toc-number">14.2.</span> <span class="toc-text">你也可以用 &#96;&#96;&#96; 包裹一段代码，并指定一种语言（也可以不指定）：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-number">15.</span> <span class="toc-text">链接：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E9%93%BE%E6%8E%A5%EF%BC%88%E6%84%9F%E8%A7%89%E6%B2%A1%E5%A4%AA%E5%A4%A7%E7%94%A8%E5%A4%84%EF%BC%89%EF%BC%9A"><span class="toc-number">15.1.</span> <span class="toc-text">高级链接（感觉没太大用处）：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E7%89%87"><span class="toc-number">16.</span> <span class="toc-text">图片</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%A8%E6%A0%BC%EF%BC%9A"><span class="toc-number">17.</span> <span class="toc-text">表格：</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://formikasaever.github.io./post/0.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://formikasaever.github.io./post/0.html&text=Markdown语言学习"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://formikasaever.github.io./post/0.html&title=Markdown语言学习"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://formikasaever.github.io./post/0.html&is_video=false&description=Markdown语言学习"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Markdown语言学习&body=Check out this article: https://formikasaever.github.io./post/0.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://formikasaever.github.io./post/0.html&title=Markdown语言学习"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://formikasaever.github.io./post/0.html&title=Markdown语言学习"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://formikasaever.github.io./post/0.html&title=Markdown语言学习"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://formikasaever.github.io./post/0.html&title=Markdown语言学习"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://formikasaever.github.io./post/0.html&name=Markdown语言学习&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://formikasaever.github.io./post/0.html&t=Markdown语言学习"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    ForMikasaEver
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>
