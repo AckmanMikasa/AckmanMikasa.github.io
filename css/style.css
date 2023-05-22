@@ -1517,12 +1517,12 @@ article .content .caption {
   content: ")";
 }
 .highlight {
-  color: #6e6b5e;
-  background: #fefbec;
+  background: #20201d;
+  color: #a6a28c;
 }
 .highlight .code .comment,
 .highlight .code .quote {
-  color: #7d7a68;
+  color: #999580;
 }
 .highlight .code .variable,
 .highlight .code .template-variable,
@@ -1556,13 +1556,6 @@ article .content .caption {
 .highlight .code .keyword,
 .highlight .code .selector-tag {
   color: #b854d4;
-}
-.highlight .code .highlight {
-  display: block;
-  overflow-x: auto;
-  background: #fefbec;
-  color: #6e6b5e;
-  padding: 0.5em;
 }
 .highlight .code .emphasis {
   font-style: italic;
