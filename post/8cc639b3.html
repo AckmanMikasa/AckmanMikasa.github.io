@@ -160,46 +160,18 @@
 <li>你想传入那个方法的参数</li>
 </ol>
 <p>以太坊节点只能识别一种叫做 <code>JSON-RPC</code> 的语言。这种语言直接读起来并不好懂。当你你想调用一个合约的方法的时候，需要发送的查询语句将会是这样的：</p>
-<pre><code>// 哈……祝你写所有这样的函数调用的时候都一次通过
-// 往右边拉…… ==&gt;
-&#123;&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;eth_sendTransaction&quot;,&quot;params&quot;:[&#123;&quot;from&quot;:&quot;0xb60e8dd61c5d32be8058bb8eb970870f07233155&quot;,&quot;to&quot;:&quot;0xd46e8dd67c5d32be8058bb8eb970870f07244567&quot;,&quot;gas&quot;:&quot;0x76c0&quot;,&quot;gasPrice&quot;:&quot;0x9184e72a000&quot;,&quot;value&quot;:&quot;0x9184e72a&quot;,&quot;data&quot;:&quot;0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675&quot;&#125;],&quot;id&quot;:1&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 哈……祝你写所有这样的函数调用的时候都一次通过</span><br><span class="line">// 往右边拉…… ==&gt;</span><br><span class="line">&#123;&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;eth_sendTransaction&quot;,&quot;params&quot;:[&#123;&quot;from&quot;:&quot;0xb60e8dd61c5d32be8058bb8eb970870f07233155&quot;,&quot;to&quot;:&quot;0xd46e8dd67c5d32be8058bb8eb970870f07244567&quot;,&quot;gas&quot;:&quot;0x76c0&quot;,&quot;gasPrice&quot;:&quot;0x9184e72a000&quot;,&quot;value&quot;:&quot;0x9184e72a&quot;,&quot;data&quot;:&quot;0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675&quot;&#125;],&quot;id&quot;:1&#125;</span><br></pre></td></tr></table></figure>
 <p>幸运的是 Web3.js 把这些令人讨厌的查询语句都隐藏起来了， 所以你只需要与方便易懂的 JavaScript 界面进行交互即可。</p>
 <p>你不需要构建上面的查询语句，在你的代码中调用一个函数看起来将是这样：</p>
-<pre><code>CryptoZombies.methods.createRandomZombie(&quot;Vitalik Nakamoto 🤔&quot;)
-  .send(&#123; from: &quot;0xb60e8dd61c5d32be8058bb8eb970870f07233155&quot;, gas: &quot;3000000&quot; &#125;)
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CryptoZombies.methods.createRandomZombie(&quot;Vitalik Nakamoto 🤔&quot;)</span><br><span class="line">  .send(&#123; from: &quot;0xb60e8dd61c5d32be8058bb8eb970870f07233155&quot;, gas: &quot;3000000&quot; &#125;)</span><br></pre></td></tr></table></figure>
 <p>我们将在接下来的几章详细解释这些语句，不过首先我们来把 Web3.js 环境搭建起来。</p>
 <p><strong>准备好了么？</strong><br>取决于你的项目工作流程和你的爱好，你可以用一些常用工具把 Web3.js 添加进来：</p>
-<pre><code>// 用 NPM
-npm install web3
-
-// 用 Yarn
-yarn add web3
-
-// 用 Bower
-bower install web3
-
-// ...或者其他。
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 用 NPM</span><br><span class="line">npm install web3</span><br><span class="line"></span><br><span class="line">// 用 Yarn</span><br><span class="line">yarn add web3</span><br><span class="line"></span><br><span class="line">// 用 Bower</span><br><span class="line">bower install web3</span><br><span class="line"></span><br><span class="line">// ...或者其他。</span><br></pre></td></tr></table></figure>
 <p>甚至，你可以从 <code>github</code> 直接下载压缩后的 <code>.js </code>文件 然后包含到你的项目文件中：</p>
-<pre><code>&lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot; src=&quot;web3.min.js&quot;&gt;&lt;/script&gt;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot; src=&quot;web3.min.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 <p>因为我们不想让你花太多在项目环境搭建上，在本教程中我们将使用上面的 <code>script</code> 标签来将 Web3.js 引入。</p>
 <p>实战演习：<br><strong>index.html:</strong></p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;CryptoZombies front-end&lt;/title&gt;
-    &lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot; src=&quot;web3.min.js&quot;&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;CryptoZombies front-end&lt;/title&gt;</span><br><span class="line">    &lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot; src=&quot;web3.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line"></span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 <h4 id="②Web3-提供者"><a href="#②Web3-提供者" class="headerlink" title="②Web3 提供者"></a>②Web3 提供者</h4><hr>
 <h3 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h3><h4 id="①"><a href="#①" class="headerlink" title="①"></a>①</h4>
   </div>

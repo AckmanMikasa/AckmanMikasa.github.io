@@ -159,399 +159,86 @@
 <p>我们将在后面的课程中介绍地址的细节，现在你只需要了解地址属于特定用户（或智能合约）的。</p>
 <p>所以我们可以指定“地址”作为僵尸主人的 ID。当用户通过与我们的应用程序交互来创建新的僵尸时，新僵尸的所有权被设置到调用者的以太坊地址下。</p>
 <p>Mapping（映射）<br>映射是这样定义的：</p>
-<pre><code>//对于金融应用程序，将用户的余额保存在一个 uint类型的变量中：
-mapping (address =&gt; uint) public accountBalance;
-//或者可以用来通过userId 存储/查找的用户名
-mapping (uint =&gt; string) userIdToName;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//对于金融应用程序，将用户的余额保存在一个 uint类型的变量中：</span><br><span class="line">mapping (address =&gt; uint) public accountBalance;</span><br><span class="line">//或者可以用来通过userId 存储/查找的用户名</span><br><span class="line">mapping (uint =&gt; string) userIdToName;</span><br></pre></td></tr></table></figure>
 <p>映射本质上是存储和查找数据所用的键-值对。在第一个例子中，键是一个 address，值是一个 uint，在第二个例子中，键是一个uint，值是一个 string。</p>
 <p>实战演习:</p>
-<pre><code>mapping (uint =&gt; address) public zombieToOwner;
-mapping (address =&gt; uint) ownerZombieCount;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mapping (uint =&gt; address) public zombieToOwner;</span><br><span class="line">mapping (address =&gt; uint) ownerZombieCount;</span><br></pre></td></tr></table></figure>
 <h4 id="③Msg-sender"><a href="#③Msg-sender" class="headerlink" title="③Msg.sender"></a>③Msg.sender</h4><p>在 Solidity 中，有一些全局变量可以被所有函数调用。 其中一个就是 msg.sender，它指的是当前调用者（或智能合约）的 address。</p>
 <p>注意：在 Solidity 中，功能执行始终需要从外部调用者开始。 一个合约只会在区块链上什么也不做，除非有人调用其中的函数。所以 msg.sender总是存在的。</p>
 <p>以下是使用 msg.sender 来更新 mapping 的例子：</p>
-<pre><code>mapping (address =&gt; uint) favoriteNumber;
-
-function setMyNumber(uint _myNumber) public &#123;
-  // 更新我们的 `favoriteNumber` 映射来将 `_myNumber`存储在 `msg.sender`名下
-  favoriteNumber[msg.sender] = _myNumber;
-  // 存储数据至映射的方法和将数据存储在数组相似
-&#125;
-
-function whatIsMyNumber() public view returns (uint) &#123;
-  // 拿到存储在调用者地址名下的值
-  // 若调用者还没调用 setMyNumber， 则值为 `0`
-  return favoriteNumber[msg.sender];
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mapping (address =&gt; uint) favoriteNumber;</span><br><span class="line"></span><br><span class="line">function setMyNumber(uint _myNumber) public &#123;</span><br><span class="line">  // 更新我们的 `favoriteNumber` 映射来将 `_myNumber`存储在 `msg.sender`名下</span><br><span class="line">  favoriteNumber[msg.sender] = _myNumber;</span><br><span class="line">  // 存储数据至映射的方法和将数据存储在数组相似</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function whatIsMyNumber() public view returns (uint) &#123;</span><br><span class="line">  // 拿到存储在调用者地址名下的值</span><br><span class="line">  // 若调用者还没调用 setMyNumber， 则值为 `0`</span><br><span class="line">  return favoriteNumber[msg.sender];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在这个小小的例子中，任何人都可以调用 setMyNumber 在我们的合约中存下一个 uint 并且与他们的地址相绑定。 然后，他们调用 whatIsMyNumber 就会返回他们存储的 uint。</p>
 <p>使用 msg.sender 很安全，因为它具有以太坊区块链的安全保障 —— 除非窃取与以太坊地址相关联的私钥，否则是没有办法修改其他人的数据的。</p>
 <p>实战演习</p>
-<pre><code>    mapping (uint =&gt; address) public zombieToOwner;
-    mapping (address =&gt; uint) ownerZombieCount;
-
-    function _createZombie(string _name, uint _dna) private &#123;
-        uint id = zombies.push(Zombie(_name, _dna)) - 1;
-        zombieToOwner[id] = msg.sender;
-        ownerZombieCount[msg.sender]++;
-        NewZombie(id, _name, _dna);
-    &#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mapping (uint =&gt; address) public zombieToOwner;</span><br><span class="line">mapping (address =&gt; uint) ownerZombieCount;</span><br><span class="line"></span><br><span class="line">function _createZombie(string _name, uint _dna) private &#123;</span><br><span class="line">    uint id = zombies.push(Zombie(_name, _dna)) - 1;</span><br><span class="line">    zombieToOwner[id] = msg.sender;</span><br><span class="line">    ownerZombieCount[msg.sender]++;</span><br><span class="line">    NewZombie(id, _name, _dna);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>####④Require<br>require使得函数在执行过程中，当不满足某些条件时抛出错误，并停止执行：</p>
-<pre><code>function sayHiToVitalik(string _name) public returns (string) &#123;
-  // 比较 _name 是否等于 &quot;Vitalik&quot;. 如果不成立，抛出异常并终止程序
-  // (敲黑板: Solidity 并不支持原生的字符串比较, 我们只能通过比较
-  // 两字符串的 keccak256 哈希值来进行判断)
-  require(keccak256(_name) == keccak256(&quot;Vitalik&quot;));
-  // 如果返回 true, 运行如下语句
-  return &quot;Hi!&quot;;
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function sayHiToVitalik(string _name) public returns (string) &#123;</span><br><span class="line">  // 比较 _name 是否等于 &quot;Vitalik&quot;. 如果不成立，抛出异常并终止程序</span><br><span class="line">  // (敲黑板: Solidity 并不支持原生的字符串比较, 我们只能通过比较</span><br><span class="line">  // 两字符串的 keccak256 哈希值来进行判断)</span><br><span class="line">  require(keccak256(_name) == keccak256(&quot;Vitalik&quot;));</span><br><span class="line">  // 如果返回 true, 运行如下语句</span><br><span class="line">  return &quot;Hi!&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果你这样调用函数 sayHiToVitalik（“Vitalik”） ,它会返回“Hi！”。而如果调用的时候使用了其他参数，它则会抛出错误并停止执行。</p>
 <p>因此，在调用一个函数之前，用 require 验证前置条件是非常有必要的。</p>
 <p>实战演习</p>
-<pre><code>function createRandomZombie(string _name) public &#123;
-        require(ownerZombieCount[msg.sender] == 0);
-        uint randDna = _generateRandomDna(_name);
-        _createZombie(_name, randDna);
-    &#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function createRandomZombie(string _name) public &#123;</span><br><span class="line">        require(ownerZombieCount[msg.sender] == 0);</span><br><span class="line">        uint randDna = _generateRandomDna(_name);</span><br><span class="line">        _createZombie(_name, randDna);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>####⑤继承（Inheritance）<br>个让 Solidity 的代码易于管理的功能，就是合约 inheritance (继承)：</p>
-<pre><code>contract Doge &#123;
-  function catchphrase() public returns (string) &#123;
-    return &quot;So Wow CryptoDoge&quot;;
-  &#125;
-&#125;
-
-contract BabyDoge is Doge &#123;
-  function anotherCatchphrase() public returns (string) &#123;
-    return &quot;Such Moon BabyDoge&quot;;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">contract Doge &#123;</span><br><span class="line">  function catchphrase() public returns (string) &#123;</span><br><span class="line">    return &quot;So Wow CryptoDoge&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract BabyDoge is Doge &#123;</span><br><span class="line">  function anotherCatchphrase() public returns (string) &#123;</span><br><span class="line">    return &quot;Such Moon BabyDoge&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>由于 BabyDoge 是从 Doge 那里 inherits （继承)过来的。 这意味着当你编译和部署了 BabyDoge，它将可以访问 catchphrase() 和 anotherCatchphrase()和其他我们在 Doge 中定义的其他公共函数。<br>实战演习</p>
-<pre><code>contract ZombieFeeding is ZombieFactory &#123;
-
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">contract ZombieFeeding is ZombieFactory &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>####⑥引入（Import）<br>在 Solidity 中，当你有多个文件并且想把一个文件导入另一个文件时，可以使用 import 语句：</p>
-<pre><code>import &quot;./someothercontract.sol&quot;;
-
-contract newContract is SomeOtherContract &#123;
-
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import &quot;./someothercontract.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract newContract is SomeOtherContract &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这样当我们在合约（contract）目录下有一个名为 someothercontract.sol 的文件（ .&#x2F; 就是同一目录的意思），它就会被编译器导入。</p>
 <p>实战演习</p>
-<pre><code>pragma solidity ^0.4.19;
-
-import &quot;./zombiefactory.sol&quot;;
-
-contract ZombieFeeding is ZombieFactory &#123;
-
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">import &quot;./zombiefactory.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract ZombieFeeding is ZombieFactory &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>####⑦Storage与Memory<br>在 Solidity 中，有两个地方可以存储变量 —— storage 或 memory。</p>
 <p>Storage 变量是指永久存储在区块链中的变量。 Memory 变量则是临时的，当外部函数对某合约调用完成时，内存型变量即被移除。 你可以把它想象成存储在你电脑的硬盘或是RAM中数据的关系。</p>
 <p>大多数时候你都用不到这些关键字，默认情况下 Solidity 会自动处理它们。 状态变量（在函数之外声明的变量）默认为“存储”形式，并永久写入区块链；而在函数内部声明的变量是“内存”型的，它们函数调用结束后消失。</p>
 <p>然而也有一些情况下，你需要手动声明存储类型，主要用于处理函数内的 _ 结构体 _ 和 _ 数组 _ 时：</p>
-<pre><code>contract SandwichFactory &#123;
-  struct Sandwich &#123;
-    string name;
-    string status;
-  &#125;
-
-  Sandwich[] sandwiches;
-
-  function eatSandwich(uint _index) public &#123;
-    // Sandwich mySandwich = sandwiches[_index];
-
-    // ^ 看上去很直接，不过 Solidity 将会给出警告
-    // 告诉你应该明确在这里定义 `storage` 或者 `memory`。
-
-    // 所以你应该明确定义 `storage`:
-    Sandwich storage mySandwich = sandwiches[_index];
-    // ...这样 `mySandwich` 是指向 `sandwiches[_index]`的指针
-    // 在存储里，另外...
-    mySandwich.status = &quot;Eaten!&quot;;
-    // ...这将永久把 `sandwiches[_index]` 变为区块链上的存储
-
-    // 如果你只想要一个副本，可以使用`memory`:
-    Sandwich memory anotherSandwich = sandwiches[_index + 1];
-    // ...这样 `anotherSandwich` 就仅仅是一个内存里的副本了
-    // 另外
-    anotherSandwich.status = &quot;Eaten!&quot;;
-    // ...将仅仅修改临时变量，对 `sandwiches[_index + 1]` 没有任何影响
-    // 不过你可以这样做:
-    sandwiches[_index + 1] = anotherSandwich;
-    // ...如果你想把副本的改动保存回区块链存储
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">contract SandwichFactory &#123;</span><br><span class="line">  struct Sandwich &#123;</span><br><span class="line">    string name;</span><br><span class="line">    string status;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Sandwich[] sandwiches;</span><br><span class="line"></span><br><span class="line">  function eatSandwich(uint _index) public &#123;</span><br><span class="line">    // Sandwich mySandwich = sandwiches[_index];</span><br><span class="line"></span><br><span class="line">    // ^ 看上去很直接，不过 Solidity 将会给出警告</span><br><span class="line">    // 告诉你应该明确在这里定义 `storage` 或者 `memory`。</span><br><span class="line"></span><br><span class="line">    // 所以你应该明确定义 `storage`:</span><br><span class="line">    Sandwich storage mySandwich = sandwiches[_index];</span><br><span class="line">    // ...这样 `mySandwich` 是指向 `sandwiches[_index]`的指针</span><br><span class="line">    // 在存储里，另外...</span><br><span class="line">    mySandwich.status = &quot;Eaten!&quot;;</span><br><span class="line">    // ...这将永久把 `sandwiches[_index]` 变为区块链上的存储</span><br><span class="line"></span><br><span class="line">    // 如果你只想要一个副本，可以使用`memory`:</span><br><span class="line">    Sandwich memory anotherSandwich = sandwiches[_index + 1];</span><br><span class="line">    // ...这样 `anotherSandwich` 就仅仅是一个内存里的副本了</span><br><span class="line">    // 另外</span><br><span class="line">    anotherSandwich.status = &quot;Eaten!&quot;;</span><br><span class="line">    // ...将仅仅修改临时变量，对 `sandwiches[_index + 1]` 没有任何影响</span><br><span class="line">    // 不过你可以这样做:</span><br><span class="line">    sandwiches[_index + 1] = anotherSandwich;</span><br><span class="line">    // ...如果你想把副本的改动保存回区块链存储</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果你还没有完全理解究竟应该使用哪一个,Solidity 编译器会发警示提醒你的。</p>
 <p>实战演示</p>
-<pre><code>function feedAndMultiply(uint _zombieId, uint _targetDna) public &#123;
-    require(msg.sender == zombieToOwner[_zombieId]);
-    Zombie storage myZombie = zombies[_zombieId];
-  &#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function feedAndMultiply(uint _zombieId, uint _targetDna) public &#123;</span><br><span class="line">    require(msg.sender == zombieToOwner[_zombieId]);</span><br><span class="line">    Zombie storage myZombie = zombies[_zombieId];</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <p>####⑧僵尸的DNA<br>获取新的僵尸DNA的公式很简单：计算猎食僵尸DNA和被猎僵尸DNA之间的平均值。</p>
 <p>例如：</p>
-<pre><code>function testDnaSplicing() public &#123;
-  uint zombieDna = 2222222222222222;
-  uint targetDna = 4444444444444444;
-  uint newZombieDna = (zombieDna + targetDna) / 2;
-  // newZombieDna 将等于 3333333333333333
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function testDnaSplicing() public &#123;</span><br><span class="line">  uint zombieDna = 2222222222222222;</span><br><span class="line">  uint targetDna = 4444444444444444;</span><br><span class="line">  uint newZombieDna = (zombieDna + targetDna) / 2;</span><br><span class="line">  // newZombieDna 将等于 3333333333333333</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>实战演习</p>
-<pre><code>function feedAndMultiply(uint _zombieId, uint _targetDna) public &#123;
-    require(msg.sender == zombieToOwner[_zombieId]);
-    Zombie storage myZombie = zombies[_zombieId];
-    _targetDna = _targetDna % dnaModulus;
-    uint newDna = (myZombie.dna + _targetDna) / 2;
-    _createZombie(&quot;NoName&quot;, newDna);
-  &#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function feedAndMultiply(uint _zombieId, uint _targetDna) public &#123;</span><br><span class="line">    require(msg.sender == zombieToOwner[_zombieId]);</span><br><span class="line">    Zombie storage myZombie = zombies[_zombieId];</span><br><span class="line">    _targetDna = _targetDna % dnaModulus;</span><br><span class="line">    uint newDna = (myZombie.dna + _targetDna) / 2;</span><br><span class="line">    _createZombie(&quot;NoName&quot;, newDna);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <h4 id="⑨更多关于函数可见性"><a href="#⑨更多关于函数可见性" class="headerlink" title="⑨更多关于函数可见性"></a>⑨更多关于函数可见性</h4><p>internal 和 external<br>除 public 和 private 属性之外，Solidity 还使用了另外两个描述函数可见性的修饰词：internal（内部） 和 external（外部）。</p>
 <p>internal 和 private 类似，不过， 如果某个合约继承自其父合约，这个合约即可以访问父合约中定义的“内部”函数。</p>
 <p>external 与public 类似，只不过这些函数只能在合约之外调用 - 它们不能被合约内的其他函数调用。</p>
 <p>声明函数 internal 或 external 类型的语法，与声明 private 和 public类 型相同：</p>
-<pre><code>contract Sandwich &#123;
-  uint private sandwichesEaten = 0;
-
-  function eat() internal &#123;
-    sandwichesEaten++;
-  &#125;
-&#125;
-
-contract BLT is Sandwich &#123;
-  uint private baconSandwichesEaten = 0;
-
-  function eatWithBacon() public returns (string) &#123;
-    baconSandwichesEaten++;
-    // 因为eat() 是internal 的，所以我们能在这里调用
-    eat();
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">contract Sandwich &#123;</span><br><span class="line">  uint private sandwichesEaten = 0;</span><br><span class="line"></span><br><span class="line">  function eat() internal &#123;</span><br><span class="line">    sandwichesEaten++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract BLT is Sandwich &#123;</span><br><span class="line">  uint private baconSandwichesEaten = 0;</span><br><span class="line"></span><br><span class="line">  function eatWithBacon() public returns (string) &#123;</span><br><span class="line">    baconSandwichesEaten++;</span><br><span class="line">    // 因为eat() 是internal 的，所以我们能在这里调用</span><br><span class="line">    eat();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>实战演习:将 _createZombie() 函数的属性从 private 改为 internal</p>
 <h4 id="⑩僵尸吃什么"><a href="#⑩僵尸吃什么" class="headerlink" title="⑩僵尸吃什么?"></a>⑩僵尸吃什么?</h4><p>与其他合约的交互：<br>如果我们的合约需要和区块链上的其他的合约会话，则需先定义一个 interface (接口)。</p>
 <p>先举一个简单的栗子。 假设在区块链上有这么一个合约：</p>
-<pre><code>contract LuckyNumber &#123;
-  mapping(address =&gt; uint) numbers;
-
-  function setNum(uint _num) public &#123;
-    numbers[msg.sender] = _num;
-  &#125;
-
-  function getNum(address _myAddress) public view returns (uint) &#123;
-    return numbers[_myAddress];
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">contract LuckyNumber &#123;</span><br><span class="line">  mapping(address =&gt; uint) numbers;</span><br><span class="line"></span><br><span class="line">  function setNum(uint _num) public &#123;</span><br><span class="line">    numbers[msg.sender] = _num;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function getNum(address _myAddress) public view returns (uint) &#123;</span><br><span class="line">    return numbers[_myAddress];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这是个很简单的合约，您可以用它存储自己的幸运号码，并将其与您的以太坊地址关联。 这样其他人就可以通过您的地址查找您的幸运号码了。</p>
 <p>现在假设我们有一个外部合约，使用 getNum 函数可读取其中的数据。</p>
 <p>首先，我们定义 LuckyNumber 合约的 interface ：</p>
-<pre><code>contract NumberInterface &#123;
-  function getNum(address _myAddress) public view returns (uint);
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">contract NumberInterface &#123;</span><br><span class="line">  function getNum(address _myAddress) public view returns (uint);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>请注意，这个过程虽然看起来像在定义一个合约，但其实内里不同：</p>
 <p>首先，我们只声明了要与之交互的函数 —— 在本例中为 getNum —— 在其中我们没有使用到任何其他的函数或状态变量。</p>
 <p>其次，我们并没有使用大括号（{ 和 }）定义函数体，我们单单用分号（;）结束了函数声明。这使它看起来像一个合约框架。</p>
 <p>编译器就是靠这些特征认出它是一个接口的。<br>实战演习：</p>
-<pre><code>contract KittyInterface &#123;
-  function getKitty(uint256 _id) external view returns (
-    bool isGestating,
-    bool isReady,
-    uint256 cooldownIndex,
-    uint256 nextActionAt,
-    uint256 siringWithId,
-    uint256 birthTime,
-    uint256 matronId,
-    uint256 sireId,
-    uint256 generation,
-    uint256 genes
-  );
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">contract KittyInterface &#123;</span><br><span class="line">  function getKitty(uint256 _id) external view returns (</span><br><span class="line">    bool isGestating,</span><br><span class="line">    bool isReady,</span><br><span class="line">    uint256 cooldownIndex,</span><br><span class="line">    uint256 nextActionAt,</span><br><span class="line">    uint256 siringWithId,</span><br><span class="line">    uint256 birthTime,</span><br><span class="line">    uint256 matronId,</span><br><span class="line">    uint256 sireId,</span><br><span class="line">    uint256 generation,</span><br><span class="line">    uint256 genes</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="⑪使用接口"><a href="#⑪使用接口" class="headerlink" title="⑪使用接口"></a>⑪使用接口</h4><p>继续前面 NumberInterface 的例子，我们既然将接口定义为：</p>
-<pre><code>contract NumberInterface &#123;
-  function getNum(address _myAddress) public view returns (uint);
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">contract NumberInterface &#123;</span><br><span class="line">  function getNum(address _myAddress) public view returns (uint);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们可以在合约中这样使用：</p>
-<pre><code>contract MyContract &#123;
-  address NumberInterfaceAddress = 0xab38...;
-  // ^ 这是FavoriteNumber合约在以太坊上的地址
-  NumberInterface numberContract = NumberInterface(NumberInterfaceAddress);
-  // 现在变量 `numberContract` 指向另一个合约对象
-
-  function someFunction() public &#123;
-    // 现在我们可以调用在那个合约中声明的 `getNum`函数:
-    uint num = numberContract.getNum(msg.sender);
-    // ...在这儿使用 `num`变量做些什么
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">contract MyContract &#123;</span><br><span class="line">  address NumberInterfaceAddress = 0xab38...;</span><br><span class="line">  // ^ 这是FavoriteNumber合约在以太坊上的地址</span><br><span class="line">  NumberInterface numberContract = NumberInterface(NumberInterfaceAddress);</span><br><span class="line">  // 现在变量 `numberContract` 指向另一个合约对象</span><br><span class="line"></span><br><span class="line">  function someFunction() public &#123;</span><br><span class="line">    // 现在我们可以调用在那个合约中声明的 `getNum`函数:</span><br><span class="line">    uint num = numberContract.getNum(msg.sender);</span><br><span class="line">    // ...在这儿使用 `num`变量做些什么</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>通过这种方式，只要将您合约的可见性设置为public(公共)或external(外部)，它们就可以与以太坊区块链上的任何其他合约进行交互。</p>
 <p>实战演习:</p>
-<pre><code>KittyInterface kittyContract = KittyInterface(ckAddress);
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">KittyInterface kittyContract = KittyInterface(ckAddress);</span><br></pre></td></tr></table></figure>
 <h4 id="⑫处理多返回值"><a href="#⑫处理多返回值" class="headerlink" title="⑫处理多返回值"></a>⑫处理多返回值</h4><p>getKitty 是我们所看到的第一个返回多个值的函数。我们来看看是如何处理的：</p>
-<pre><code>function multipleReturns() internal returns(uint a, uint b, uint c) &#123;
-  return (1, 2, 3);
-&#125;
-
-function processMultipleReturns() external &#123;
-  uint a;
-  uint b;
-  uint c;
-  // 这样来做批量赋值:
-  (a, b, c) = multipleReturns();
-&#125;
-
-// 或者如果我们只想返回其中一个变量:
-function getLastReturnValue() external &#123;
-  uint c;
-  // 可以对其他字段留空:
-  (,,c) = multipleReturns();
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function multipleReturns() internal returns(uint a, uint b, uint c) &#123;</span><br><span class="line">  return (1, 2, 3);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function processMultipleReturns() external &#123;</span><br><span class="line">  uint a;</span><br><span class="line">  uint b;</span><br><span class="line">  uint c;</span><br><span class="line">  // 这样来做批量赋值:</span><br><span class="line">  (a, b, c) = multipleReturns();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 或者如果我们只想返回其中一个变量:</span><br><span class="line">function getLastReturnValue() external &#123;</span><br><span class="line">  uint c;</span><br><span class="line">  // 可以对其他字段留空:</span><br><span class="line">  (,,c) = multipleReturns();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>实战演习:</p>
-<pre><code>function feedOnKitty(uint _zombieId, uint _kittyId) public &#123;
-    uint kittyDna;
-    (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);
-    // 并修改函数调用
-    feedAndMultiply(_zombieId, kittyDna);
-  &#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function feedOnKitty(uint _zombieId, uint _kittyId) public &#123;</span><br><span class="line">    uint kittyDna;</span><br><span class="line">    (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);</span><br><span class="line">    // 并修改函数调用</span><br><span class="line">    feedAndMultiply(_zombieId, kittyDna);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <h4 id="⑬奖励-Kitty-基因"><a href="#⑬奖励-Kitty-基因" class="headerlink" title="⑬奖励: Kitty 基因"></a>⑬奖励: Kitty 基因</h4><p>还记得吗，第一课中我们提到，我们目前只使用16位DNA的前12位数来指定僵尸的外观。所以现在我们可以使用最后2个数字来处理“特殊”的特征。</p>
 <p>这样吧，把猫僵尸DNA的最后两个数字设定为99（因为猫有9条命）。所以在我们这么来写代码：如果这个僵尸是一只猫变来的，就将它DNA的最后两位数字设置为99。</p>
 <p>if 语句<br>if语句的语法在 Solidity 中，与在 JavaScript 中差不多：</p>
-<pre><code>function eatBLT(string sandwich) public &#123;
-  // 看清楚了，当我们比较字符串的时候，需要比较他们的 keccak256 哈希码
-  if (keccak256(sandwich) == keccak256(&quot;BLT&quot;)) &#123;
-    eat();
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function eatBLT(string sandwich) public &#123;</span><br><span class="line">  // 看清楚了，当我们比较字符串的时候，需要比较他们的 keccak256 哈希码</span><br><span class="line">  if (keccak256(sandwich) == keccak256(&quot;BLT&quot;)) &#123;</span><br><span class="line">    eat();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="⑭放在一起"><a href="#⑭放在一起" class="headerlink" title="⑭放在一起"></a>⑭放在一起</h4><p>JavaScript 实现<br>我们只用编译和部署 ZombieFeeding，就可以将这个合约部署到以太坊了。我们最终完成的这个合约继承自 ZombieFactory，因此它可以访问自己和父辈合约中的所有 public 方法。</p>
 <p>我们来看一个与我们的刚部署的合约进行交互的例子， 这个例子使用了 JavaScript 和 web3.js：</p>
-<pre><code>var abi = /* abi generated by the compiler */
-var ZombieFeedingContract = web3.eth.contract(abi)
-var contractAddress = /* our contract address on Ethereum after deploying */
-var ZombieFeeding = ZombieFeedingContract.at(contractAddress)
-
-// 假设我们有我们的僵尸ID和要攻击的猫咪ID
-let zombieId = 1;
-let kittyId = 1;
-
-// 要拿到猫咪的DNA，我们需要调用它的API。这些数据保存在它们的服务器上而不是区块链上。
-// 如果一切都在区块链上，我们就不用担心它们的服务器挂了，或者它们修改了API，
-// 或者因为不喜欢我们的僵尸游戏而封杀了我们
-let apiUrl = &quot;https://api.cryptokitties.co/kitties/&quot; + kittyId
-$.get(apiUrl, function(data) &#123;
-  let imgUrl = data.image_url
-  // 一些显示图片的代码
-&#125;)
-
-// 当用户点击一只猫咪的时候:
-$(&quot;.kittyImage&quot;).click(function(e) &#123;
-  // 调用我们合约的 `feedOnKitty` 函数
-  ZombieFeeding.feedOnKitty(zombieId, kittyId)
-&#125;)
-
-// 侦听来自我们合约的新僵尸事件好来处理
-ZombieFactory.NewZombie(function(error, result) &#123;
-  if (error) return
-  // 这个函数用来显示僵尸:
-  generateZombie(result.zombieId, result.name, result.dna)
-&#125;)
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var abi = /* abi generated by the compiler */</span><br><span class="line">var ZombieFeedingContract = web3.eth.contract(abi)</span><br><span class="line">var contractAddress = /* our contract address on Ethereum after deploying */</span><br><span class="line">var ZombieFeeding = ZombieFeedingContract.at(contractAddress)</span><br><span class="line"></span><br><span class="line">// 假设我们有我们的僵尸ID和要攻击的猫咪ID</span><br><span class="line">let zombieId = 1;</span><br><span class="line">let kittyId = 1;</span><br><span class="line"></span><br><span class="line">// 要拿到猫咪的DNA，我们需要调用它的API。这些数据保存在它们的服务器上而不是区块链上。</span><br><span class="line">// 如果一切都在区块链上，我们就不用担心它们的服务器挂了，或者它们修改了API，</span><br><span class="line">// 或者因为不喜欢我们的僵尸游戏而封杀了我们</span><br><span class="line">let apiUrl = &quot;https://api.cryptokitties.co/kitties/&quot; + kittyId</span><br><span class="line">$.get(apiUrl, function(data) &#123;</span><br><span class="line">  let imgUrl = data.image_url</span><br><span class="line">  // 一些显示图片的代码</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 当用户点击一只猫咪的时候:</span><br><span class="line">$(&quot;.kittyImage&quot;).click(function(e) &#123;</span><br><span class="line">  // 调用我们合约的 `feedOnKitty` 函数</span><br><span class="line">  ZombieFeeding.feedOnKitty(zombieId, kittyId)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 侦听来自我们合约的新僵尸事件好来处理</span><br><span class="line">ZombieFactory.NewZombie(function(error, result) &#123;</span><br><span class="line">  if (error) return</span><br><span class="line">  // 这个函数用来显示僵尸:</span><br><span class="line">  generateZombie(result.zombieId, result.name, result.dna)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <h4 id="⑮第二课完成"><a href="#⑮第二课完成" class="headerlink" title="⑮第二课完成"></a>⑮第二课完成</h4><p>截至第二课完成，所有代码如下：<br>zombiefactory.sol</p>
-<pre><code>pragma solidity ^0.4.19;
-
-contract ZombieFactory &#123;
-
-    event NewZombie(uint zombieId, string name, uint dna);
-
-    uint dnaDigits = 16;
-    uint dnaModulus = 10 ** dnaDigits;
-
-    struct Zombie &#123;
-        string name;
-        uint dna;
-    &#125;
-
-    Zombie[] public zombies;
-
-    mapping (uint =&gt; address) public zombieToOwner;
-    mapping (address =&gt; uint) ownerZombieCount;
-
-    function _createZombie(string _name, uint _dna) internal &#123;
-        uint id = zombies.push(Zombie(_name, _dna)) - 1;
-        zombieToOwner[id] = msg.sender;
-        ownerZombieCount[msg.sender]++;
-        NewZombie(id, _name, _dna);
-    &#125;
-
-    function _generateRandomDna(string _str) private view returns (uint) &#123;
-        uint rand = uint(keccak256(_str));
-        return rand % dnaModulus;
-    &#125;
-
-    function createRandomZombie(string _name) public &#123;
-        require(ownerZombieCount[msg.sender] == 0);
-        uint randDna = _generateRandomDna(_name);
-        randDna = randDna - randDna % 100;
-        _createZombie(_name, randDna);
-    &#125;
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">contract ZombieFactory &#123;</span><br><span class="line"></span><br><span class="line">    event NewZombie(uint zombieId, string name, uint dna);</span><br><span class="line"></span><br><span class="line">    uint dnaDigits = 16;</span><br><span class="line">    uint dnaModulus = 10 ** dnaDigits;</span><br><span class="line"></span><br><span class="line">    struct Zombie &#123;</span><br><span class="line">        string name;</span><br><span class="line">        uint dna;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Zombie[] public zombies;</span><br><span class="line"></span><br><span class="line">    mapping (uint =&gt; address) public zombieToOwner;</span><br><span class="line">    mapping (address =&gt; uint) ownerZombieCount;</span><br><span class="line"></span><br><span class="line">    function _createZombie(string _name, uint _dna) internal &#123;</span><br><span class="line">        uint id = zombies.push(Zombie(_name, _dna)) - 1;</span><br><span class="line">        zombieToOwner[id] = msg.sender;</span><br><span class="line">        ownerZombieCount[msg.sender]++;</span><br><span class="line">        NewZombie(id, _name, _dna);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function _generateRandomDna(string _str) private view returns (uint) &#123;</span><br><span class="line">        uint rand = uint(keccak256(_str));</span><br><span class="line">        return rand % dnaModulus;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function createRandomZombie(string _name) public &#123;</span><br><span class="line">        require(ownerZombieCount[msg.sender] == 0);</span><br><span class="line">        uint randDna = _generateRandomDna(_name);</span><br><span class="line">        randDna = randDna - randDna % 100;</span><br><span class="line">        _createZombie(_name, randDna);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>zombiefeeding.sol</p>
-<pre><code>pragma solidity ^0.4.19;
-import &quot;./zombiefactory.sol&quot;;
-contract KittyInterface &#123;
-  function getKitty(uint256 _id) external view returns (
-    bool isGestating,
-    bool isReady,
-    uint256 cooldownIndex,
-    uint256 nextActionAt,
-    uint256 siringWithId,
-    uint256 birthTime,
-    uint256 matronId,
-    uint256 sireId,
-    uint256 generation,
-    uint256 genes
-  );
-&#125;
-contract ZombieFeeding is ZombieFactory &#123;
-
-  address ckAddress = 0x06012c8cf97BEaD5deAe237070F9587f8E7A266d;
-  KittyInterface kittyContract = KittyInterface(ckAddress);
-
-  function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) public &#123;
-    require(msg.sender == zombieToOwner[_zombieId]);
-    Zombie storage myZombie = zombies[_zombieId];
-    _targetDna = _targetDna % dnaModulus;
-    uint newDna = (myZombie.dna + _targetDna) / 2;
-    if (keccak256(_species) == keccak256(&quot;kitty&quot;)) &#123;
-      newDna = newDna - newDna % 100 + 99;
-    &#125;
-    _createZombie(&quot;NoName&quot;, newDna);
-  &#125;
-
-  function feedOnKitty(uint _zombieId, uint _kittyId) public &#123;
-    uint kittyDna;
-    (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);
-    feedAndMultiply(_zombieId, kittyDna, &quot;kitty&quot;);
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line">import &quot;./zombiefactory.sol&quot;;</span><br><span class="line">contract KittyInterface &#123;</span><br><span class="line">  function getKitty(uint256 _id) external view returns (</span><br><span class="line">    bool isGestating,</span><br><span class="line">    bool isReady,</span><br><span class="line">    uint256 cooldownIndex,</span><br><span class="line">    uint256 nextActionAt,</span><br><span class="line">    uint256 siringWithId,</span><br><span class="line">    uint256 birthTime,</span><br><span class="line">    uint256 matronId,</span><br><span class="line">    uint256 sireId,</span><br><span class="line">    uint256 generation,</span><br><span class="line">    uint256 genes</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line">contract ZombieFeeding is ZombieFactory &#123;</span><br><span class="line"></span><br><span class="line">  address ckAddress = 0x06012c8cf97BEaD5deAe237070F9587f8E7A266d;</span><br><span class="line">  KittyInterface kittyContract = KittyInterface(ckAddress);</span><br><span class="line"></span><br><span class="line">  function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) public &#123;</span><br><span class="line">    require(msg.sender == zombieToOwner[_zombieId]);</span><br><span class="line">    Zombie storage myZombie = zombies[_zombieId];</span><br><span class="line">    _targetDna = _targetDna % dnaModulus;</span><br><span class="line">    uint newDna = (myZombie.dna + _targetDna) / 2;</span><br><span class="line">    if (keccak256(_species) == keccak256(&quot;kitty&quot;)) &#123;</span><br><span class="line">      newDna = newDna - newDna % 100 + 99;</span><br><span class="line">    &#125;</span><br><span class="line">    _createZombie(&quot;NoName&quot;, newDna);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function feedOnKitty(uint _zombieId, uint _kittyId) public &#123;</span><br><span class="line">    uint kittyDna;</span><br><span class="line">    (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);</span><br><span class="line">    feedAndMultiply(_zombieId, kittyDna, &quot;kitty&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="3-高级-Solidity-理论"><a href="#3-高级-Solidity-理论" class="headerlink" title="3.高级 Solidity 理论"></a>3.高级 Solidity 理论</h3><h4 id="①智能协议的永固性"><a href="#①智能协议的永固性" class="headerlink" title="①智能协议的永固性"></a>①智能协议的永固性</h4><p>到现在为止，我们讲的 Solidity 和其他语言没有质的区别，它长得也很像 JavaScript。</p>
 <p>但是，在有几点以太坊上的 DApp 跟普通的应用程序有着天壤之别。</p>
@@ -562,50 +249,10 @@ contract ZombieFeeding is ZombieFactory &#123;
 <p>因此，我们不能硬编码，而要采用“函数”，以便于 DApp 的关键部分可以以参数形式修改。</p>
 <p>比方说，我们不再一开始就把猎物地址给写入代码，而是写个函数 setKittyContractAddress, 运行时再设定猎物的地址，这样我们就可以随时去锁定新的猎物，也不用担心加密小猫集体消失了。</p>
 <p>实战演习：</p>
-<pre><code>KittyInterface kittyContract;
-
-  function setKittyContractAddress(address _address) external &#123;
-    kittyContract = KittyInterface(_address);
-  &#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">KittyInterface kittyContract;</span><br><span class="line"></span><br><span class="line">  function setKittyContractAddress(address _address) external &#123;</span><br><span class="line">    kittyContract = KittyInterface(_address);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <h4 id="②Ownable-Contracts"><a href="#②Ownable-Contracts" class="headerlink" title="②Ownable Contracts"></a>②Ownable Contracts</h4><p>OpenZeppelin库的Ownable 合约<br>下面是一个 Ownable 合约的例子： 来自 _ OpenZeppelin _ Solidity 库的 Ownable 合约。 OpenZeppelin 是主打安保和社区审查的智能合约库，您可以在自己的 DApps中引用。等把这一课学完，您不要催我们发布下一课，最好利用这个时间把 OpenZeppelin 的网站看看，保管您会学到很多东西！</p>
 <p>把楼下这个合约读读通，是不是还有些没见过代码？别担心，我们随后会解释。</p>
-<pre><code>/**
- * @title Ownable
- * @dev The Ownable contract has an owner address, and provides basic authorization control
- * functions, this simplifies the implementation of &quot;user permissions&quot;.
- */
-contract Ownable &#123;
-  address public owner;
-  event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
-
-  /**
-   * @dev The Ownable constructor sets the original `owner` of the contract to the sender
-   * account.
-   */
-  function Ownable() public &#123;
-    owner = msg.sender;
-  &#125;
-
-  /**
-   * @dev Throws if called by any account other than the owner.
-   */
-  modifier onlyOwner() &#123;
-    require(msg.sender == owner);
-    _;
-  &#125;
-
-  /**
-   * @dev Allows the current owner to transfer control of the contract to a newOwner.
-   * @param newOwner The address to transfer ownership to.
-   */
-  function transferOwnership(address newOwner) public onlyOwner &#123;
-    require(newOwner != address(0));
-    OwnershipTransferred(owner, newOwner);
-    owner = newOwner;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @title Ownable</span><br><span class="line"> * @dev The Ownable contract has an owner address, and provides basic authorization control</span><br><span class="line"> * functions, this simplifies the implementation of &quot;user permissions&quot;.</span><br><span class="line"> */</span><br><span class="line">contract Ownable &#123;</span><br><span class="line">  address public owner;</span><br><span class="line">  event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * @dev The Ownable constructor sets the original `owner` of the contract to the sender</span><br><span class="line">   * account.</span><br><span class="line">   */</span><br><span class="line">  function Ownable() public &#123;</span><br><span class="line">    owner = msg.sender;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * @dev Throws if called by any account other than the owner.</span><br><span class="line">   */</span><br><span class="line">  modifier onlyOwner() &#123;</span><br><span class="line">    require(msg.sender == owner);</span><br><span class="line">    _;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * @dev Allows the current owner to transfer control of the contract to a newOwner.</span><br><span class="line">   * @param newOwner The address to transfer ownership to.</span><br><span class="line">   */</span><br><span class="line">  function transferOwnership(address newOwner) public onlyOwner &#123;</span><br><span class="line">    require(newOwner != address(0));</span><br><span class="line">    OwnershipTransferred(owner, newOwner);</span><br><span class="line">    owner = newOwner;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
 <li>构造函数：function Ownable()是一个 _ constructor_ (构造函数)，构造函数不是必须的，它与合约同名，构造函数一生中唯一的一次执行，就是在合约最初被创建的时候。</li>
 <li>函数修饰符：modifier onlyOwner()。 修饰符跟函数很类似，不过是用来修饰其他已有函数用的， 在其他语句执行前，为它检查下先验条件。 在这个例子中，我们就可以写个修饰符 onlyOwner 检查下调用者，确保只有合约的主人才能运行本函数。我们下一章中会详细讲述修饰符，以及那个奇怪的_;。</li>
@@ -619,36 +266,16 @@ contract Ownable &#123;
 </ol>
 <p>onlyOwner 简直人见人爱，大多数人开发自己的 Solidity DApps，都是从复制&#x2F;粘贴 Ownable 开始的，从它再继承出的子类，并在之上进行功能开发。</p>
 <p>既然我们想把 setKittyContractAddress 限制为 onlyOwner ，我们也要做同样的事情。<br>实战演习：</p>
-<pre><code>import &quot;./ownable.sol&quot;;
-
-contract ZombieFactory is Ownable &#123;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import &quot;./ownable.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract ZombieFactory is Ownable &#123;</span><br></pre></td></tr></table></figure>
 <h4 id="③onlyOwner-函数修饰符"><a href="#③onlyOwner-函数修饰符" class="headerlink" title="③onlyOwner 函数修饰符"></a>③onlyOwner 函数修饰符</h4><p>现在我们有了个基本版的合约 ZombieFactory 了，它继承自 Ownable 接口，我们也可以给 ZombieFeeding 加上 onlyOwner 函数修饰符。</p>
 <p>这就是合约继承的工作原理。记得：</p>
-<pre><code>ZombieFeeding 是个 ZombieFactory
-ZombieFactory 是个 Ownable
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ZombieFeeding 是个 ZombieFactory</span><br><span class="line">ZombieFactory 是个 Ownable</span><br></pre></td></tr></table></figure>
 <p>因此 ZombieFeeding 也是个 Ownable, 并可以通过 Ownable 接口访问父类中的函数&#x2F;事件&#x2F;修饰符。往后，ZombieFeeding 的继承者合约们同样也可以这么延续下去。</p>
 <p><strong>函数修饰符</strong><br>函数修饰符看起来跟函数没什么不同，不过关键字modifier 告诉编译器，这是个modifier(修饰符)，而不是个function(函数)。它不能像函数那样被直接调用，只能被添加到函数定义的末尾，用以改变函数的行为。</p>
 <p>咱们仔细读读 onlyOwner:</p>
-<pre><code>/**
- * @dev 调用者不是‘主人’，就会抛出异常
- */
-modifier onlyOwner() &#123;
-  require(msg.sender == owner);
-  _;
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @dev 调用者不是‘主人’，就会抛出异常</span><br><span class="line"> */</span><br><span class="line">modifier onlyOwner() &#123;</span><br><span class="line">  require(msg.sender == owner);</span><br><span class="line">  _;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>onlyOwner 函数修饰符是这么用的：</p>
-<pre><code>contract MyContract is Ownable &#123;
-  event LaughManiacally(string laughter);
-
-  //注意！ `onlyOwner`上场 :
-  function likeABoss() external onlyOwner &#123;
-    LaughManiacally(&quot;Muahahahaha&quot;);
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">contract MyContract is Ownable &#123;</span><br><span class="line">  event LaughManiacally(string laughter);</span><br><span class="line"></span><br><span class="line">  //注意！ `onlyOwner`上场 :</span><br><span class="line">  function likeABoss() external onlyOwner &#123;</span><br><span class="line">    LaughManiacally(&quot;Muahahahaha&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>注意 likeABoss 函数上的 onlyOwner 修饰符。 当你调用 likeABoss 时，首先执行 onlyOwner 中的代码， 执行到 onlyOwner 中的 _; 语句时，程序再返回并执行 likeABoss 中的代码。</p>
 <p>可见，尽管函数修饰符也可以应用到各种场合，但最常见的还是放在函数执行之前添加快速的 require检查。</p>
 <p>因为给函数添加了修饰符 onlyOwner，使得唯有合约的主人（也就是部署者）才能调用它。</p>
@@ -658,11 +285,7 @@ modifier onlyOwner() &#123;
 <blockquote>
 <p>所以非常重要的是，部署在以太坊上的 DApp，并不能保证它真正做到去中心，你需要阅读并理解它的源代码，才能防止其中没有被部署者恶意植入后门；作为开发人员，如何做到既要给自己留下修复 bug 的余地，又要尽量地放权给使用者，以便让他们放心你，从而愿意把数据放在你的 DApp 中，这确实需要个微妙的平衡。<br>实战演习：</p>
 </blockquote>
-<pre><code>// 修改这个函数:
-function setKittyContractAddress(address _address) external &#123;
-//修改后：
-function setKittyContractAddress(address _address) external onlyOwner &#123;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 修改这个函数:</span><br><span class="line">function setKittyContractAddress(address _address) external &#123;</span><br><span class="line">//修改后：</span><br><span class="line">function setKittyContractAddress(address _address) external onlyOwner &#123;</span><br></pre></td></tr></table></figure>
 <h4 id="④Gas"><a href="#④Gas" class="headerlink" title="④Gas"></a>④Gas</h4><p><strong>Gas - 驱动以太坊DApps的能源</strong><br>在 Solidity 中，你的用户想要每次执行你的 DApp 都需要支付一定的 gas，gas 可以用以太币购买，因此，用户每次跑 DApp 都得花费以太币。</p>
 <p>一个 DApp 收取多少 gas 取决于功能逻辑的复杂程度。每个操作背后，都在计算完成这个操作所需要的计算资源，（比如，存储数据就比做个加法运算贵得多）， 一次操作所需要花费的 gas 等于这个操作背后的所有运算花销的总和。</p>
 <p>由于运行你的程序需要花费用户的真金白银，在以太坊中代码的编程语言，比其他任何编程语言都更强调优化。同样的功能，使用笨拙的代码开发的程序，比起经过精巧优化的代码来，运行花费更高，这显然会给成千上万的用户带来大量不必要的开销。<br><strong>为什么要用 gas 来驱动？</strong><br>以太坊就像一个巨大、缓慢、但非常安全的电脑。当你运行一个程序的时候，网络上的每一个节点都在进行相同的运算，以验证它的输出 —— 这就是所谓的“去中心化” 由于数以千计的节点同时在验证着每个功能的运行，这可以确保它的数据不会被被监控，或者被刻意修改。</p>
@@ -674,32 +297,11 @@ function setKittyContractAddress(address _address) external onlyOwner &#123;
 <p>通常情况下我们不会考虑使用 uint 变种，因为无论如何定义 uint的大小，Solidity 为它保留256位的存储空间。例如，使用 uint8 而不是uint（uint256）不会为你节省任何 gas。</p>
 <p>除非，把 uint 绑定到 struct 里面。</p>
 <p>如果一个 struct 中有多个 uint，则尽可能使用较小的 uint, Solidity 会将这些 uint 打包在一起，从而占用较少的存储空间。例如：</p>
-<pre><code>struct NormalStruct &#123;
-  uint a;
-  uint b;
-  uint c;
-&#125;
-
-struct MiniMe &#123;
-  uint32 a;
-  uint32 b;
-  uint c;
-&#125;
-
-// 因为使用了结构打包，`mini` 比 `normal` 占用的空间更少
-NormalStruct normal = NormalStruct(10, 20, 30);
-MiniMe mini = MiniMe(10, 20, 30); 
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">struct NormalStruct &#123;</span><br><span class="line">  uint a;</span><br><span class="line">  uint b;</span><br><span class="line">  uint c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct MiniMe &#123;</span><br><span class="line">  uint32 a;</span><br><span class="line">  uint32 b;</span><br><span class="line">  uint c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 因为使用了结构打包，`mini` 比 `normal` 占用的空间更少</span><br><span class="line">NormalStruct normal = NormalStruct(10, 20, 30);</span><br><span class="line">MiniMe mini = MiniMe(10, 20, 30); </span><br></pre></td></tr></table></figure>
 <p>所以，当 uint 定义在一个 struct 中的时候，尽量使用最小的整数子类型以节约空间。 并且把同样类型的变量放一起（即在 struct 中将把变量按照类型依次放置），这样 Solidity 可以将存储空间最小化。例如，有两个 struct：</p>
 <p>uint c; uint32 a; uint32 b; 和 uint32 a; uint c; uint32 b;</p>
 <p>前者比后者需要的gas更少，因为前者把uint32放一起了。<br>实战演习：</p>
-<pre><code>struct Zombie &#123;
-        string name;
-        uint dna;
-        uint32 level;
-        uint32 readyTime;
-    &#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">struct Zombie &#123;</span><br><span class="line">        string name;</span><br><span class="line">        uint dna;</span><br><span class="line">        uint32 level;</span><br><span class="line">        uint32 readyTime;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <h4 id="⑤时间单位"><a href="#⑤时间单位" class="headerlink" title="⑤时间单位"></a>⑤时间单位</h4><p>level 属性表示僵尸的级别。以后，在我们创建的战斗系统中，打胜仗的僵尸会逐渐升级并获得更多的能力。</p>
 <p>readyTime 稍微复杂点。我们希望增加一个“冷却周期”，表示僵尸在两次猎食或攻击之之间必须等待的时间。如果没有它，僵尸每天可能会攻击和繁殖1,000次，这样游戏就太简单了。</p>
 <p>为了记录僵尸在下一次进击前需要等待的时间，我们使用了 Solidity 的时间单位。<br><strong>时间单位</strong><br>Solidity 使用自己的本地时间单位。</p>
@@ -709,27 +311,9 @@ MiniMe mini = MiniMe(10, 20, 30);
 </blockquote>
 <p>Solidity 还包含秒(seconds)，分钟(minutes)，小时(hours)，天(days)，周(weeks) 和 年(years) 等时间单位。它们都会转换成对应的秒数放入 uint 中。所以 1分钟 就是 60，1小时是 3600（60秒×60分钟），1天是86400（24小时×60分钟×60秒），以此类推。</p>
 <p>下面是一些使用时间单位的实用案例：</p>
-<pre><code>uint lastUpdated;
-
-// 将‘上次更新时间’ 设置为 ‘现在’
-function updateTimestamp() public &#123;
-  lastUpdated = now;
-&#125;
-
-// 如果到上次`updateTimestamp` 超过5分钟，返回 &#39;true&#39;
-// 不到5分钟返回 &#39;false&#39;
-function fiveMinutesHavePassed() public view returns (bool) &#123;
-  return (now &gt;= (lastUpdated + 5 minutes));
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">uint lastUpdated;</span><br><span class="line"></span><br><span class="line">// 将‘上次更新时间’ 设置为 ‘现在’</span><br><span class="line">function updateTimestamp() public &#123;</span><br><span class="line">  lastUpdated = now;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 如果到上次`updateTimestamp` 超过5分钟，返回 &#x27;true&#x27;</span><br><span class="line">// 不到5分钟返回 &#x27;false&#x27;</span><br><span class="line">function fiveMinutesHavePassed() public view returns (bool) &#123;</span><br><span class="line">  return (now &gt;= (lastUpdated + 5 minutes));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>有了这些工具，我们可以为僵尸设定“冷静时间”功能。<br>实战演习：</p>
-<pre><code>// 1. 在这里定义 `cooldownTime`
-
-// 2. 修改下面这行:
-        uint id = zombies.push(Zombie(_name, _dna)) - 1;
-// uint cooldownTime = 1 days;
-   uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime))) - 1;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 1. 在这里定义 `cooldownTime`</span><br><span class="line"></span><br><span class="line">// 2. 修改下面这行:</span><br><span class="line">        uint id = zombies.push(Zombie(_name, _dna)) - 1;</span><br><span class="line">// uint cooldownTime = 1 days;</span><br><span class="line">   uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime))) - 1;</span><br></pre></td></tr></table></figure>
 <h4 id="⑥僵尸冷却"><a href="#⑥僵尸冷却" class="headerlink" title="⑥僵尸冷却"></a>⑥僵尸冷却</h4><p>现在，Zombie 结构体中定义好了一个 readyTime 属性，让我们跳到 zombiefeeding.sol， 去实现一个”冷却周期定时器“。</p>
 <p>按照以下步骤修改 feedAndMultiply：</p>
 <ol>
@@ -739,68 +323,19 @@ function fiveMinutesHavePassed() public view returns (bool) &#123;
 <p>这将限制僵尸，防止其无限制地捕猎小猫或者整天不停地繁殖。将来，当我们增加战斗功能时，我们同样用”冷却周期“限制僵尸之间打斗的频率。</p>
 <p>首先，我们要定义一些辅助函数，设置并检查僵尸的 readyTime。<br><strong>将结构体作为参数传入</strong><br>由于结构体的存储指针可以以参数的方式传递给一个 private 或 internal 的函数，因此结构体可以在多个函数之间相互传递。</p>
 <p>遵循这样的语法：</p>
-<pre><code>function _doStuff(Zombie storage _zombie) internal &#123;
-  // do stuff with _zombie
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function _doStuff(Zombie storage _zombie) internal &#123;</span><br><span class="line">  // do stuff with _zombie</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这样我们可以将某僵尸的引用直接传递给一个函数，而不用是通过参数传入僵尸ID后，函数再依据ID去查找。<br>实战演习：</p>
-<pre><code>  function _triggerCooldown(Zombie storage _zombie) internal &#123;
-    _zombie.readyTime = uint32(now + cooldownTime);
-  &#125;
-
-  function _isReady(Zombie storage _zombie) internal view returns (bool) &#123;
-      return (_zombie.readyTime &lt;= now);
-  &#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function _triggerCooldown(Zombie storage _zombie) internal &#123;</span><br><span class="line">  _zombie.readyTime = uint32(now + cooldownTime);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function _isReady(Zombie storage _zombie) internal view returns (bool) &#123;</span><br><span class="line">    return (_zombie.readyTime &lt;= now);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="⑦公有函数和安全性"><a href="#⑦公有函数和安全性" class="headerlink" title="⑦公有函数和安全性"></a>⑦公有函数和安全性</h4><p>现在来修改 feedAndMultiply ，实现冷却周期。</p>
 <p>回顾一下这个函数，前一课上我们将其可见性设置为public。你必须仔细地检查所有声明为 public 和 external的函数，一个个排除用户滥用它们的可能，谨防安全漏洞。请记住，如果这些函数没有类似 onlyOwner 这样的函数修饰符，用户能利用各种可能的参数去调用它们。</p>
 <p>检查完这个函数，用户就可以直接调用这个它，并传入他们所希望的 _targetDna 或 species 。</p>
 <p>仔细观察，这个函数只需被 feedOnKitty() 调用，因此，想要防止漏洞，最简单的方法就是设其可见性为 internal。<br>实战演习：</p>
-<pre><code>// 1. 使这个函数的可见性为 internal
-  function feedAndMultiply(uint _zombieId, uint _targetDna, string species) internal &#123;
-    require(msg.sender == zombieToOwner[_zombieId]);
-    Zombie storage myZombie = zombies[_zombieId];
-    require(_isReady(myZombie));// 2. 在这里为 `_isReady` 增加一个检查
-    _targetDna = _targetDna % dnaModulus;
-    uint newDna = (myZombie.dna + _targetDna) / 2;
-    if (keccak256(species) == keccak256(&quot;kitty&quot;)) &#123;
-      newDna = newDna - newDna % 100 + 99;
-    &#125;
-    _createZombie(&quot;NoName&quot;, newDna);
-    _triggerCooldown(myZombie);// 3. 调用 `_triggerCooldown`
-  &#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 1. 使这个函数的可见性为 internal</span><br><span class="line">  function feedAndMultiply(uint _zombieId, uint _targetDna, string species) internal &#123;</span><br><span class="line">    require(msg.sender == zombieToOwner[_zombieId]);</span><br><span class="line">    Zombie storage myZombie = zombies[_zombieId];</span><br><span class="line">    require(_isReady(myZombie));// 2. 在这里为 `_isReady` 增加一个检查</span><br><span class="line">    _targetDna = _targetDna % dnaModulus;</span><br><span class="line">    uint newDna = (myZombie.dna + _targetDna) / 2;</span><br><span class="line">    if (keccak256(species) == keccak256(&quot;kitty&quot;)) &#123;</span><br><span class="line">      newDna = newDna - newDna % 100 + 99;</span><br><span class="line">    &#125;</span><br><span class="line">    _createZombie(&quot;NoName&quot;, newDna);</span><br><span class="line">    _triggerCooldown(myZombie);// 3. 调用 `_triggerCooldown`</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <h4 id="⑧进一步了解函数修饰符"><a href="#⑧进一步了解函数修饰符" class="headerlink" title="⑧进一步了解函数修饰符"></a>⑧进一步了解函数修饰符</h4><p><strong>带参数的函数修饰符</strong><br>之前我们已经读过一个简单的函数修饰符了：onlyOwner。函数修饰符也可以带参数。例如：</p>
-<pre><code>// 存储用户年龄的映射
-mapping (uint =&gt; uint) public age;
-
-// 限定用户年龄的修饰符
-modifier olderThan(uint _age, uint _userId) &#123;
-  require(age[_userId] &gt;= _age);
-  _;
-&#125;
-
-// 必须年满16周岁才允许开车 (至少在美国是这样的).
-// 我们可以用如下参数调用`olderThan` 修饰符:
-function driveCar(uint _userId) public olderThan(16, _userId) &#123;
-  // 其余的程序逻辑
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 存储用户年龄的映射</span><br><span class="line">mapping (uint =&gt; uint) public age;</span><br><span class="line"></span><br><span class="line">// 限定用户年龄的修饰符</span><br><span class="line">modifier olderThan(uint _age, uint _userId) &#123;</span><br><span class="line">  require(age[_userId] &gt;= _age);</span><br><span class="line">  _;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 必须年满16周岁才允许开车 (至少在美国是这样的).</span><br><span class="line">// 我们可以用如下参数调用`olderThan` 修饰符:</span><br><span class="line">function driveCar(uint _userId) public olderThan(16, _userId) &#123;</span><br><span class="line">  // 其余的程序逻辑</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>看到了吧， olderThan 修饰符可以像函数一样接收参数，是“宿主”函数 driveCar 把参数传递给它的修饰符的。</p>
 <p>来，我们自己生产一个修饰符，通过传入的level参数来限制僵尸使用某些特殊功能。<br>实战演习：</p>
-<pre><code>pragma solidity ^0.4.19;
-
-import &quot;./zombiefeeding.sol&quot;;
-
-contract ZombieHelper is ZombieFeeding &#123;
-
-  modifier aboveLevel(uint _level, uint _zombieId) &#123;
-    require(zombies[_zombieId].level &gt;= _level);
-    _;
-  &#125;
-
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">import &quot;./zombiefeeding.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract ZombieHelper is ZombieFeeding &#123;</span><br><span class="line"></span><br><span class="line">  modifier aboveLevel(uint _level, uint _zombieId) &#123;</span><br><span class="line">    require(zombies[_zombieId].level &gt;= _level);</span><br><span class="line">    _;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="⑨僵尸修饰符"><a href="#⑨僵尸修饰符" class="headerlink" title="⑨僵尸修饰符"></a>⑨僵尸修饰符</h4><p>现在让我们设计一些使用 aboveLevel 修饰符的函数。</p>
 <p>作为游戏，您得有一些措施激励玩家们去升级他们的僵尸：</p>
 <ul>
@@ -808,16 +343,7 @@ contract ZombieHelper is ZombieFeeding &#123;
 <li>20级以上的僵尸，玩家能给他们定制的 DNA。</li>
 </ul>
 <p>是实现这些功能的时候了。以下是上一课的示例代码，供参考：（第八节课的代码）<br>实战演习：</p>
-<pre><code>function changeName(uint _zombieId, string _newName) external aboveLevel(2, _zombieId) &#123;
-    require(msg.sender == zombieToOwner[_zombieId]);
-    zombies[_zombieId].name = _newName;
-  &#125;
-
-  function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20, _zombieId) &#123;
-    require(msg.sender == zombieToOwner[_zombieId]);
-    zombies[_zombieId].dna = _newDna;
-  &#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function changeName(uint _zombieId, string _newName) external aboveLevel(2, _zombieId) &#123;</span><br><span class="line">    require(msg.sender == zombieToOwner[_zombieId]);</span><br><span class="line">    zombies[_zombieId].name = _newName;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20, _zombieId) &#123;</span><br><span class="line">    require(msg.sender == zombieToOwner[_zombieId]);</span><br><span class="line">    zombies[_zombieId].dna = _newDna;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <h4 id="⑩利用-‘View’-函数节省-Gas"><a href="#⑩利用-‘View’-函数节省-Gas" class="headerlink" title="⑩利用 ‘View’ 函数节省 Gas"></a>⑩利用 ‘View’ 函数节省 Gas</h4><p>现在需要添加的一个功能是：我们的 DApp 需要一个方法来查看某玩家的整个僵尸军团 - 我们称之为 getZombiesByOwner。</p>
 <p>实现这个功能只需从区块链中读取数据，所以它可以是一个 view 函数。这让我们不得不回顾一下“gas优化”这个重要话题。</p>
 <p><strong>“view” 函数不花 “gas”</strong><br>当玩家从外部调用一个view函数，是不需要支付一分 gas 的。</p>
@@ -826,10 +352,7 @@ contract ZombieHelper is ZombieFeeding &#123;
 <blockquote>
 <p>注意：如果一个 view 函数在另一个函数的内部被调用，而调用函数与 view 函数的不属于同一个合约，也会产生调用成本。这是因为如果主调函数在以太坊创建了一个事务，它仍然需要逐个节点去验证。所以标记为 view 的函数只有在外部调用时才是免费的。<br>实战演习：</p>
 </blockquote>
-<pre><code>function getZombiesByOwner(address _owner) external view returns(uint[]) &#123;
-   
-  &#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function getZombiesByOwner(address _owner) external view returns(uint[]) &#123;</span><br><span class="line">   </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <h4 id="⑪存储非常昂贵"><a href="#⑪存储非常昂贵" class="headerlink" title="⑪存储非常昂贵"></a>⑪存储非常昂贵</h4><p>Solidity 使用storage(存储)是相当昂贵的，”写入“操作尤其贵。</p>
 <p>这是因为，无论是写入还是更改一段数据， 这都将永久性地写入区块链。”永久性“啊！需要在全球数千个节点的硬盘上存入这些数据，随着区块链的增长，拷贝份数更多，存储量也就越大。这是需要成本的！</p>
 <p>为了降低成本，不到万不得已，避免将数据写入存储。这也会导致效率低下的编程逻辑 - 比如每次调用一个函数，都需要在 memory(内存) 中重建一个数组，而不是简单地将上次计算的数组给存储下来以便快速查找。</p>
@@ -837,36 +360,18 @@ contract ZombieHelper is ZombieFeeding &#123;
 <p>我们将在下一章讨论for循环，现在我们来看一下看如何如何在内存中声明数组。</p>
 <p><strong>在内存中声明数组</strong><br>在数组后面加上 memory关键字， 表明这个数组是仅仅在内存中创建，不需要写入外部存储，并且在函数调用结束时它就解散了。与在程序结束时把数据保存进 storage 的做法相比，内存运算可以大大节省gas开销 – 把这数组放在view里用，完全不用花钱。</p>
 <p>以下是申明一个内存数组的例子：</p>
-<pre><code>function getArray() external pure returns(uint[]) &#123;
-  // 初始化一个长度为3的内存数组
-  uint[] memory values = new uint[](3);
-  // 赋值
-  values.push(1);
-  values.push(2);
-  values.push(3);
-  // 返回数组
-  return values;
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function getArray() external pure returns(uint[]) &#123;</span><br><span class="line">  // 初始化一个长度为3的内存数组</span><br><span class="line">  uint[] memory values = new uint[](3);</span><br><span class="line">  // 赋值</span><br><span class="line">  values.push(1);</span><br><span class="line">  values.push(2);</span><br><span class="line">  values.push(3);</span><br><span class="line">  // 返回数组</span><br><span class="line">  return values;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这个小例子展示了一些语法规则，下一章中，我们将通过一个实际用例，展示它和 for 循环结合的做法。</p>
 <blockquote>
 <p>注意：内存数组 必须 用长度参数（在本例中为3）创建。目前不支持 array.push()之类的方法调整数组大小，在未来的版本可能会支持长度修改。<br>实战演习：</p>
 </blockquote>
-<pre><code>function getZombiesByOwner(address _owner) external view returns(uint[]) &#123;
-    uint[] memory result = new uint[](ownerZombieCount[_owner]);
-    return result;
-  &#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function getZombiesByOwner(address _owner) external view returns(uint[]) &#123;</span><br><span class="line">    uint[] memory result = new uint[](ownerZombieCount[_owner]);</span><br><span class="line">    return result;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <h4 id="⑫For循环"><a href="#⑫For循环" class="headerlink" title="⑫For循环"></a>⑫For循环</h4><p>在之前的章节中，我们提到过，函数中使用的数组是运行时在内存中通过 for 循环实时构建，而不是预先建立在存储中的。</p>
 <p>为什么要这样做呢？</p>
 <p>为了实现 getZombiesByOwner 函数，一种“无脑式”的解决方案是在 ZombieFactory 中存入”主人“和”僵尸军团“的映射。</p>
-<pre><code>mapping (address =&gt; uint[]) public ownerToZombies
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mapping (address =&gt; uint[]) public ownerToZombies</span><br></pre></td></tr></table></figure>
 <p>然后我们每次创建新僵尸时，执行 ownerToZombies [owner] .push（zombieId） 将其添加到主人的僵尸数组中。而 getZombiesByOwner 函数也非常简单：</p>
-<pre><code>function getZombiesByOwner(address _owner) external view returns (uint[]) &#123;
-  return ownerToZombies[_owner];
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function getZombiesByOwner(address _owner) external view returns (uint[]) &#123;</span><br><span class="line">  return ownerToZombies[_owner];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>这个做法有问题</strong><br>做法倒是简单。可是如果我们需要一个函数来把一头僵尸转移到另一个主人名下（我们一定会在后面的课程中实现的），又会发生什么？</p>
 <p>这个“换主”函数要做到：</p>
 <p>1.将僵尸push到新主人的 ownerToZombies 数组中， 2.从旧主的 ownerToZombies 数组中移除僵尸， 3.将旧主僵尸数组中“换主僵尸”之后的的每头僵尸都往前挪一位，把挪走“换主僵尸”后留下的“空槽”填上， 4.将数组长度减1。</p>
@@ -878,36 +383,9 @@ contract ZombieHelper is ZombieFeeding &#123;
 <p>由于从外部调用一个 view 函数是免费的，我们也可以在 getZombiesByOwner 函数中用一个for循环遍历整个僵尸数组，把属于某个主人的僵尸挑出来构建出僵尸数组。那么我们的 transfer 函数将会便宜得多，因为我们不需要挪动存储里的僵尸数组重新排序，总体上这个方法会更便宜，虽然有点反直觉。</p>
 <p><strong>使用 for 循环</strong><br>for循环的语法在 Solidity 和 JavaScript 中类似。</p>
 <p>来看一个创建偶数数组的例子：</p>
-<pre><code>function getEvens() pure external returns(uint[]) &#123;
-  uint[] memory evens = new uint[](5);
-  // 在新数组中记录序列号
-  uint counter = 0;
-  // 在循环从1迭代到10：
-  for (uint i = 1; i &lt;= 10; i++) &#123;
-    // 如果 `i` 是偶数...
-    if (i % 2 == 0) &#123;
-      // 把它加入偶数数组
-      evens[counter] = i;
-      //索引加一， 指向下一个空的‘even’
-      counter++;
-    &#125;
-  &#125;
-  return evens;
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function getEvens() pure external returns(uint[]) &#123;</span><br><span class="line">  uint[] memory evens = new uint[](5);</span><br><span class="line">  // 在新数组中记录序列号</span><br><span class="line">  uint counter = 0;</span><br><span class="line">  // 在循环从1迭代到10：</span><br><span class="line">  for (uint i = 1; i &lt;= 10; i++) &#123;</span><br><span class="line">    // 如果 `i` 是偶数...</span><br><span class="line">    if (i % 2 == 0) &#123;</span><br><span class="line">      // 把它加入偶数数组</span><br><span class="line">      evens[counter] = i;</span><br><span class="line">      //索引加一， 指向下一个空的‘even’</span><br><span class="line">      counter++;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return evens;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这个函数将返回一个形为 [2,4,6,8,10] 的数组。<br>实战演习：</p>
-<pre><code>function getZombiesByOwner(address _owner) external view returns(uint[]) &#123;
-    uint[] memory result = new uint[](ownerZombieCount[_owner]);
-    uint counter = 0;
-    for (uint i = 0; i &lt; zombies.length; i++) &#123;
-      if (zombieToOwner[i] == _owner) &#123;
-        result[counter] = i;
-        counter++;
-      &#125;
-    &#125;
-    return result;
-  &#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function getZombiesByOwner(address _owner) external view returns(uint[]) &#123;</span><br><span class="line">    uint[] memory result = new uint[](ownerZombieCount[_owner]);</span><br><span class="line">    uint counter = 0;</span><br><span class="line">    for (uint i = 0; i &lt; zombies.length; i++) &#123;</span><br><span class="line">      if (zombieToOwner[i] == _owner) &#123;</span><br><span class="line">        result[counter] = i;</span><br><span class="line">        counter++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <h4 id="⑬放在一起"><a href="#⑬放在一起" class="headerlink" title="⑬放在一起"></a>⑬放在一起</h4><p><strong>让我们回顾一下：</strong></p>
 <ul>
 <li>添加了一种新方法来修改CryptoKitties合约</li>
@@ -918,184 +396,13 @@ contract ZombieHelper is ZombieFeeding &#123;
 <li>最后，定义了一个函数，用以返回某个玩家的僵尸军团</li>
 </ul>
 <h4 id="⑭第三课完成"><a href="#⑭第三课完成" class="headerlink" title="⑭第三课完成"></a>⑭第三课完成</h4><p>截至第三课完成，所有代码如下：<br>zombiehelper.sol:</p>
-<pre><code>pragma solidity ^0.4.19;
-
-import &quot;./zombiefeeding.sol&quot;;
-
-contract ZombieHelper is ZombieFeeding &#123;
-
-  modifier aboveLevel(uint _level, uint _zombieId) &#123;
-    require(zombies[_zombieId].level &gt;= _level);
-    _;
-  &#125; 
-
-  function changeName(uint _zombieId, string _newName) external aboveLevel(2, _zombieId) &#123;
-    require(msg.sender == zombieToOwner[_zombieId]);
-    zombies[_zombieId].name = _newName;
-  &#125;
-
-  function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20, _zombieId) &#123;
-    require(msg.sender == zombieToOwner[_zombieId]);
-    zombies[_zombieId].dna = _newDna;
-  &#125;
-
-  function getZombiesByOwner(address _owner) external view returns(uint[]) &#123;
-    uint[] memory result = new uint[](ownerZombieCount[_owner]);
-    uint counter = 0;
-    for (uint i = 0; i &lt; zombies.length; i++) &#123;
-      if (zombieToOwner[i] == _owner) &#123;
-        result[counter] = i;
-        counter++;
-      &#125;
-    &#125;
-    return result;
-  &#125;
-
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">import &quot;./zombiefeeding.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract ZombieHelper is ZombieFeeding &#123;</span><br><span class="line"></span><br><span class="line">  modifier aboveLevel(uint _level, uint _zombieId) &#123;</span><br><span class="line">    require(zombies[_zombieId].level &gt;= _level);</span><br><span class="line">    _;</span><br><span class="line">  &#125; </span><br><span class="line"></span><br><span class="line">  function changeName(uint _zombieId, string _newName) external aboveLevel(2, _zombieId) &#123;</span><br><span class="line">    require(msg.sender == zombieToOwner[_zombieId]);</span><br><span class="line">    zombies[_zombieId].name = _newName;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20, _zombieId) &#123;</span><br><span class="line">    require(msg.sender == zombieToOwner[_zombieId]);</span><br><span class="line">    zombies[_zombieId].dna = _newDna;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function getZombiesByOwner(address _owner) external view returns(uint[]) &#123;</span><br><span class="line">    uint[] memory result = new uint[](ownerZombieCount[_owner]);</span><br><span class="line">    uint counter = 0;</span><br><span class="line">    for (uint i = 0; i &lt; zombies.length; i++) &#123;</span><br><span class="line">      if (zombieToOwner[i] == _owner) &#123;</span><br><span class="line">        result[counter] = i;</span><br><span class="line">        counter++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>zombiefeeding.sol:</p>
-<pre><code>pragma solidity ^0.4.19;
-
-import &quot;./zombiefactory.sol&quot;;
-
-contract KittyInterface &#123;
-  function getKitty(uint256 _id) external view returns (
-    bool isGestating,
-    bool isReady,
-    uint256 cooldownIndex,
-    uint256 nextActionAt,
-    uint256 siringWithId,
-    uint256 birthTime,
-    uint256 matronId,
-    uint256 sireId,
-    uint256 generation,
-    uint256 genes
-  );
-&#125;
-
-contract ZombieFeeding is ZombieFactory &#123;
-
-  KittyInterface kittyContract;
-
-  function setKittyContractAddress(address _address) external onlyOwner &#123;
-    kittyContract = KittyInterface(_address);
-  &#125;
-
-  function _triggerCooldown(Zombie storage _zombie) internal &#123;
-    _zombie.readyTime = uint32(now + cooldownTime);
-  &#125;
-
-  function _isReady(Zombie storage _zombie) internal view returns (bool) &#123;
-      return (_zombie.readyTime &lt;= now);
-  &#125;
-
-  function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) internal &#123;
-    require(msg.sender == zombieToOwner[_zombieId]);
-    Zombie storage myZombie = zombies[_zombieId];
-    require(_isReady(myZombie));
-    _targetDna = _targetDna % dnaModulus;
-    uint newDna = (myZombie.dna + _targetDna) / 2;
-    if (keccak256(_species) == keccak256(&quot;kitty&quot;)) &#123;
-      newDna = newDna - newDna % 100 + 99;
-    &#125;
-    _createZombie(&quot;NoName&quot;, newDna);
-    _triggerCooldown(myZombie);
-  &#125;
-
-  function feedOnKitty(uint _zombieId, uint _kittyId) public &#123;
-    uint kittyDna;
-    (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);
-    feedAndMultiply(_zombieId, kittyDna, &quot;kitty&quot;);
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">import &quot;./zombiefactory.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract KittyInterface &#123;</span><br><span class="line">  function getKitty(uint256 _id) external view returns (</span><br><span class="line">    bool isGestating,</span><br><span class="line">    bool isReady,</span><br><span class="line">    uint256 cooldownIndex,</span><br><span class="line">    uint256 nextActionAt,</span><br><span class="line">    uint256 siringWithId,</span><br><span class="line">    uint256 birthTime,</span><br><span class="line">    uint256 matronId,</span><br><span class="line">    uint256 sireId,</span><br><span class="line">    uint256 generation,</span><br><span class="line">    uint256 genes</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract ZombieFeeding is ZombieFactory &#123;</span><br><span class="line"></span><br><span class="line">  KittyInterface kittyContract;</span><br><span class="line"></span><br><span class="line">  function setKittyContractAddress(address _address) external onlyOwner &#123;</span><br><span class="line">    kittyContract = KittyInterface(_address);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function _triggerCooldown(Zombie storage _zombie) internal &#123;</span><br><span class="line">    _zombie.readyTime = uint32(now + cooldownTime);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function _isReady(Zombie storage _zombie) internal view returns (bool) &#123;</span><br><span class="line">      return (_zombie.readyTime &lt;= now);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) internal &#123;</span><br><span class="line">    require(msg.sender == zombieToOwner[_zombieId]);</span><br><span class="line">    Zombie storage myZombie = zombies[_zombieId];</span><br><span class="line">    require(_isReady(myZombie));</span><br><span class="line">    _targetDna = _targetDna % dnaModulus;</span><br><span class="line">    uint newDna = (myZombie.dna + _targetDna) / 2;</span><br><span class="line">    if (keccak256(_species) == keccak256(&quot;kitty&quot;)) &#123;</span><br><span class="line">      newDna = newDna - newDna % 100 + 99;</span><br><span class="line">    &#125;</span><br><span class="line">    _createZombie(&quot;NoName&quot;, newDna);</span><br><span class="line">    _triggerCooldown(myZombie);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function feedOnKitty(uint _zombieId, uint _kittyId) public &#123;</span><br><span class="line">    uint kittyDna;</span><br><span class="line">    (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);</span><br><span class="line">    feedAndMultiply(_zombieId, kittyDna, &quot;kitty&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>zombiefactory.sol:</p>
-<pre><code>pragma solidity ^0.4.19;
-
-import &quot;./ownable.sol&quot;;
-
-contract ZombieFactory is Ownable &#123;
-
-    event NewZombie(uint zombieId, string name, uint dna);
-
-    uint dnaDigits = 16;
-    uint dnaModulus = 10 ** dnaDigits;
-    uint cooldownTime = 1 days;
-
-    struct Zombie &#123;
-      string name;
-      uint dna;
-      uint32 level;
-      uint32 readyTime;
-    &#125;
-
-    Zombie[] public zombies;
-
-    mapping (uint =&gt; address) public zombieToOwner;
-    mapping (address =&gt; uint) ownerZombieCount;
-
-    function _createZombie(string _name, uint _dna) internal &#123;
-        uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime))) - 1;
-        zombieToOwner[id] = msg.sender;
-        ownerZombieCount[msg.sender]++;
-        NewZombie(id, _name, _dna);
-    &#125;
-
-    function _generateRandomDna(string _str) private view returns (uint) &#123;
-        uint rand = uint(keccak256(_str));
-        return rand % dnaModulus;
-    &#125;
-
-    function createRandomZombie(string _name) public &#123;
-        require(ownerZombieCount[msg.sender] == 0);
-        uint randDna = _generateRandomDna(_name);
-        randDna = randDna - randDna % 100;
-        _createZombie(_name, randDna);
-    &#125;
-
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">import &quot;./ownable.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract ZombieFactory is Ownable &#123;</span><br><span class="line"></span><br><span class="line">    event NewZombie(uint zombieId, string name, uint dna);</span><br><span class="line"></span><br><span class="line">    uint dnaDigits = 16;</span><br><span class="line">    uint dnaModulus = 10 ** dnaDigits;</span><br><span class="line">    uint cooldownTime = 1 days;</span><br><span class="line"></span><br><span class="line">    struct Zombie &#123;</span><br><span class="line">      string name;</span><br><span class="line">      uint dna;</span><br><span class="line">      uint32 level;</span><br><span class="line">      uint32 readyTime;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Zombie[] public zombies;</span><br><span class="line"></span><br><span class="line">    mapping (uint =&gt; address) public zombieToOwner;</span><br><span class="line">    mapping (address =&gt; uint) ownerZombieCount;</span><br><span class="line"></span><br><span class="line">    function _createZombie(string _name, uint _dna) internal &#123;</span><br><span class="line">        uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime))) - 1;</span><br><span class="line">        zombieToOwner[id] = msg.sender;</span><br><span class="line">        ownerZombieCount[msg.sender]++;</span><br><span class="line">        NewZombie(id, _name, _dna);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function _generateRandomDna(string _str) private view returns (uint) &#123;</span><br><span class="line">        uint rand = uint(keccak256(_str));</span><br><span class="line">        return rand % dnaModulus;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function createRandomZombie(string _name) public &#123;</span><br><span class="line">        require(ownerZombieCount[msg.sender] == 0);</span><br><span class="line">        uint randDna = _generateRandomDna(_name);</span><br><span class="line">        randDna = randDna - randDna % 100;</span><br><span class="line">        _createZombie(_name, randDna);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>ownable.sol:</p>
-<pre><code>/**
- * @title Ownable
- * @dev The Ownable contract has an owner address, and provides basic authorization control
- * functions, this simplifies the implementation of &quot;user permissions&quot;.
- */
-contract Ownable &#123;
-  address public owner;
-
-  event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
-
-  /**
-   * @dev The Ownable constructor sets the original `owner` of the contract to the sender
-   * account.
-   */
-  function Ownable() public &#123;
-    owner = msg.sender;
-  &#125;
-
-
-  /**
-   * @dev Throws if called by any account other than the owner.
-   */
-  modifier onlyOwner() &#123;
-    require(msg.sender == owner);
-    _;
-  &#125;
-
-
-  /**
-   * @dev Allows the current owner to transfer control of the contract to a newOwner.
-   * @param newOwner The address to transfer ownership to.
-   */
-  function transferOwnership(address newOwner) public onlyOwner &#123;
-    require(newOwner != address(0));
-    OwnershipTransferred(owner, newOwner);
-    owner = newOwner;
-  &#125;
-
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @title Ownable</span><br><span class="line"> * @dev The Ownable contract has an owner address, and provides basic authorization control</span><br><span class="line"> * functions, this simplifies the implementation of &quot;user permissions&quot;.</span><br><span class="line"> */</span><br><span class="line">contract Ownable &#123;</span><br><span class="line">  address public owner;</span><br><span class="line"></span><br><span class="line">  event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * @dev The Ownable constructor sets the original `owner` of the contract to the sender</span><br><span class="line">   * account.</span><br><span class="line">   */</span><br><span class="line">  function Ownable() public &#123;</span><br><span class="line">    owner = msg.sender;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * @dev Throws if called by any account other than the owner.</span><br><span class="line">   */</span><br><span class="line">  modifier onlyOwner() &#123;</span><br><span class="line">    require(msg.sender == owner);</span><br><span class="line">    _;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * @dev Allows the current owner to transfer control of the contract to a newOwner.</span><br><span class="line">   * @param newOwner The address to transfer ownership to.</span><br><span class="line">   */</span><br><span class="line">  function transferOwnership(address newOwner) public onlyOwner &#123;</span><br><span class="line">    require(newOwner != address(0));</span><br><span class="line">    OwnershipTransferred(owner, newOwner);</span><br><span class="line">    owner = newOwner;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="心得-①-②-③-④-⑤-⑥-⑦-⑧-⑨-⑩-⑪-⑫-⑬-⑭-⑮-⑯-⑰-⑱-⑲-⑳"><a href="#心得-①-②-③-④-⑤-⑥-⑦-⑧-⑨-⑩-⑪-⑫-⑬-⑭-⑮-⑯-⑰-⑱-⑲-⑳" class="headerlink" title="心得 ① ② ③ ④ ⑤ ⑥ ⑦ ⑧ ⑨ ⑩ ⑪ ⑫ ⑬ ⑭ ⑮ ⑯ ⑰ ⑱ ⑲ ⑳"></a>心得 ① ② ③ ④ ⑤ ⑥ ⑦ ⑧ ⑨ ⑩ ⑪ ⑫ ⑬ ⑭ ⑮ ⑯ ⑰ ⑱ ⑲ ⑳</h3><h4 id="①第二课-第7节Storage与Memory"><a href="#①第二课-第7节Storage与Memory" class="headerlink" title="①第二课 第7节Storage与Memory"></a>①第二课 第7节Storage与Memory</h4><p>实战演习代码的第三行<br>require(msg.sender &#x3D;&#x3D; zombieToOwner[_zombieId]);<br>&#x3D;&#x3D; 后面为什么是 zombieToOwner[_zombieId]);<br>而不是 _zombieId</p>
 <h4 id="②第二课-第3节Msg-sender"><a href="#②第二课-第3节Msg-sender" class="headerlink" title="②第二课 第3节Msg.sender"></a>②第二课 第3节Msg.sender</h4><p>实战演习中<br>    zombieToOwner[id] &#x3D; msg.sender;<br>    ownerZombieCount[msg.sender]++;<br>的这两句代码无法理解</p>
