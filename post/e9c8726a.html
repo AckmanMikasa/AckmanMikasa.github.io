@@ -169,9 +169,25 @@
 <p>请注意，使用像 ERC721 这样的标准的优势就是，我们不必在我们的合约中实现拍卖或托管逻辑，这决定了玩家能够如何交易／出售我们的僵尸。 如果我们符合规范，其他人可以为加密可交易的 ERC721 资产搭建一个交易所平台，我们的 ERC721 僵尸将可以在该平台上使用。 所以使用代币标准相较于使用你自己的交易逻辑有明显的好处。</p>
 </blockquote>
 <p>实战演习:<br>zombieownership.sol:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">import &quot;./zombieattack.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract ZombieOwnership is ZombieAttack &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>pragma solidity ^0.4.19;
+
+import &quot;./zombieattack.sol&quot;;
+
+contract ZombieOwnership is ZombieAttack &#123;
+&#125;
+</code></pre>
 <h4 id="②ERC721-标准-多重继承"><a href="#②ERC721-标准-多重继承" class="headerlink" title="②ERC721 标准, 多重继承"></a>②ERC721 标准, 多重继承</h4><p>让我们来看一看 ERC721 标准：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">contract ERC721 &#123;</span><br><span class="line">  event Transfer(address indexed _from, address indexed _to, uint256 _tokenId);</span><br><span class="line">  event Approval(address indexed _owner, address indexed _approved, uint256 _tokenId);</span><br><span class="line"></span><br><span class="line">  function balanceOf(address _owner) public view returns (uint256 _balance);</span><br><span class="line">  function ownerOf(uint256 _tokenId) public view returns (address _owner);</span><br><span class="line">  function transfer(address _to, uint256 _tokenId) public;</span><br><span class="line">  function approve(address _to, uint256 _tokenId) public;</span><br><span class="line">  function takeOwnership(uint256 _tokenId) public;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>contract ERC721 &#123;
+  event Transfer(address indexed _from, address indexed _to, uint256 _tokenId);
+  event Approval(address indexed _owner, address indexed _approved, uint256 _tokenId);
+
+  function balanceOf(address _owner) public view returns (uint256 _balance);
+  function ownerOf(uint256 _tokenId) public view returns (address _owner);
+  function transfer(address _to, uint256 _tokenId) public;
+  function approve(address _to, uint256 _tokenId) public;
+  function takeOwnership(uint256 _tokenId) public;
+&#125;
+</code></pre>
 <p>这是我们需要实现的方法列表，我们将在接下来的章节中逐个学习。</p>
 <p>虽然看起来很多，但不要被吓到了！我们在这里就是准备带着你一步一步了解它们的。</p>
 <blockquote>
@@ -180,10 +196,21 @@
 <p><strong>实现一个代币合约</strong><br>在实现一个代币合约的时候，我们首先要做的是将接口复制到它自己的 Solidity 文件并导入它，<code>import &quot;./erc721.sol&quot;;</code>。 接着，让我们的合约继承它，然后我们用一个函数定义来重写每个方法。</p>
 <p>但等一下—— <code>ZombieOwnership</code>已经继承自 <code>ZombieAttack</code>了 —— 它如何能够也继承于 <code>ERC721</code>呢？</p>
 <p>幸运的是在Solidity，你的合约可以继承自多个合约，参考如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">contract SatoshiNakamoto is NickSzabo, HalFinney &#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>contract SatoshiNakamoto is NickSzabo, HalFinney &#123;
+  
+&#125;
+</code></pre>
 <p>正如你所见，当使用多重继承的时候，你只需要用逗号 , 来隔开几个你想要继承的合约。在上面的例子中，我们的合约继承自 <code>NickSzabo</code> 和 <code>HalFinney</code>。</p>
 <p>实战演习：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">import &quot;./zombieattack.sol&quot;;</span><br><span class="line">import &quot;./erc721.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract ZombieOwnership is ZombieAttack, ERC721 &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>pragma solidity ^0.4.19;
+
+import &quot;./zombieattack.sol&quot;;
+import &quot;./erc721.sol&quot;;
+
+contract ZombieOwnership is ZombieAttack, ERC721 &#123;
+
+&#125;
+</code></pre>
 <h4 id="③balanceOf-和-ownerOf"><a href="#③balanceOf-和-ownerOf" class="headerlink" title="③balanceOf 和 ownerOf"></a>③balanceOf 和 ownerOf</h4><p>在本章节，我们将实现头两个方法： balanceOf 和 ownerOf。</p>
 <p><strong>balanceOf</strong><br><code>function balanceOf(address _owner) public view returns (uint256 _balance);</code><br>这个函数只需要一个传入 address 参数，然后返回这个 address 拥有多少代币。</p>
 <p>在我们的例子中，我们的“代币”是僵尸。你还记得在我们 DApp 的哪里存储了一个主人拥有多少只僵尸吗？</p>
@@ -194,7 +221,14 @@
 <p>注意：要记得， uint256 等同于uint。我们从课程的开始一直在代码中使用 uint，但从现在开始我们将在这里用 uint256，因为我们直接从规范中复制粘贴。</p>
 </blockquote>
 <p>实战演习：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function balanceOf(address _owner) public view returns (uint256 _balance) &#123;</span><br><span class="line">  return ownerZombieCount[_owner];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function ownerOf(uint256 _tokenId) public view returns (address _owner) &#123;</span><br><span class="line">  return zombieToOwner[_tokenId];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>  function balanceOf(address _owner) public view returns (uint256 _balance) &#123;
+    return ownerZombieCount[_owner];
+  &#125;
+
+  function ownerOf(uint256 _tokenId) public view returns (address _owner) &#123;
+    return zombieToOwner[_tokenId];
+  &#125;
+</code></pre>
 <h4 id="④重构"><a href="#④重构" class="headerlink" title="④重构"></a>④重构</h4><p>我们刚刚的代码中其实有个错误，以至于其根本无法通过编译，你发现了没？</p>
 <p>在前一个章节我们定义了一个叫 ownerOf 的函数。但如果你还记得第4课的内容，我们同样在zombiefeeding.sol 里以 ownerOf 命名创建了一个 modifier（修饰符）。</p>
 <p>如果你尝试编译这段代码，编译器会给你一个错误说你不能有相同名称的修饰符和函数。</p>
@@ -213,7 +247,11 @@
 </blockquote>
 <h4 id="⑤ERC721-转移标准"><a href="#⑤ERC721-转移标准" class="headerlink" title="⑤ERC721: 转移标准"></a>⑤ERC721: 转移标准</h4><p>现在我们将通过学习把所有权从一个人转移给另一个人来继续我们的 ERC721 规范的实现。</p>
 <p>注意 ERC721 规范有两种不同的方法来转移代币：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function transfer(address _to, uint256 _tokenId) public;</span><br><span class="line"></span><br><span class="line">function approve(address _to, uint256 _tokenId) public;</span><br><span class="line">function takeOwnership(uint256 _tokenId) public;</span><br></pre></td></tr></table></figure>
+<pre><code>function transfer(address _to, uint256 _tokenId) public;
+
+function approve(address _to, uint256 _tokenId) public;
+function takeOwnership(uint256 _tokenId) public;
+</code></pre>
 <ol>
 <li><p>第一种方法是代币的拥有者调用transfer 方法，传入他想转移到的 address 和他想转移的代币的 _tokenId。</p>
 </li>
@@ -223,9 +261,18 @@
 <p>你注意到了吗，transfer 和 takeOwnership 都将包含相同的转移逻辑，只是以相反的顺序。 （一种情况是代币的发送者调用函数；另一种情况是代币的接收者调用它）。</p>
 <p>所以我们把这个逻辑抽象成它自己的私有函数 _transfer，然后由这两个函数来调用它。 这样我们就不用写重复的代码了。</p>
 <p>实战演习:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function _transfer(address _from, address _to, uint256 _tokenId) private &#123;</span><br><span class="line">    ownerZombieCount[_to]++;</span><br><span class="line">    ownerZombieCount[_from]--;</span><br><span class="line">    zombieToOwner[_tokenId] = _to;</span><br><span class="line">    Transfer(_from, _to, _tokenId);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<pre><code>function _transfer(address _from, address _to, uint256 _tokenId) private &#123;
+    ownerZombieCount[_to]++;
+    ownerZombieCount[_from]--;
+    zombieToOwner[_tokenId] = _to;
+    Transfer(_from, _to, _tokenId);
+  &#125;
+</code></pre>
 <h4 id="⑥ERC721-转移-续"><a href="#⑥ERC721-转移-续" class="headerlink" title="⑥ERC721: 转移-续"></a>⑥ERC721: 转移-续</h4><p>实战演习：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function transfer(address _to, uint256 _tokenId) public onlyOwnerOf(_tokenId) &#123;</span><br><span class="line">    _transfer(msg.sender, _to, _tokenId);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<pre><code>function transfer(address _to, uint256 _tokenId) public onlyOwnerOf(_tokenId) &#123;
+    _transfer(msg.sender, _to, _tokenId);
+  &#125;
+</code></pre>
 <h4 id="⑦ERC721-批准"><a href="#⑦ERC721-批准" class="headerlink" title="⑦ERC721: 批准"></a>⑦ERC721: 批准</h4><p>现在，让我们来实现 approve。</p>
 <p>记住，使用 approve 或者 takeOwnership 的时候，转移有2个步骤：</p>
 <ol>
@@ -236,10 +283,21 @@
 </ol>
 <p>因为这发生在2个函数的调用中，所以在函数调用之间，我们需要一个数据结构来存储什么人被批准获取什么。</p>
 <p>实战演习：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mapping (uint =&gt; address) zombieApprovals;</span><br><span class="line"></span><br><span class="line">function approve(address _to, uint256 _tokenId) public onlyOwnerOf(_tokenId) &#123;</span><br><span class="line">    zombieApprovals[_tokenId] = _to;</span><br><span class="line">    Approval(msg.sender, _to, _tokenId);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<pre><code>mapping (uint =&gt; address) zombieApprovals;
+
+function approve(address _to, uint256 _tokenId) public onlyOwnerOf(_tokenId) &#123;
+    zombieApprovals[_tokenId] = _to;
+    Approval(msg.sender, _to, _tokenId);
+  &#125;
+</code></pre>
 <h4 id="⑧ERC721-takeOwnership"><a href="#⑧ERC721-takeOwnership" class="headerlink" title="⑧ERC721: takeOwnership"></a>⑧ERC721: takeOwnership</h4><p>最后一个函数 takeOwnership， 应该只是简单地检查以确保 msg.sender 已经被批准来提取这个代币或者僵尸。若确认，就调用 _transfer；</p>
 <p>实战演习：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function takeOwnership(uint256 _tokenId) public &#123;</span><br><span class="line">    require(zombieApprovals[_tokenId] == msg.sender);</span><br><span class="line">    address owner = ownerOf(_tokenId);</span><br><span class="line">    _transfer(owner, msg.sender, _tokenId);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<pre><code>function takeOwnership(uint256 _tokenId) public &#123;
+    require(zombieApprovals[_tokenId] == msg.sender);
+    address owner = ownerOf(_tokenId);
+    _transfer(owner, msg.sender, _tokenId);
+  &#125;
+</code></pre>
 <h4 id="⑨预防溢出"><a href="#⑨预防溢出" class="headerlink" title="⑨预防溢出"></a>⑨预防溢出</h4><p>我们完成了 ERC721 的实现。</p>
 <p>不过要记住那只是最简单的实现。还有很多的特性我们也许想加入到我们的实现中来，比如一些额外的检查，来确保用户不会不小心把他们的僵尸转移给0 地址（这被称作 “烧币”, 基本上就是把代币转移到一个谁也没有私钥的地址，让这个代币永远也无法恢复）。 或者在 DApp 中加入一些基本的拍卖逻辑。（你能想出一些实现的方法么？）</p>
 <p>但是为了让我们的课程不至于离题太远，所以我们只专注于一些基础实现。如果你想学习一些更深层次的实现，可以在这个教程结束后，去看看 OpenZeppelin 的 ERC721 合约。</p>
@@ -247,7 +305,9 @@
 <p>什么是 <em>溢出</em> (overflow)?</p>
 <p>假设我们有一个 uint8, 只能存储8 bit数据。这意味着我们能存储的最大数字就是二进制 11111111 (或者说十进制的 2^8 - 1 &#x3D; 255).</p>
 <p>来看看下面的代码。最后 number 将会是什么值？</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">uint8 number = 255;</span><br><span class="line">number++;</span><br></pre></td></tr></table></figure>
+<pre><code>uint8 number = 255;
+number++;
+</code></pre>
 <p>在这个例子中，我们导致了溢出 — 虽然我们加了1， 但是 number 出乎意料地等于 0了。 (如果你给二进制 11111111 加1, 它将被重置为 00000000，就像钟表从 23:59 走向 00:00)。</p>
 <p>下溢(underflow)也类似，如果你从一个等于 0 的 uint8 减去 1, 它将变成 255 (因为 uint 是无符号的，其不能等于负数)。</p>
 <p>虽然我们在这里不使用 uint8，而且每次给一个 uint256 加 1 也不太可能溢出 (2^256 真的是一个很大的数了)，在我们的合约中添加一些保护机制依然是非常有必要的，以防我们的 DApp 以后出现什么异常情况。</p>
@@ -255,7 +315,12 @@
 <p>不过在我们使用之前…… 什么叫做库?</p>
 <p>一个_库_ 是 Solidity 中一种特殊的合约。其中一个有用的功能是给原始数据类型增加一些方法。</p>
 <p>比如，使用 SafeMath 库的时候，我们将使用 using SafeMath for uint256 这样的语法。 SafeMath 库有四个方法 — add， sub， mul， 以及 div。现在我们可以这样来让 uint256 调用这些方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">using SafeMath for uint256;</span><br><span class="line"></span><br><span class="line">uint256 a = 5;</span><br><span class="line">uint256 b = a.add(3); // 5 + 3 = 8</span><br><span class="line">uint256 c = a.mul(2); // 5 * 2 = 10</span><br></pre></td></tr></table></figure>
+<pre><code>using SafeMath for uint256;
+
+uint256 a = 5;
+uint256 b = a.add(3); // 5 + 3 = 8
+uint256 c = a.mul(2); // 5 * 2 = 10
+</code></pre>
 <p>我们将在下一章来学习这些方法，不过现在我们先将 SafeMath 库添加进我们的合约。</p>
 <p>实战演习：</p>
 <ol>
@@ -263,32 +328,87 @@
 <li>添加定义： using SafeMath for uint256;.</li>
 </ol>
 <h4 id="⑩SafeMath第二部分"><a href="#⑩SafeMath第二部分" class="headerlink" title="⑩SafeMath第二部分"></a>⑩SafeMath第二部分</h4><p>来看看 SafeMath 的部分代码:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">library SafeMath &#123;</span><br><span class="line"></span><br><span class="line">  function mul(uint256 a, uint256 b) internal pure returns (uint256) &#123;</span><br><span class="line">    if (a == 0) &#123;</span><br><span class="line">      return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    uint256 c = a * b;</span><br><span class="line">    assert(c / a == b);</span><br><span class="line">    return c;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function div(uint256 a, uint256 b) internal pure returns (uint256) &#123;</span><br><span class="line">    // assert(b &gt; 0); // Solidity automatically throws when dividing by 0</span><br><span class="line">    uint256 c = a / b;</span><br><span class="line">    // assert(a == b * c + a % b); // There is no case in which this doesn&#x27;t hold</span><br><span class="line">    return c;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function sub(uint256 a, uint256 b) internal pure returns (uint256) &#123;</span><br><span class="line">    assert(b &lt;= a);</span><br><span class="line">    return a - b;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function add(uint256 a, uint256 b) internal pure returns (uint256) &#123;</span><br><span class="line">    uint256 c = a + b;</span><br><span class="line">    assert(c &gt;= a);</span><br><span class="line">    return c;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>library SafeMath &#123;
+
+  function mul(uint256 a, uint256 b) internal pure returns (uint256) &#123;
+    if (a == 0) &#123;
+      return 0;
+    &#125;
+    uint256 c = a * b;
+    assert(c / a == b);
+    return c;
+  &#125;
+
+  function div(uint256 a, uint256 b) internal pure returns (uint256) &#123;
+    // assert(b &gt; 0); // Solidity automatically throws when dividing by 0
+    uint256 c = a / b;
+    // assert(a == b * c + a % b); // There is no case in which this doesn&#39;t hold
+    return c;
+  &#125;
+
+  function sub(uint256 a, uint256 b) internal pure returns (uint256) &#123;
+    assert(b &lt;= a);
+    return a - b;
+  &#125;
+
+  function add(uint256 a, uint256 b) internal pure returns (uint256) &#123;
+    uint256 c = a + b;
+    assert(c &gt;= a);
+    return c;
+  &#125;
+&#125;
+</code></pre>
 <p>首先我们有了 library 关键字 — 库和 合约很相似，但是又有一些不同。 就我们的目的而言，库允许我们使用 using 关键字，它可以自动把库的所有方法添加给一个数据类型：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">using SafeMath for uint;</span><br><span class="line">// 这下我们可以为任何 uint 调用这些方法了</span><br><span class="line">uint test = 2;</span><br><span class="line">test = test.mul(3); // test 等于 6 了</span><br><span class="line">test = test.add(5); // test 等于 11 了</span><br></pre></td></tr></table></figure>
+<pre><code>using SafeMath for uint;
+// 这下我们可以为任何 uint 调用这些方法了
+uint test = 2;
+test = test.mul(3); // test 等于 6 了
+test = test.add(5); // test 等于 11 了
+</code></pre>
 <p>注意 mul 和 add 其实都需要两个参数。 在我们声明了 using SafeMath for uint 后，我们用来调用这些方法的 uint 就自动被作为第一个参数传递进去了(在此例中就是 test)</p>
 <p>我们来看看 add 的源代码看 SafeMath 做了什么:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function add(uint256 a, uint256 b) internal pure returns (uint256) &#123;</span><br><span class="line">  uint256 c = a + b;</span><br><span class="line">  assert(c &gt;= a);</span><br><span class="line">  return c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>function add(uint256 a, uint256 b) internal pure returns (uint256) &#123;
+  uint256 c = a + b;
+  assert(c &gt;= a);
+  return c;
+&#125;
+</code></pre>
 <p>基本上 add 只是像 + 一样对两个 uint 相加， 但是它用一个 assert 语句来确保结果大于 a。这样就防止了溢出。</p>
 <p>assert 和 require 相似，若结果为否它就会抛出错误。 assert 和 require 区别在于，require 若失败则会返还给用户剩下的 gas， assert 则不会。所以大部分情况下，你写代码的时候会比较喜欢 require，assert 只在代码可能出现严重错误的时候使用，比如 uint 溢出。</p>
 <p>所以简而言之， SafeMath 的 add， sub， mul， 和 div 方法只做简单的四则运算，然后在发生溢出或下溢的时候抛出错误。</p>
 <p><strong>在我们的代码里使用 SafeMath。</strong><br>为了防止溢出和下溢，我们可以在我们的代码里找 +， -， *， 或 &#x2F;，然后替换为 add, sub, mul, div.</p>
 <p>比如，与其这样做:<code>myUint++;</code><br>我们这样做:<code>myUint = myUint.add(1);</code></p>
 <p>实战演习：<br>    &#x2F;&#x2F; 1. 替换成 SafeMath 的 <code>add</code><br>    ownerZombieCount[_to]++;<br>    &#x2F;&#x2F; 2. 替换成 SafeMath 的 <code>sub</code><br>    ownerZombieCount[_from]–;</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ownerZombieCount[_to] = ownerZombieCount[_to].add(1);</span><br><span class="line">ownerZombieCount[msg.sender] = ownerZombieCount[msg.sender].sub(1);</span><br></pre></td></tr></table></figure>
+<pre><code>    ownerZombieCount[_to] = ownerZombieCount[_to].add(1);
+    ownerZombieCount[msg.sender] = ownerZombieCount[msg.sender].sub(1);
+</code></pre>
 <h4 id="⑪SafeMath-第三部分"><a href="#⑪SafeMath-第三部分" class="headerlink" title="⑪SafeMath 第三部分"></a>⑪SafeMath 第三部分</h4><p>太好了，这下我们的 ERC721 实现不会有溢出或者下溢了。</p>
 <p>回头看看我们在之前课程写的代码，还有其他几个地方也有可能导致溢出或下溢。</p>
 <p>比如， 在 ZombieAttack 里面我们有：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">myZombie.winCount++;</span><br><span class="line">myZombie.level++;</span><br><span class="line">enemyZombie.lossCount++;</span><br></pre></td></tr></table></figure>
+<pre><code>myZombie.winCount++;
+myZombie.level++;
+enemyZombie.lossCount++;
+</code></pre>
 <p>我们同样应该在这些地方防止溢出。（通常情况下，总是使用 SafeMath 而不是普通数学运算是个好主意，也许在以后 Solidity 的新版本里这点会被默认实现，但是现在我们得自己在代码里实现这些额外的安全措施）。</p>
 <p>不过我们遇到个小问题 — winCount 和 lossCount 是 uint16， 而 level 是 uint32。 所以如果我们用这些作为参数传入 SafeMath 的 add 方法。 它实际上并不会防止溢出，因为它会把这些变量都转换成 uint256:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function add(uint256 a, uint256 b) internal pure returns (uint256) &#123;</span><br><span class="line">  uint256 c = a + b;</span><br><span class="line">  assert(c &gt;= a);</span><br><span class="line">  return c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 如果我们在`uint8` 上调用 `.add`。它将会被转换成 `uint256`.</span><br><span class="line">// 所以它不会在 2^8 时溢出，因为 256 是一个有效的 `uint256`.</span><br></pre></td></tr></table></figure>
+<pre><code>function add(uint256 a, uint256 b) internal pure returns (uint256) &#123;
+  uint256 c = a + b;
+  assert(c &gt;= a);
+  return c;
+&#125;
+
+// 如果我们在`uint8` 上调用 `.add`。它将会被转换成 `uint256`.
+// 所以它不会在 2^8 时溢出，因为 256 是一个有效的 `uint256`.
+</code></pre>
 <p>这就意味着，我们需要再实现两个库来防止 uint16 和 uint32 溢出或下溢。我们可以将其命名为 SafeMath16 和 SafeMath32。</p>
 <p>代码将和 SafeMath 完全相同，除了所有的 uint256 实例都将被替换成 uint32 或 uint16。</p>
 <p>我们已经将这些代码帮你写好了，打开 safemath.sol 合约看看代码吧。</p>
 <p>现在我们需要在 ZombieFactory 里使用它们。</p>
 <p>实战演习：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">using SafeMath for uint256;</span><br><span class="line">using SafeMath32 for uint32;</span><br><span class="line">using SafeMath16 for uint16;</span><br></pre></td></tr></table></figure>
+<pre><code>  using SafeMath for uint256;
+  using SafeMath32 for uint32;
+  using SafeMath16 for uint16;
+</code></pre>
 <h4 id="⑫SafeMath-第4部分"><a href="#⑫SafeMath-第4部分" class="headerlink" title="⑫SafeMath 第4部分"></a>⑫SafeMath 第4部分</h4><p>真棒，现在我们已经为我们的 DApp 里面用到的 uint 数据类型都实现了 SafeMath 了。</p>
 <p>让我们把 ZombieAttack 里所有潜在的问题都修复了吧。 （其实在 ZombieHelper 里也有一处 zombies[_zombieId].level++; 需要修复，不过我们已经帮你做好了，这样我们就不用再来一章了 😉）。</p>
 <h4 id="⑬注释"><a href="#⑬注释" class="headerlink" title="⑬注释"></a>⑬注释</h4><p>僵尸游戏的 Solidity 代码终于完成啦。</p>
@@ -299,10 +419,37 @@
 <p>只要在任何地方添加一个 &#x2F;&#x2F; 就意味着你在注释。如此简单所以你应该经常这么做。</p>
 <p>不过我们也知道你的想法：有时候单行注释是不够的。毕竟你生来话痨。</p>
 <p>所以我们有了多行注释：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">contract CryptoZombies &#123;</span><br><span class="line">  /* 这是一个多行注释。我想对所有花时间来尝试这个编程课程的人说声谢谢。</span><br><span class="line">  它是免费的，并将永远免费。但是我们依然倾注了我们的心血来让它变得更好。</span><br><span class="line"></span><br><span class="line">   要知道这依然只是区块链开发的开始而已，虽然我们已经走了很远，</span><br><span class="line">   仍然有很多种方式来让我们的社区变得更好。</span><br><span class="line">   如果我们在哪个地方出了错，欢迎在我们的 github 提交 PR 或者 issue 来帮助我们改进：</span><br><span class="line">    https://github.com/loomnetwork/cryptozombie-lessons</span><br><span class="line"></span><br><span class="line">    或者，如果你有任何的想法、建议甚至仅仅想和我们打声招呼，欢迎来我们的电报群：</span><br><span class="line">     https://t.me/loomnetworkdev</span><br><span class="line">  */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>contract CryptoZombies &#123;
+  /* 这是一个多行注释。我想对所有花时间来尝试这个编程课程的人说声谢谢。
+  它是免费的，并将永远免费。但是我们依然倾注了我们的心血来让它变得更好。
+
+   要知道这依然只是区块链开发的开始而已，虽然我们已经走了很远，
+   仍然有很多种方式来让我们的社区变得更好。
+   如果我们在哪个地方出了错，欢迎在我们的 github 提交 PR 或者 issue 来帮助我们改进：
+    https://github.com/loomnetwork/cryptozombie-lessons
+
+    或者，如果你有任何的想法、建议甚至仅仅想和我们打声招呼，欢迎来我们的电报群：
+     https://t.me/loomnetworkdev
+  */
+&#125;
+</code></pre>
 <p>特别是，最好为你合约中每个方法添加注释来解释它的预期行为。这样其他开发者（或者你自己，在6个月以后再回到这个项目中）可以很快地理解你的代码而不需要逐行阅读所有代码。</p>
 <p>Solidity 社区所使用的一个标准是使用一种被称作 natspec 的格式，看起来像这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/// @title 一个简单的基础运算合约</span><br><span class="line">/// @author H4XF13LD MORRIS 💯💯😎💯💯</span><br><span class="line">/// @notice 现在，这个合约只添加一个乘法</span><br><span class="line">contract Math &#123;</span><br><span class="line">  /// @notice 两个数相乘</span><br><span class="line">  /// @param x 第一个 uint</span><br><span class="line">  /// @param y  第二个 uint</span><br><span class="line">  /// @return z  (x * y) 的结果</span><br><span class="line">  /// @dev 现在这个方法不检查溢出</span><br><span class="line">  function multiply(uint x, uint y) returns (uint z) &#123;</span><br><span class="line">    // 这只是个普通的注释，不会被 natspec 解释</span><br><span class="line">    z = x * y;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>/// @title 一个简单的基础运算合约
+/// @author H4XF13LD MORRIS 💯💯😎💯💯
+/// @notice 现在，这个合约只添加一个乘法
+contract Math &#123;
+  /// @notice 两个数相乘
+  /// @param x 第一个 uint
+  /// @param y  第二个 uint
+  /// @return z  (x * y) 的结果
+  /// @dev 现在这个方法不检查溢出
+  function multiply(uint x, uint y) returns (uint z) &#123;
+    // 这只是个普通的注释，不会被 natspec 解释
+    z = x * y;
+  &#125;
+&#125;
+</code></pre>
 <ol>
 <li>@title（标题） 和 @author （作者）很直接了.</li>
 <li>@notice （须知）向 用户 解释这个方法或者合约是做什么的。 @dev （开发者） 是向开发者解释更多的细节。</li>
@@ -310,7 +457,11 @@
 </ol>
 <p>注意你并不需要每次都用上所有的标签，它们都是可选的。不过最少，写下一个 @dev 注释来解释每个方法是做什么的。</p>
 <p>实战演习：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/// @title 一个管理转移僵尸所有权的合约</span><br><span class="line">/// @author formikasaever</span><br><span class="line">/// @dev 符合 OpenZeppelin 对 ERC721 标准草案的实现</span><br><span class="line">contract ZombieOwnership is ZombieAttack, ERC721 &#123;</span><br></pre></td></tr></table></figure>
+<pre><code>/// @title 一个管理转移僵尸所有权的合约
+/// @author formikasaever
+/// @dev 符合 OpenZeppelin 对 ERC721 标准草案的实现
+contract ZombieOwnership is ZombieAttack, ERC721 &#123;
+</code></pre>
 <h4 id="⑭放在一起"><a href="#⑭放在一起" class="headerlink" title="⑭放在一起"></a>⑭放在一起</h4><p><strong>总结一下</strong><br>这节课里面我们学到了</p>
 <ul>
 <li>代币, ERC721 标准，以及可交易的物件&#x2F;僵尸</li>
@@ -321,21 +472,347 @@
 <p>这节教程完成了我们游戏的 Solidity 代码（仅针对当下来说，未来的课程我们也许会加入更多进去）。</p>
 <p>在接下来的两节课中，我们将学习如何将游戏部署到以太坊以及和 web3.js 交互 （这样你就能为你的 DApp 打造一个界面了 ）。</p>
 <h4 id="⑮第五课完成"><a href="#⑮第五课完成" class="headerlink" title="⑮第五课完成"></a>⑮第五课完成</h4><p>截至第五课完成，所有代码如下：<br><strong>zombieownership.sol:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">import &quot;./zombieattack.sol&quot;;</span><br><span class="line">import &quot;./erc721.sol&quot;;</span><br><span class="line">import &quot;./safemath.sol&quot;;</span><br><span class="line"></span><br><span class="line">/// @title 一个管理转移僵尸所有权的合约</span><br><span class="line">/// @author formikasaever</span><br><span class="line">/// @dev 符合 OpenZeppelin 对 ERC721 标准草案的实现</span><br><span class="line">contract ZombieOwnership is ZombieAttack, ERC721 &#123;</span><br><span class="line"></span><br><span class="line">  using SafeMath for uint256;</span><br><span class="line"></span><br><span class="line">  mapping (uint =&gt; address) zombieApprovals;</span><br><span class="line"></span><br><span class="line">  function balanceOf(address _owner) public view returns (uint256 _balance) &#123;</span><br><span class="line">    return ownerZombieCount[_owner];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function ownerOf(uint256 _tokenId) public view returns (address _owner) &#123;</span><br><span class="line">    return zombieToOwner[_tokenId];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function _transfer(address _from, address _to, uint256 _tokenId) private &#123;</span><br><span class="line">    ownerZombieCount[_to] = ownerZombieCount[_to].add(1);</span><br><span class="line">    ownerZombieCount[msg.sender] = ownerZombieCount[msg.sender].sub(1);</span><br><span class="line">    zombieToOwner[_tokenId] = _to;</span><br><span class="line">    Transfer(_from, _to, _tokenId);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function transfer(address _to, uint256 _tokenId) public onlyOwnerOf(_tokenId) &#123;</span><br><span class="line">    _transfer(msg.sender, _to, _tokenId);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function approve(address _to, uint256 _tokenId) public onlyOwnerOf(_tokenId) &#123;</span><br><span class="line">    zombieApprovals[_tokenId] = _to;</span><br><span class="line">    Approval(msg.sender, _to, _tokenId);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function takeOwnership(uint256 _tokenId) public &#123;</span><br><span class="line">    require(zombieApprovals[_tokenId] == msg.sender);</span><br><span class="line">    address owner = ownerOf(_tokenId);</span><br><span class="line">    _transfer(owner, msg.sender, _tokenId);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>pragma solidity ^0.4.19;
+
+import &quot;./zombieattack.sol&quot;;
+import &quot;./erc721.sol&quot;;
+import &quot;./safemath.sol&quot;;
+
+/// @title 一个管理转移僵尸所有权的合约
+/// @author formikasaever
+/// @dev 符合 OpenZeppelin 对 ERC721 标准草案的实现
+contract ZombieOwnership is ZombieAttack, ERC721 &#123;
+
+  using SafeMath for uint256;
+
+  mapping (uint =&gt; address) zombieApprovals;
+
+  function balanceOf(address _owner) public view returns (uint256 _balance) &#123;
+    return ownerZombieCount[_owner];
+  &#125;
+
+  function ownerOf(uint256 _tokenId) public view returns (address _owner) &#123;
+    return zombieToOwner[_tokenId];
+  &#125;
+
+  function _transfer(address _from, address _to, uint256 _tokenId) private &#123;
+    ownerZombieCount[_to] = ownerZombieCount[_to].add(1);
+    ownerZombieCount[msg.sender] = ownerZombieCount[msg.sender].sub(1);
+    zombieToOwner[_tokenId] = _to;
+    Transfer(_from, _to, _tokenId);
+  &#125;
+
+  function transfer(address _to, uint256 _tokenId) public onlyOwnerOf(_tokenId) &#123;
+    _transfer(msg.sender, _to, _tokenId);
+  &#125;
+
+  function approve(address _to, uint256 _tokenId) public onlyOwnerOf(_tokenId) &#123;
+    zombieApprovals[_tokenId] = _to;
+    Approval(msg.sender, _to, _tokenId);
+  &#125;
+
+  function takeOwnership(uint256 _tokenId) public &#123;
+    require(zombieApprovals[_tokenId] == msg.sender);
+    address owner = ownerOf(_tokenId);
+    _transfer(owner, msg.sender, _tokenId);
+  &#125;
+&#125;
+</code></pre>
 <p><strong>zombieattack.sol:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">import &quot;./zombiehelper.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract ZombieBattle is ZombieHelper &#123;</span><br><span class="line">  uint randNonce = 0;</span><br><span class="line">  uint attackVictoryProbability = 70;</span><br><span class="line"></span><br><span class="line">  function randMod(uint _modulus) internal returns(uint) &#123;</span><br><span class="line">    randNonce++;</span><br><span class="line">    return uint(keccak256(now, msg.sender, randNonce)) % _modulus;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function attack(uint _zombieId, uint _targetId) external onlyOwnerOf(_zombieId) &#123;</span><br><span class="line">    Zombie storage myZombie = zombies[_zombieId];</span><br><span class="line">    Zombie storage enemyZombie = zombies[_targetId];</span><br><span class="line">    uint rand = randMod(100);</span><br><span class="line">    if (rand &lt;= attackVictoryProbability) &#123;</span><br><span class="line">      myZombie.winCount++;</span><br><span class="line">      myZombie.level++;</span><br><span class="line">      enemyZombie.lossCount++;</span><br><span class="line">      feedAndMultiply(_zombieId, enemyZombie.dna, &quot;zombie&quot;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      myZombie.lossCount++;</span><br><span class="line">      enemyZombie.winCount++;</span><br><span class="line">      _triggerCooldown(myZombie);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>pragma solidity ^0.4.19;
+
+import &quot;./zombiehelper.sol&quot;;
+
+contract ZombieBattle is ZombieHelper &#123;
+  uint randNonce = 0;
+  uint attackVictoryProbability = 70;
+
+  function randMod(uint _modulus) internal returns(uint) &#123;
+    randNonce++;
+    return uint(keccak256(now, msg.sender, randNonce)) % _modulus;
+  &#125;
+
+  function attack(uint _zombieId, uint _targetId) external onlyOwnerOf(_zombieId) &#123;
+    Zombie storage myZombie = zombies[_zombieId];
+    Zombie storage enemyZombie = zombies[_targetId];
+    uint rand = randMod(100);
+    if (rand &lt;= attackVictoryProbability) &#123;
+      myZombie.winCount++;
+      myZombie.level++;
+      enemyZombie.lossCount++;
+      feedAndMultiply(_zombieId, enemyZombie.dna, &quot;zombie&quot;);
+    &#125; else &#123;
+      myZombie.lossCount++;
+      enemyZombie.winCount++;
+      _triggerCooldown(myZombie);
+    &#125;
+  &#125;
+&#125;
+</code></pre>
 <p><strong>zombiehelper.sol:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">import &quot;./zombiefeeding.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract ZombieHelper is ZombieFeeding &#123;</span><br><span class="line"></span><br><span class="line">  uint levelUpFee = 0.001 ether;</span><br><span class="line"></span><br><span class="line">  modifier aboveLevel(uint _level, uint _zombieId) &#123;</span><br><span class="line">    require(zombies[_zombieId].level &gt;= _level);</span><br><span class="line">    _;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function withdraw() external onlyOwner &#123;</span><br><span class="line">    owner.transfer(this.balance);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function setLevelUpFee(uint _fee) external onlyOwner &#123;</span><br><span class="line">    levelUpFee = _fee;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function levelUp(uint _zombieId) external payable &#123;</span><br><span class="line">    require(msg.value == levelUpFee);</span><br><span class="line">    zombies[_zombieId].level++;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function changeName(uint _zombieId, string _newName) external aboveLevel(2, _zombieId) onlyOwnerOf(_zombieId) &#123;</span><br><span class="line">    zombies[_zombieId].name = _newName;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20, _zombieId) onlyOwnerOf(_zombieId) &#123;</span><br><span class="line">    zombies[_zombieId].dna = _newDna;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function getZombiesByOwner(address _owner) external view returns(uint[]) &#123;</span><br><span class="line">    uint[] memory result = new uint[](ownerZombieCount[_owner]);</span><br><span class="line">    uint counter = 0;</span><br><span class="line">    for (uint i = 0; i &lt; zombies.length; i++) &#123;</span><br><span class="line">      if (zombieToOwner[i] == _owner) &#123;</span><br><span class="line">        result[counter] = i;</span><br><span class="line">        counter++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>pragma solidity ^0.4.19;
+
+import &quot;./zombiefeeding.sol&quot;;
+
+contract ZombieHelper is ZombieFeeding &#123;
+
+  uint levelUpFee = 0.001 ether;
+
+  modifier aboveLevel(uint _level, uint _zombieId) &#123;
+    require(zombies[_zombieId].level &gt;= _level);
+    _;
+  &#125;
+
+  function withdraw() external onlyOwner &#123;
+    owner.transfer(this.balance);
+  &#125;
+
+  function setLevelUpFee(uint _fee) external onlyOwner &#123;
+    levelUpFee = _fee;
+  &#125;
+
+  function levelUp(uint _zombieId) external payable &#123;
+    require(msg.value == levelUpFee);
+    zombies[_zombieId].level++;
+  &#125;
+
+  function changeName(uint _zombieId, string _newName) external aboveLevel(2, _zombieId) onlyOwnerOf(_zombieId) &#123;
+    zombies[_zombieId].name = _newName;
+  &#125;
+
+  function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20, _zombieId) onlyOwnerOf(_zombieId) &#123;
+    zombies[_zombieId].dna = _newDna;
+  &#125;
+
+  function getZombiesByOwner(address _owner) external view returns(uint[]) &#123;
+    uint[] memory result = new uint[](ownerZombieCount[_owner]);
+    uint counter = 0;
+    for (uint i = 0; i &lt; zombies.length; i++) &#123;
+      if (zombieToOwner[i] == _owner) &#123;
+        result[counter] = i;
+        counter++;
+      &#125;
+    &#125;
+    return result;
+  &#125;
+
+&#125;
+</code></pre>
 <p><strong>zombiefeeding.sol:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">import &quot;./zombiefactory.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract KittyInterface &#123;</span><br><span class="line">  function getKitty(uint256 _id) external view returns (</span><br><span class="line">    bool isGestating,</span><br><span class="line">    bool isReady,</span><br><span class="line">    uint256 cooldownIndex,</span><br><span class="line">    uint256 nextActionAt,</span><br><span class="line">    uint256 siringWithId,</span><br><span class="line">    uint256 birthTime,</span><br><span class="line">    uint256 matronId,</span><br><span class="line">    uint256 sireId,</span><br><span class="line">    uint256 generation,</span><br><span class="line">    uint256 genes</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract ZombieFeeding is ZombieFactory &#123;</span><br><span class="line"></span><br><span class="line">  KittyInterface kittyContract;</span><br><span class="line"></span><br><span class="line">  modifier onlyOwnerOf(uint _zombieId) &#123;</span><br><span class="line">    require(msg.sender == zombieToOwner[_zombieId]);</span><br><span class="line">    _;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function setKittyContractAddress(address _address) external onlyOwner &#123;</span><br><span class="line">    kittyContract = KittyInterface(_address);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function _triggerCooldown(Zombie storage _zombie) internal &#123;</span><br><span class="line">    _zombie.readyTime = uint32(now + cooldownTime);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function _isReady(Zombie storage _zombie) internal view returns (bool) &#123;</span><br><span class="line">      return (_zombie.readyTime &lt;= now);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) internal onlyOwnerOf(_zombieId) &#123;</span><br><span class="line">    Zombie storage myZombie = zombies[_zombieId];</span><br><span class="line">    require(_isReady(myZombie));</span><br><span class="line">    _targetDna = _targetDna % dnaModulus;</span><br><span class="line">    uint newDna = (myZombie.dna + _targetDna) / 2;</span><br><span class="line">    if (keccak256(_species) == keccak256(&quot;kitty&quot;)) &#123;</span><br><span class="line">      newDna = newDna - newDna % 100 + 99;</span><br><span class="line">    &#125;</span><br><span class="line">    _createZombie(&quot;NoName&quot;, newDna);</span><br><span class="line">    _triggerCooldown(myZombie);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function feedOnKitty(uint _zombieId, uint _kittyId) public &#123;</span><br><span class="line">    uint kittyDna;</span><br><span class="line">    (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);</span><br><span class="line">    feedAndMultiply(_zombieId, kittyDna, &quot;kitty&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>pragma solidity ^0.4.19;
+
+import &quot;./zombiefactory.sol&quot;;
+
+contract KittyInterface &#123;
+  function getKitty(uint256 _id) external view returns (
+    bool isGestating,
+    bool isReady,
+    uint256 cooldownIndex,
+    uint256 nextActionAt,
+    uint256 siringWithId,
+    uint256 birthTime,
+    uint256 matronId,
+    uint256 sireId,
+    uint256 generation,
+    uint256 genes
+  );
+&#125;
+
+contract ZombieFeeding is ZombieFactory &#123;
+
+  KittyInterface kittyContract;
+
+  modifier onlyOwnerOf(uint _zombieId) &#123;
+    require(msg.sender == zombieToOwner[_zombieId]);
+    _;
+  &#125;
+
+  function setKittyContractAddress(address _address) external onlyOwner &#123;
+    kittyContract = KittyInterface(_address);
+  &#125;
+
+  function _triggerCooldown(Zombie storage _zombie) internal &#123;
+    _zombie.readyTime = uint32(now + cooldownTime);
+  &#125;
+
+  function _isReady(Zombie storage _zombie) internal view returns (bool) &#123;
+      return (_zombie.readyTime &lt;= now);
+  &#125;
+
+  function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) internal onlyOwnerOf(_zombieId) &#123;
+    Zombie storage myZombie = zombies[_zombieId];
+    require(_isReady(myZombie));
+    _targetDna = _targetDna % dnaModulus;
+    uint newDna = (myZombie.dna + _targetDna) / 2;
+    if (keccak256(_species) == keccak256(&quot;kitty&quot;)) &#123;
+      newDna = newDna - newDna % 100 + 99;
+    &#125;
+    _createZombie(&quot;NoName&quot;, newDna);
+    _triggerCooldown(myZombie);
+  &#125;
+
+  function feedOnKitty(uint _zombieId, uint _kittyId) public &#123;
+    uint kittyDna;
+    (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);
+    feedAndMultiply(_zombieId, kittyDna, &quot;kitty&quot;);
+  &#125;
+&#125;
+</code></pre>
 <p><strong>zombiefactory.sol:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line"></span><br><span class="line">import &quot;./ownable.sol&quot;;</span><br><span class="line">import &quot;./safemath.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract ZombieFactory is Ownable &#123;</span><br><span class="line"></span><br><span class="line">  using SafeMath for uint256;</span><br><span class="line"></span><br><span class="line">  event NewZombie(uint zombieId, string name, uint dna);</span><br><span class="line"></span><br><span class="line">  uint dnaDigits = 16;</span><br><span class="line">  uint dnaModulus = 10 ** dnaDigits;</span><br><span class="line">  uint cooldownTime = 1 days;</span><br><span class="line"></span><br><span class="line">  struct Zombie &#123;</span><br><span class="line">    string name;</span><br><span class="line">    uint dna;</span><br><span class="line">    uint32 level;</span><br><span class="line">    uint32 readyTime;</span><br><span class="line">    uint16 winCount;</span><br><span class="line">    uint16 lossCount;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Zombie[] public zombies;</span><br><span class="line"></span><br><span class="line">  mapping (uint =&gt; address) public zombieToOwner;</span><br><span class="line">  mapping (address =&gt; uint) ownerZombieCount;</span><br><span class="line"></span><br><span class="line">  function _createZombie(string _name, uint _dna) internal &#123;</span><br><span class="line">    uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime), 0, 0)) - 1;</span><br><span class="line">    zombieToOwner[id] = msg.sender;</span><br><span class="line">    ownerZombieCount[msg.sender]++;</span><br><span class="line">    NewZombie(id, _name, _dna);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function _generateRandomDna(string _str) private view returns (uint) &#123;</span><br><span class="line">    uint rand = uint(keccak256(_str));</span><br><span class="line">    return rand % dnaModulus;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function createRandomZombie(string _name) public &#123;</span><br><span class="line">    require(ownerZombieCount[msg.sender] == 0);</span><br><span class="line">    uint randDna = _generateRandomDna(_name);</span><br><span class="line">    randDna = randDna - randDna % 100;</span><br><span class="line">    _createZombie(_name, randDna);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>pragma solidity ^0.4.19;
+
+import &quot;./ownable.sol&quot;;
+import &quot;./safemath.sol&quot;;
+
+contract ZombieFactory is Ownable &#123;
+
+  using SafeMath for uint256;
+
+  event NewZombie(uint zombieId, string name, uint dna);
+
+  uint dnaDigits = 16;
+  uint dnaModulus = 10 ** dnaDigits;
+  uint cooldownTime = 1 days;
+
+  struct Zombie &#123;
+    string name;
+    uint dna;
+    uint32 level;
+    uint32 readyTime;
+    uint16 winCount;
+    uint16 lossCount;
+  &#125;
+
+  Zombie[] public zombies;
+
+  mapping (uint =&gt; address) public zombieToOwner;
+  mapping (address =&gt; uint) ownerZombieCount;
+
+  function _createZombie(string _name, uint _dna) internal &#123;
+    uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime), 0, 0)) - 1;
+    zombieToOwner[id] = msg.sender;
+    ownerZombieCount[msg.sender]++;
+    NewZombie(id, _name, _dna);
+  &#125;
+
+  function _generateRandomDna(string _str) private view returns (uint) &#123;
+    uint rand = uint(keccak256(_str));
+    return rand % dnaModulus;
+  &#125;
+
+  function createRandomZombie(string _name) public &#123;
+    require(ownerZombieCount[msg.sender] == 0);
+    uint randDna = _generateRandomDna(_name);
+    randDna = randDna - randDna % 100;
+    _createZombie(_name, randDna);
+  &#125;
+
+&#125;
+</code></pre>
 <p><strong>ownable.sol:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line">/**</span><br><span class="line"> * @title Ownable</span><br><span class="line"> * @dev The Ownable contract has an owner address, and provides basic authorization control</span><br><span class="line"> * functions, this simplifies the implementation of &quot;user permissions&quot;.</span><br><span class="line"> */</span><br><span class="line">contract Ownable &#123;</span><br><span class="line">  address public owner;</span><br><span class="line"></span><br><span class="line">  event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * @dev The Ownable constructor sets the original `owner` of the contract to the sender</span><br><span class="line">   * account.</span><br><span class="line">   */</span><br><span class="line">  function Ownable() public &#123;</span><br><span class="line">    owner = msg.sender;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * @dev Throws if called by any account other than the owner.</span><br><span class="line">   */</span><br><span class="line">  modifier onlyOwner() &#123;</span><br><span class="line">    require(msg.sender == owner);</span><br><span class="line">    _;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * @dev Allows the current owner to transfer control of the contract to a newOwner.</span><br><span class="line">   * @param newOwner The address to transfer ownership to.</span><br><span class="line">   */</span><br><span class="line">  function transferOwnership(address newOwner) public onlyOwner &#123;</span><br><span class="line">    require(newOwner != address(0));</span><br><span class="line">    OwnershipTransferred(owner, newOwner);</span><br><span class="line">    owner = newOwner;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>pragma solidity ^0.4.19;
+/**
+ * @title Ownable
+ * @dev The Ownable contract has an owner address, and provides basic authorization control
+ * functions, this simplifies the implementation of &quot;user permissions&quot;.
+ */
+contract Ownable &#123;
+  address public owner;
+
+  event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+
+  /**
+   * @dev The Ownable constructor sets the original `owner` of the contract to the sender
+   * account.
+   */
+  function Ownable() public &#123;
+    owner = msg.sender;
+  &#125;
+
+
+  /**
+   * @dev Throws if called by any account other than the owner.
+   */
+  modifier onlyOwner() &#123;
+    require(msg.sender == owner);
+    _;
+  &#125;
+
+
+  /**
+   * @dev Allows the current owner to transfer control of the contract to a newOwner.
+   * @param newOwner The address to transfer ownership to.
+   */
+  function transferOwnership(address newOwner) public onlyOwner &#123;
+    require(newOwner != address(0));
+    OwnershipTransferred(owner, newOwner);
+    owner = newOwner;
+  &#125;
+
+&#125;
+</code></pre>
 <p><strong>safemath.sol:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.18;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @title SafeMath</span><br><span class="line"> * @dev Math operations with safety checks that throw on error</span><br><span class="line"> */</span><br><span class="line">library SafeMath &#123;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">  * @dev Multiplies two numbers, throws on overflow.</span><br><span class="line">  */</span><br><span class="line">  function mul(uint256 a, uint256 b) internal pure returns (uint256) &#123;</span><br><span class="line">    if (a == 0) &#123;</span><br><span class="line">      return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    uint256 c = a * b;</span><br><span class="line">    assert(c / a == b);</span><br><span class="line">    return c;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">  * @dev Integer division of two numbers, truncating the quotient.</span><br><span class="line">  */</span><br><span class="line">  function div(uint256 a, uint256 b) internal pure returns (uint256) &#123;</span><br><span class="line">    // assert(b &gt; 0); // Solidity automatically throws when dividing by 0</span><br><span class="line">    uint256 c = a / b;</span><br><span class="line">    // assert(a == b * c + a % b); // There is no case in which this doesn&#x27;t hold</span><br><span class="line">    return c;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">  * @dev Substracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).</span><br><span class="line">  */</span><br><span class="line">  function sub(uint256 a, uint256 b) internal pure returns (uint256) &#123;</span><br><span class="line">    assert(b &lt;= a);</span><br><span class="line">    return a - b;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">  * @dev Adds two numbers, throws on overflow.</span><br><span class="line">  */</span><br><span class="line">  function add(uint256 a, uint256 b) internal pure returns (uint256) &#123;</span><br><span class="line">    uint256 c = a + b;</span><br><span class="line">    assert(c &gt;= a);</span><br><span class="line">    return c;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>pragma solidity ^0.4.18;
+
+/**
+ * @title SafeMath
+ * @dev Math operations with safety checks that throw on error
+ */
+library SafeMath &#123;
+
+  /**
+  * @dev Multiplies two numbers, throws on overflow.
+  */
+  function mul(uint256 a, uint256 b) internal pure returns (uint256) &#123;
+    if (a == 0) &#123;
+      return 0;
+    &#125;
+    uint256 c = a * b;
+    assert(c / a == b);
+    return c;
+  &#125;
+
+  /**
+  * @dev Integer division of two numbers, truncating the quotient.
+  */
+  function div(uint256 a, uint256 b) internal pure returns (uint256) &#123;
+    // assert(b &gt; 0); // Solidity automatically throws when dividing by 0
+    uint256 c = a / b;
+    // assert(a == b * c + a % b); // There is no case in which this doesn&#39;t hold
+    return c;
+  &#125;
+
+  /**
+  * @dev Substracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).
+  */
+  function sub(uint256 a, uint256 b) internal pure returns (uint256) &#123;
+    assert(b &lt;= a);
+    return a - b;
+  &#125;
+
+  /**
+  * @dev Adds two numbers, throws on overflow.
+  */
+  function add(uint256 a, uint256 b) internal pure returns (uint256) &#123;
+    uint256 c = a + b;
+    assert(c &gt;= a);
+    return c;
+  &#125;
+&#125;
+</code></pre>
 <p><strong>erc721.sol:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.19;</span><br><span class="line">contract ERC721 &#123;</span><br><span class="line">  event Transfer(address indexed _from, address indexed _to, uint256 _tokenId);</span><br><span class="line">  event Approval(address indexed _owner, address indexed _approved, uint256 _tokenId);</span><br><span class="line"></span><br><span class="line">  function balanceOf(address _owner) public view returns (uint256 _balance);</span><br><span class="line">  function ownerOf(uint256 _tokenId) public view returns (address _owner);</span><br><span class="line">  function transfer(address _to, uint256 _tokenId) public;</span><br><span class="line">  function approve(address _to, uint256 _tokenId) public;</span><br><span class="line">  function takeOwnership(uint256 _tokenId) public;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>pragma solidity ^0.4.19;
+contract ERC721 &#123;
+  event Transfer(address indexed _from, address indexed _to, uint256 _tokenId);
+  event Approval(address indexed _owner, address indexed _approved, uint256 _tokenId);
+
+  function balanceOf(address _owner) public view returns (uint256 _balance);
+  function ownerOf(uint256 _tokenId) public view returns (address _owner);
+  function transfer(address _to, uint256 _tokenId) public;
+  function approve(address _to, uint256 _tokenId) public;
+  function takeOwnership(uint256 _tokenId) public;
+&#125;
+</code></pre>
 <hr>
 <h3 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h3><h4 id="①"><a href="#①" class="headerlink" title="①"></a>①</h4>
   </div>
