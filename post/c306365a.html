@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="密码学存在的两大对立分支是（D ） A 对称加密和非对称加密 B 序列算法和分组算法 C DES 和RSA D 密码编码学和密码分析学 关于非对称加密体制的描述正确的是（C ） A加密和解密使用的密钥是一样的 B 甲若要发送一个文件给乙，只想乙 看到，需要用甲的私钥加密信息再传送，从而保证机密性 C任何人若想发送加密信息给乙，只需要用乙的公钥将信息加密传送即可 D 可以从公钥推导出私钥 数字签名过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息安全复习笔记_简陋版">
+<meta property="og:url" content="https://formikasaever.github.io./post/c306365a.html">
+<meta property="og:site_name" content="ForMikasaEver&#39;s blog">
+<meta property="og:description" content="密码学存在的两大对立分支是（D ） A 对称加密和非对称加密 B 序列算法和分组算法 C DES 和RSA D 密码编码学和密码分析学 关于非对称加密体制的描述正确的是（C ） A加密和解密使用的密钥是一样的 B 甲若要发送一个文件给乙，只想乙 看到，需要用甲的私钥加密信息再传送，从而保证机密性 C任何人若想发送加密信息给乙，只需要用乙的公钥将信息加密传送即可 D 可以从公钥推导出私钥 数字签名过">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-06-12T15:39:28.000Z">
+<meta property="article:modified_time" content="2023-06-12T15:39:55.653Z">
+<meta property="article:author" content="ForMikasaEver">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>信息安全复习笔记_简陋版</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/ForMikasaEver">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/d8e416ee.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://formikasaever.github.io./post/c306365a.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://formikasaever.github.io./post/c306365a.html&text=信息安全复习笔记_简陋版"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://formikasaever.github.io./post/c306365a.html&title=信息安全复习笔记_简陋版"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://formikasaever.github.io./post/c306365a.html&is_video=false&description=信息安全复习笔记_简陋版"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=信息安全复习笔记_简陋版&body=Check out this article: https://formikasaever.github.io./post/c306365a.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://formikasaever.github.io./post/c306365a.html&title=信息安全复习笔记_简陋版"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://formikasaever.github.io./post/c306365a.html&title=信息安全复习笔记_简陋版"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://formikasaever.github.io./post/c306365a.html&title=信息安全复习笔记_简陋版"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://formikasaever.github.io./post/c306365a.html&title=信息安全复习笔记_简陋版"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://formikasaever.github.io./post/c306365a.html&name=信息安全复习笔记_简陋版&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://formikasaever.github.io./post/c306365a.html&t=信息安全复习笔记_简陋版"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">第一章</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        信息安全复习笔记_简陋版
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">ForMikasaEver</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-06-12T15:39:28.000Z" class="dt-published" itemprop="datePublished">2023-06-12</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>密码学存在的两大对立分支是（D ）</p>
+<p>A 对称加密和非对称加密</p>
+<p>B 序列算法和分组算法</p>
+<p>C DES 和RSA</p>
+<p>D 密码编码学和密码分析学</p>
+<p>关于非对称加密体制的描述正确的是（C ）</p>
+<p>A加密和解密使用的密钥是一样的</p>
+<p>B 甲若要发送一个文件给乙，只想乙 看到，需要用甲的私钥加密信息再传送，从而保证机密性</p>
+<p>C任何人若想发送加密信息给乙，只需要用乙的公钥将信息加密传送即可</p>
+<p>D 可以从公钥推导出私钥</p>
+<p>数字签名过程中，要确保来源于发送者的信息，则用（ ）的（）钥对（   ）进行签名？ C</p>
+<p>A 发送者 公   发送内容的信息摘要</p>
+<p>B 发送者 公   发送的内容</p>
+<p>C 发送者 私  发送内容的信息摘要</p>
+<p>D 发送者 私  发送的内容</p>
+<p>E 接收者 公   发送内容的信息摘要</p>
+<p>F 接收者 公   发送的内容</p>
+<p>数字签名过程中，要确保传送消息的保密性（只能有接收方看到），则用（ ）的（ ）钥 对发送消息内容和数字签名进行加密传送  C</p>
+<p>给接收者？</p>
+<p>A 发送者 公</p>
+<p>B 发送者 私</p>
+<p>C 接收者 公</p>
+<p>D 接收者 私</p>
+<p>哪种情况证书的序列号应该出现在CRL上（ D ）</p>
+<p>A 有效期内正常的证书</p>
+<p>B 过期的证书</p>
+<p>C 尚未生效的证书</p>
+<p>D 因私钥泄露，且在有效期内的CA证书</p>
+<p>PKI中哪个部分负责审核提交用户信息的真实性（C ）</p>
+<p>A CA</p>
+<p>B CDA</p>
+<p>C RA</p>
+<p>D CPS</p>
+<p>下面说法正确的是（ C ）</p>
+<p>A 用户要将自己的私钥、公钥都交给CA，CA才能签证书</p>
+<p>B 证书的验证就是看证书能否用CA的公钥打开</p>
+<p>C CRL需要签发者进行签名</p>
+<p>D 证书的更新就是公钥有效期延长</p>
+<p>1.以下关于计算机病毒与蠕虫的特点比较中，说法正确的是(  C)<br> A、在传染机制中，蠕虫是通过宿主程序运行<br> B、在触发机制中，蠕虫的触发者是计算机的使用者<br> C、为系统打补丁，能有效预防蠕虫，但不能有效预防病毒<br> D、蠕虫和病毒都是寄生模式存在</p>
+<p>2.特洛伊木马程序分为客户端（也称为控制端）和服务器端（也称为被控制端）两部分，当用户访问了带有木马的网页后，木马的（B）部分就下载到用户所在的计算机上，并自动运行</p>
+<p>A．客户端<br> B．服务器端<br> C．客户端和服务器端<br> D．客户端或服务器端</p>
+<p>3.（多选）下列各项中，属于计算机病毒主要特征的有(ABCD)</p>
+<p>A.隐蔽性 B 破坏性 C 潜伏性 D 感染性</p>
+<p>（B ）对主体和资源的属性进行划分（安全标签），通过预先制定的安全策略对安全标签进行判断，决定主体是否能进行访问。</p>
+<p>A 自主访问控制 B 强制访问控制 C 基于角色的访问控制</p>
+<p>防火墙对数据包进行状态检测包过滤时，不可以进行的过滤是（D）</p>
+<p>A 源IP，目标IP B 源端口，目标端口 C IP协议号 D 数据包的内容</p>
+<p>下列说法错误的是(C)</p>
+<p>A包过滤防火墙是最传统、最基本的过滤技术</p>
+<p>B应用级网关的安全性高，并有较好的访问控制</p>
+<p>C DMZ区不受防火墙保护</p>
+<p>D 内网用户通过防火墙访问公共网络的IP，需要对源IP进行NAT转换</p>
+<p>入侵检测系统不支持的功能（C ）</p>
+<p>A统计分析异常行为 B 检测分析用户和系统的活动</p>
+<p>C网络地址转换  D识别已知攻击</p>
+<p>关于入侵检测系统IDS说法正确的是( C )</p>
+<p>A入侵检测系统不能检测内部入侵</p>
+<p>B IDS和防火墙一样必须作为内外部网络的唯一通道</p>
+<p>C 基于误用检测的IDS主要利用模式匹配的方法</p>
+<p>D IDS的数据来自于网络</p>
+<p>下面哪种访问控制策略需要安全标签（B）</p>
+<p>A基于角色的访问控制 B 自主访问控制 C基于表示的访问控制 D 强制访问控制</p>
+<p>我不允许别人ping我，我的防火墙设置应该是出站还是入站？是允许连接还是阻止连接？</p>
+<p>如果您不希望其他人ping您，您应该在防火墙的<strong>入站规则</strong>中设置<strong>阻止连接</strong>。入站规则是用来限制远程主机访问本机的服务的，本机接收的请求中如果被请求的程序或具体端口是被限制的，则该请求会被拦截</p>
+<p>若我办公室的机器默认不能使用某个联网的程序A，现在通过防火墙设置允许使用，应该在出站还是入站规则中设置？</p>
+<p>若您希望在办公室的计算机上使用某个联网程序A，您应该在防火墙的<strong>出站规则</strong>中设置<strong>允许连接</strong>。出站规则是用来限制对外访问的，从本机发出的请求中，如果请求的对象是被禁止的，该请求会被拦截，表现方式就是断网</p>
+<h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><p>1.信息安全的特征：</p>
+<ul>
+<li>保密性</li>
+<li>完整性</li>
+<li>可用性</li>
+<li>可控性</li>
+<li>不可抵赖性</li>
+</ul>
+<p>2.ISO安全体系结构包括了三部分内容：</p>
+<ul>
+<li>安全服务：认证，访问控制，数据保密性，数据完整性，不可抵赖性（五大类安全服务）</li>
+<li>安全机制：加密机制，数字签名机制，访问控制机制，数据完整性机制，鉴别交换机制，业务填充机制，路由控制机制和公证机制（八大类安全机制）</li>
+<li>安全管理：系统安全管理，安全服务管理，安全机制管理</li>
+</ul>
+<p>3.网络安全体系模型</p>
+<ol>
+<li>PDRR模型：保护Protection，检测Detection，恢复Recovery，响应Response</li>
+<li>P^2DR模型：基于时间的安全模型，Policy安全策略，Protection防护，Detection检测，Recovery响应</li>
+</ol>
+<p>​                                及时地检测和响应就是安全，及时地检测和恢复就是安全</p>
+<p>4.网络信息安全等级与标准</p>
+<ol>
+<li>TCSEC标准：将计算机安全从高到低分为A,B,C,D四类七个级别（A最高）</li>
+<li>联合公共准则CC标准</li>
+<li>我国有关网络信息安全的相关标准：（五个等级）自主保护级，系统审计保护级，安全标记保护级，结构化保护级和访问验证保护级</li>
+</ol>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/ForMikasaEver">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">第一章</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://formikasaever.github.io./post/c306365a.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://formikasaever.github.io./post/c306365a.html&text=信息安全复习笔记_简陋版"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://formikasaever.github.io./post/c306365a.html&title=信息安全复习笔记_简陋版"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://formikasaever.github.io./post/c306365a.html&is_video=false&description=信息安全复习笔记_简陋版"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=信息安全复习笔记_简陋版&body=Check out this article: https://formikasaever.github.io./post/c306365a.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://formikasaever.github.io./post/c306365a.html&title=信息安全复习笔记_简陋版"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://formikasaever.github.io./post/c306365a.html&title=信息安全复习笔记_简陋版"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://formikasaever.github.io./post/c306365a.html&title=信息安全复习笔记_简陋版"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://formikasaever.github.io./post/c306365a.html&title=信息安全复习笔记_简陋版"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://formikasaever.github.io./post/c306365a.html&name=信息安全复习笔记_简陋版&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://formikasaever.github.io./post/c306365a.html&t=信息安全复习笔记_简陋版"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+      <div class="footer-left">
+        Copyright &copy;
+        
+        
+        2023
+        ForMikasaEver
+      </div>
+      <div class="footer-right">
+        <nav>
+          <ul>
+            <!--
+          --><li><a href="/">Home</a></li><!--
+        --><!--
+          --><li><a href="/about/">About</a></li><!--
+        --><!--
+          --><li><a href="/search/">Search</a></li><!--
+        --><!--
+          --><li><a href="/archives/">Writing</a></li><!--
+        --><!--
+          --><li><a target="_blank" rel="noopener" href="https://github.com/ForMikasaEver">Projects</a></li><!--
+        -->
+          </ul>
+          <ul>
+            
+              <!-- 不蒜子统计 -->
+              <span id="busuanzi_container_site_pv">
+                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+              </span>
+              <span class="post-meta-divider">|</span>
+              <span id="busuanzi_container_site_uv" style='display:none'>
+                      本站访客数<span id="busuanzi_value_site_uv"></span>人
+              </span>
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            
+          </ul>
+        </nav>
+      </div>
+      
+</footer>
+
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'formikasaever';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>
