@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="9.循环与分支结构for i in range(11):    if i in [0,5,10]:       print(&quot;+ - - - - + - - - - +&quot;)    else:       print(&quot;*         *         *&quot;)       运行结果：+ - - - - + - - - - +*         *">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python复习总结2">
+<meta property="og:url" content="https://formikasaever.github.io./post/92cc9a62.html">
+<meta property="og:site_name" content="ForMikasaEver&#39;s blog">
+<meta property="og:description" content="9.循环与分支结构for i in range(11):    if i in [0,5,10]:       print(&quot;+ - - - - + - - - - +&quot;)    else:       print(&quot;*         *         *&quot;)       运行结果：+ - - - - + - - - - +*         *">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgloc.com/2023/06/13/VH9Mak.png">
+<meta property="og:image" content="https://i.imgloc.com/2023/06/13/VHJbXN.png">
+<meta property="og:image" content="https://i.imgloc.com/2023/06/13/VHJjKV.png">
+<meta property="og:image" content="https://i.imgloc.com/2023/06/13/VHJIDd.png">
+<meta property="article:published_time" content="2023-06-13T15:57:32.000Z">
+<meta property="article:modified_time" content="2023-06-13T15:58:16.833Z">
+<meta property="article:author" content="ForMikasaEver">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgloc.com/2023/06/13/VH9Mak.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>python复习总结2</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/ForMikasaEver">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/bc5cbd8.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://formikasaever.github.io./post/92cc9a62.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://formikasaever.github.io./post/92cc9a62.html&text=python复习总结2"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://formikasaever.github.io./post/92cc9a62.html&title=python复习总结2"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://formikasaever.github.io./post/92cc9a62.html&is_video=false&description=python复习总结2"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=python复习总结2&body=Check out this article: https://formikasaever.github.io./post/92cc9a62.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://formikasaever.github.io./post/92cc9a62.html&title=python复习总结2"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://formikasaever.github.io./post/92cc9a62.html&title=python复习总结2"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://formikasaever.github.io./post/92cc9a62.html&title=python复习总结2"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://formikasaever.github.io./post/92cc9a62.html&title=python复习总结2"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://formikasaever.github.io./post/92cc9a62.html&name=python复习总结2&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://formikasaever.github.io./post/92cc9a62.html&t=python复习总结2"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E5%BE%AA%E7%8E%AF%E4%B8%8E%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">9.循环与分支结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%A8%8B%E5%9B%BE-%E9%80%89%E6%8B%A9%E5%A1%AB%E7%A9%BA%E5%88%A4%E6%96%AD"><span class="toc-number">1.1.</span> <span class="toc-text">程序流程图-选择填空判断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for-%E5%BE%AA%E7%8E%AF-while%E5%BE%AA%E7%8E%AF-break-continue%EF%BC%88%E9%80%89%E6%8B%A9%E5%A1%AB%E7%A9%BA%E5%88%A4%E6%96%AD%E4%BB%A3%E7%A0%81%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">for 循环 while循环 break continue（选择填空判断代码）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E9%87%8D%E7%82%B9%E6%B3%A8%E6%84%8Frange%E5%AF%B9%E8%B1%A1%E7%9B%B8%E5%85%B3%E7%9A%84%E7%82%B9"><span class="toc-number">1.3.</span> <span class="toc-text">请重点注意range对象相关的点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8try%E2%80%A6except%E2%80%A6else%E2%80%A6finally%E8%AF%AD%E5%8F%A5%E6%8D%95%E8%8E%B7%E5%A4%84%E7%90%86%E5%BC%82%E5%B8%B8-%E4%B8%80%E8%88%AC%E4%B8%BA%E9%80%89%E6%8B%A9%E5%A1%AB%E7%A9%BA%E5%88%A4%E6%96%AD%EF%BC%8C%E4%B9%9F%E6%9C%89%E5%B0%91%E9%87%8F%E7%9A%84%E5%8F%AF%E8%83%BD%E5%87%BA%E4%BB%A3%E7%A0%81%E9%A2%98%E7%9B%AE"><span class="toc-number">1.4.</span> <span class="toc-text">使用try…except…else…finally语句捕获处理异常-一般为选择填空判断，也有少量的可能出代码题目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-Python%E5%86%85%E7%BD%AE%E7%9A%84%E5%BA%8F%E5%88%97%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">10.Python内置的序列数据类型</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        python复习总结2
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">ForMikasaEver</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-06-13T15:57:32.000Z" class="dt-published" itemprop="datePublished">2023-06-13</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="9-循环与分支结构"><a href="#9-循环与分支结构" class="headerlink" title="9.循环与分支结构"></a>9.循环与分支结构</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">11</span>):</span><br><span class="line">    <span class="keyword">if</span> i <span class="keyword">in</span> [<span class="number">0</span>,<span class="number">5</span>,<span class="number">10</span>]:</span><br><span class="line">       <span class="built_in">print</span>(<span class="string">&quot;+ - - - - + - - - - +&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">       <span class="built_in">print</span>(<span class="string">&quot;*         *         *&quot;</span>)</span><br><span class="line">       </span><br><span class="line">运行结果：</span><br><span class="line">+ - - - - + - - - - +</span><br><span class="line">*         *         *</span><br><span class="line">*         *         *</span><br><span class="line">*         *         *</span><br><span class="line">*         *         *</span><br><span class="line">+ - - - - + - - - - +</span><br><span class="line">*         *         *</span><br><span class="line">*         *         *</span><br><span class="line">*         *         *</span><br><span class="line">*         *         *</span><br><span class="line">+ - - - - + - - - - +</span><br><span class="line"></span><br><span class="line">编写程序，计算Sn=<span class="number">1</span>-<span class="number">3</span>+<span class="number">5</span>-<span class="number">7</span>+<span class="number">9</span>-<span class="number">11</span>+… （计算从 <span class="number">1</span> 到 n 的所有奇数和偶数的差值之和）</span><br><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入整数n：&quot;</span>))</span><br><span class="line">s=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">if</span> i%<span class="number">2</span>==<span class="number">0</span>:</span><br><span class="line">       s-=(<span class="number">2</span>*i-<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">       s+=(<span class="number">2</span>*i-<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="程序流程图-选择填空判断"><a href="#程序流程图-选择填空判断" class="headerlink" title="程序流程图-选择填空判断"></a>程序流程图-选择填空判断</h3><p><img src="/img/loading.gif" data-original="https://i.imgloc.com/2023/06/13/VH9Mak.png" alt="VH9Mak.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">单分支结构示例：输入两个数a和b，比较两者大小，使得a大于b</span><br><span class="line">a = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入第1个整数：&quot;</span>))</span><br><span class="line">b = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入第2个整数：&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;输入值：&#123;0&#125;, &#123;1&#125;“.format(a, b))</span></span><br><span class="line"><span class="string">if (a &lt; b): #a和b交换</span></span><br><span class="line"><span class="string">   t = a</span></span><br><span class="line"><span class="string">   a = b</span></span><br><span class="line"><span class="string">   b = t</span></span><br><span class="line"><span class="string">print(&quot;</span>降序值：&#123;<span class="number">0</span>&#125;, &#123;<span class="number">1</span>&#125;“.<span class="built_in">format</span>(a, b))</span><br><span class="line">      </span><br><span class="line">双单分支结构示例：输入一个数a，如果a大于<span class="number">0</span>，则在屏幕上显示“正数”，否则在屏幕上显示“不是正数”</span><br><span class="line">a=<span class="built_in">input</span>(<span class="string">&quot;请输入一个数：&quot;</span>)</span><br><span class="line">a=<span class="built_in">int</span>(a)</span><br><span class="line"><span class="keyword">if</span> a&gt;<span class="number">0</span>:</span><br><span class="line">   <span class="built_in">print</span>(a,<span class="string">&quot;is positive. &quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">   <span class="built_in">print</span>(a,<span class="string">&quot;is not positive. &quot;</span>)</span><br><span class="line">      </span><br><span class="line">多分支结构</span><br><span class="line">mark = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入分数：&quot;</span>))</span><br><span class="line"><span class="keyword">if</span> (mark &gt;= <span class="number">90</span>): grade = <span class="string">&quot;优&quot;</span></span><br><span class="line"><span class="keyword">elif</span> (mark &gt;= <span class="number">80</span>): grade = <span class="string">&quot;良&quot;</span></span><br><span class="line"><span class="keyword">elif</span> (mark &gt;= <span class="number">70</span>): grade = <span class="string">&quot;中&quot;</span></span><br><span class="line"><span class="keyword">elif</span> (mark &gt;= <span class="number">60</span>): grade = <span class="string">&quot;及格&quot;</span></span><br><span class="line"><span class="keyword">else</span>: grade = <span class="string">&quot;不及格&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="for-循环-while循环-break-continue（选择填空判断代码）"><a href="#for-循环-while循环-break-continue（选择填空判断代码）" class="headerlink" title="for 循环 while循环 break continue（选择填空判断代码）"></a>for 循环 while循环 break continue（选择填空判断代码）</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">使用<span class="keyword">continue</span>语句跳过循环。要求输入若干学生成绩（按Q或q结束），如果成绩&lt;<span class="number">0</span>，则重新输入。</span><br><span class="line">统计学生人数和平均成绩</span><br><span class="line">num = <span class="number">0</span>; scores = <span class="number">0</span>; <span class="comment">#初始化学生人数和成绩和</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">  s = <span class="built_in">input</span>(<span class="string">&#x27;请输入学生成绩（按Q或q结束）：&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> s.upper() == <span class="string">&#x27;Q&#x27;</span>:</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">float</span>(s) &lt; <span class="number">0</span>: <span class="comment">#成绩必须&gt;=0  float()用于将传入的参数转换为浮点数类型</span></span><br><span class="line">      <span class="keyword">continue</span></span><br><span class="line">  num += <span class="number">1</span> <span class="comment">#统计学生人数</span></span><br><span class="line">  scores += <span class="built_in">float</span>(s) <span class="comment">#计算成绩之和</span></span><br><span class="line">    </span><br><span class="line">计算 <span class="number">1</span>到<span class="number">100</span>的整数和</span><br><span class="line">result = <span class="number">0</span>   <span class="comment">#保存累加结果的变量</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">101</span>):</span><br><span class="line">    result =result+i  <span class="comment">#上述语句逐个获取从1到100这些值，并做累加操作</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;1到100的整数和为:&quot;</span>, result)</span><br><span class="line"></span><br><span class="line">运行程序，结果如下：</span><br><span class="line"><span class="number">1</span>到<span class="number">100</span>的整数和为: <span class="number">5050</span></span><br><span class="line"></span><br><span class="line">i = <span class="number">1</span> <span class="comment">#设置循环变量i初值</span></span><br><span class="line"><span class="built_in">sum</span>=<span class="number">0</span>  <span class="comment">#设置整数和sum初值</span></span><br><span class="line"><span class="comment"># 设置循环的初始化条件</span></span><br><span class="line"><span class="keyword">while</span> i &lt;= <span class="number">100</span> : <span class="comment"># 当i小于100时，执行循环体</span></span><br><span class="line">    <span class="built_in">print</span>( i)</span><br><span class="line">    <span class="built_in">sum</span>=<span class="built_in">sum</span>+i</span><br><span class="line">    i += <span class="number">1</span> <span class="comment">#改变循环变量i的值</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;1~100 的所有整数和：&quot;</span>,<span class="built_in">sum</span>)</span><br><span class="line"></span><br><span class="line">运行程序，结果如下：</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line">……</span><br><span class="line"><span class="number">99</span></span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="number">1</span>~<span class="number">100</span> 的所有整数和： <span class="number">5050</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="请重点注意range对象相关的点"><a href="#请重点注意range对象相关的点" class="headerlink" title="请重点注意range对象相关的点"></a>请重点注意range对象相关的点</h3><p>在 Python 中，<code>range()</code> 是一个内置函数，用于生成一个整数序列。</p>
+<p><code>range()</code> 函数的基本语法是：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">range</span>(start, stop, step)</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li><code>start</code>（可选）：表示序列的起始值，默认为 0。</li>
+<li><code>stop</code>：表示序列的结束值（不包含在序列中）。</li>
+<li><code>step</code>（可选）：表示序列中相邻两个值之间的步长，默认为 1。</li>
+</ul>
+<h3 id="使用try…except…else…finally语句捕获处理异常-一般为选择填空判断，也有少量的可能出代码题目"><a href="#使用try…except…else…finally语句捕获处理异常-一般为选择填空判断，也有少量的可能出代码题目" class="headerlink" title="使用try…except…else…finally语句捕获处理异常-一般为选择填空判断，也有少量的可能出代码题目"></a>使用try…except…else…finally语句捕获处理异常-一般为选择填空判断，也有少量的可能出代码题目</h3><p>说明：</p>
+<ul>
+<li><code>try</code> 代码块中放置可能会引发异常的代码。</li>
+<li><code>except</code> 代码块用于处理特定类型的异常。可以有多个 <code>except</code> 块来捕获不同类型的异常，每个 <code>except</code> 块可以处理特定类型的异常。</li>
+<li><code>else</code> 代码块在没有发生任何异常时执行。如果发生异常，则不会执行该代码块。</li>
+<li><code>finally</code> 代码块无论是否发生异常，都会执行。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment"># 可能会引发异常的代码块</span></span><br><span class="line">    x = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入一个整数: &quot;</span>))</span><br><span class="line">    result = <span class="number">10</span> / x</span><br><span class="line"><span class="keyword">except</span> ValueError:</span><br><span class="line">    <span class="comment"># 处理 ValueError 异常，即输入的不是整数</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;请输入一个有效的整数&quot;</span>)</span><br><span class="line"><span class="keyword">except</span> ZeroDivisionError:</span><br><span class="line">    <span class="comment"># 处理 ZeroDivisionError 异常，即除以 0</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;除数不能为 0&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># 当没有异常发生时执行的代码块</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;计算结果:&quot;</span>, result)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    <span class="comment"># 无论是否发生异常，都会执行的代码块</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;程序执行完毕&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="10-Python内置的序列数据类型"><a href="#10-Python内置的序列数据类型" class="headerlink" title="10.Python内置的序列数据类型"></a>10.Python内置的序列数据类型</h2><p>序列（Sequence）是Python中的一种基本数据类型，它包括字符串（String）、列表（List）和元组（Tuple）。这些序列类型共享一些相似的特性，例如有序性、索引访问、切片操作等。</p>
+<ol>
+<li>字符串（String）：<ul>
+<li>字符串是由字符组成的不可变序列。</li>
+<li>字符串使用引号（单引号或双引号）来定义。</li>
+<li>字符串中的字符按照顺序存储，可以通过索引访问。</li>
+<li>字符串是不可变的，即不能修改字符串中的字符。</li>
+<li>字符串常用于表示文本数据。</li>
+</ul>
+</li>
+<li>列表（List）：<ul>
+<li>列表是由元素组成的可变序列。</li>
+<li>列表使用方括号 <code>[ ]</code> 来定义，元素之间使用逗号分隔。</li>
+<li>列表中的元素按照插入的顺序存储，可以通过索引访问。</li>
+<li>列表是可变的，可以修改、添加或删除其中的元素。</li>
+<li>列表常用于存储一组有序的元素集合。</li>
+</ul>
+</li>
+<li>元组（Tuple）：<ul>
+<li>元组是由元素组成的不可变序列。</li>
+<li>元组使用圆括号 <code>( )</code> 来定义，元素之间使用逗号分隔。</li>
+<li>元组中的元素按照定义的顺序存储，可以通过索引访问。</li>
+<li>元组是不可变的，一旦创建就不能修改其中的元素。</li>
+<li>元组常用于保护数据的完整性，以及作为函数返回多个值的容器。</li>
+</ul>
+</li>
+<li>字典（Dictionary）：<ul>
+<li>字典是由键值对组成的无序集合。</li>
+<li>字典使用花括号 <code>&#123; &#125;</code> 来定义，每个键值对使用冒号 <code>:</code> 分隔，键值对之间使用逗号分隔。</li>
+<li>字典中的键与对应的值关联，通过键来访问值。</li>
+<li>字典中的元素是无序的，即它们的顺序在字典中并不重要。</li>
+<li>字典是可变的，可以添加、修改或删除键值对。</li>
+<li>字典常用于通过键来查找和修改对应的值。</li>
+</ul>
+</li>
+</ol>
+<p>总结起来，字符串是不可变的字符序列，列表是可变的元素序列，元组是不可变的元素序列，字典是键值对的无序集合。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">• 元组也称之为定值表，用于存储值固定不变的值表。例如：</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s1=(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s1 <span class="comment">#输出：(1, 2, 3)</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s1[<span class="number">2</span>] <span class="comment">#输出：3</span></span><br><span class="line"></span><br><span class="line">• 列表也称之为表，用于存储其值可变的表。例如：</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s2=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s2[<span class="number">2</span>]=<span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s2 <span class="comment">#输出：[1, 2, 4]</span></span><br><span class="line"></span><br><span class="line">• 字符串是包括若干字符的序列数据，支持序列数据的基本操作。例如：</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s3=<span class="string">&quot;Hello, world!&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s3[:<span class="number">5</span>] <span class="comment">#字符串前5个字符。输出：&#x27;Hello&#x27;</span></span><br><span class="line"></span><br><span class="line">• <span class="built_in">len</span>()、<span class="built_in">max</span>()、<span class="built_in">min</span>()，获取序列的长度、序列中元素最大值、序列中元素最小值</span><br><span class="line"><span class="built_in">sum</span>()获取列表或元组中各元素之和</span><br><span class="line">s = <span class="string">&#x27;abcdefg&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(s))  <span class="comment"># 7</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">max</span>(s))  <span class="comment"># g</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">min</span>(s))  <span class="comment"># a</span></span><br><span class="line">s2 = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(s2))  <span class="comment"># 0</span></span><br><span class="line"></span><br><span class="line">例子：</span><br><span class="line">t2 = [<span class="number">1</span>, <span class="string">&#x27;a&#x27;</span>, <span class="number">2</span>]</span><br><span class="line"><span class="built_in">sum</span>(t2)  <span class="comment"># typeError</span></span><br><span class="line">s = <span class="string">&#x27;1234&#x27;</span></span><br><span class="line"><span class="built_in">sum</span>(s)  <span class="comment"># typeError</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">sum</span>([[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]], []))  <span class="comment"># [1, 2, 3, 4]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">sum</span>()函数在这里被用来连接列表，而不是进行求和操作。</span><br><span class="line">参数[[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]]是要连接的列表，而参数[]是初始值（一个空列表）。</span><br><span class="line">在这个例子中，初始值为空列表，所以<span class="built_in">sum</span>()函数会将两个子列表[<span class="number">1</span>, <span class="number">2</span>]和[<span class="number">3</span>, <span class="number">4</span>]连接在一起</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/img/loading.gif" data-original="https://i.imgloc.com/2023/06/13/VHJbXN.png" alt="VHJbXN.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s=<span class="string">&#x27;abcdef&#x27;</span>      &gt;&gt;&gt; t=(<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;i&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;u&#x27;</span>)       &gt;&gt;&gt; lst=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[<span class="number">0</span>]            &gt;&gt;&gt; t[<span class="number">0</span>]                          &gt;&gt;&gt; lst[<span class="number">0</span>]</span><br><span class="line"><span class="string">&#x27;a&#x27;</span>                 <span class="string">&#x27;a&#x27;</span>                               <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[<span class="number">2</span>]            &gt;&gt;&gt; t[<span class="number">1</span>]                          &gt;&gt;&gt; lst</span><br><span class="line"><span class="string">&#x27;c&#x27;</span>                 <span class="string">&#x27;e&#x27;</span>                               [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[-<span class="number">1</span>]           &gt;&gt;&gt; t[-<span class="number">1</span>]                         &gt;&gt;&gt; lst[<span class="number">2</span>]=<span class="string">&#x27;a&#x27;</span></span><br><span class="line"><span class="string">&#x27;f&#x27;</span>                 <span class="string">&#x27;u&#x27;</span>                               &gt;&gt;&gt; lst[-<span class="number">2</span>]=<span class="string">&#x27;b&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[-<span class="number">3</span>]           &gt;&gt;&gt; t[-<span class="number">5</span>]                         &gt;&gt;&gt; lst</span><br><span class="line"><span class="string">&#x27;d&#x27;</span>                 <span class="string">&#x27;a&#x27;</span>                               [<span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="number">5</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>序列的切片操作</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s=<span class="string">&#x27;abcdef&#x27;</span>           &gt;&gt;&gt; t=(<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;i&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;u&#x27;</span>)        &gt;&gt;&gt; lst=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[<span class="number">1</span>:<span class="number">3</span>]               &gt;&gt;&gt; t[-<span class="number">2</span>:-<span class="number">1</span>]                       &gt;&gt;&gt; lst[:<span class="number">2</span>]</span><br><span class="line"><span class="string">&#x27;bc&#x27;</span>                     (<span class="string">&#x27;o&#x27;</span>,)                             [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[<span class="number">3</span>:<span class="number">10</span>]              &gt;&gt;&gt; t[-<span class="number">2</span>:]                         &gt;&gt;&gt; lst[:<span class="number">1</span>]=[]</span><br><span class="line"><span class="string">&#x27;def&#x27;</span>                    (<span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;u&#x27;</span>)                         &gt;&gt;&gt; lst</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[<span class="number">8</span>:<span class="number">2</span>]               &gt;&gt;&gt; t[-<span class="number">99</span>:-<span class="number">5</span>]                      [<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="string">&#x27;&#x27;</span>                       ()                                 &gt;&gt;&gt; lst[:<span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[:]                 &gt;&gt;&gt; t[-<span class="number">99</span>:-<span class="number">3</span>]                      [<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="string">&#x27;abcdef&#x27;</span>                 (<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;e&#x27;</span>)                         &gt;&gt;&gt; lst[:<span class="number">2</span>]=<span class="string">&#x27;a&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[:<span class="number">2</span>]                &gt;&gt;&gt; t[::]                          &gt;&gt;&gt; lst[<span class="number">1</span>:]=<span class="string">&#x27;b&#x27;</span></span><br><span class="line"><span class="string">&#x27;ab&#x27;</span>                     (<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;i&#x27;</span>, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;u&#x27;</span>)          &gt;&gt;&gt; lst</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[::<span class="number">2</span>]               &gt;&gt;&gt; t[<span class="number">1</span>:-<span class="number">1</span>]                        [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>]</span><br><span class="line"><span class="string">&#x27;ace&#x27;</span>                    (<span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;i&#x27;</span>, <span class="string">&#x27;o&#x27;</span>)                    &gt;&gt;&gt; <span class="keyword">del</span> lst[:<span class="number">1</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[::-<span class="number">1</span>]              &gt;&gt;&gt; t[<span class="number">1</span>::<span class="number">2</span>]                        &gt;&gt;&gt; lst</span><br><span class="line"><span class="string">&#x27;fedcba&#x27;</span>                 (<span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;o&#x27;</span>)                         [<span class="string">&#x27;b&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>序列的比较运算操作</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s1=<span class="string">&#x27;abc&#x27;</span>             &gt;&gt;&gt; t1=(<span class="number">1</span>,<span class="number">2</span>)                    &gt;&gt;&gt; s1=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s2=<span class="string">&#x27;abc&#x27;</span>             &gt;&gt;&gt; t2=(<span class="number">1</span>,<span class="number">2</span>)                    &gt;&gt;&gt; s2=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s3=<span class="string">&#x27;abcd&#x27;</span>            &gt;&gt;&gt; t3=(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)                  &gt;&gt;&gt; s3=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s4=<span class="string">&#x27;cba&#x27;</span>             &gt;&gt;&gt; t4=(<span class="number">2</span>,<span class="number">1</span>)                    &gt;&gt;&gt; s4=[<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;a&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s1 &gt; s4              &gt;&gt;&gt; t1 &lt; t4                     &gt;&gt;&gt; s1&lt;s2</span><br><span class="line"><span class="literal">False</span>                    <span class="literal">True</span>                            <span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s2 &lt;= s3             &gt;&gt;&gt; t1 &lt;= t2                    &gt;&gt;&gt; s1 &lt;= s2</span><br><span class="line"><span class="literal">True</span>                     <span class="literal">True</span>                            <span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s1 == s2             &gt;&gt;&gt; t1==t3                      &gt;&gt;&gt; s1==s2</span><br><span class="line"><span class="literal">True</span>                     <span class="literal">False</span>                           <span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s1 != s3             &gt;&gt;&gt; t1 !=t2                     &gt;&gt;&gt; s1!=s3</span><br><span class="line"><span class="literal">True</span>                     <span class="literal">False</span>                           <span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;a&#x27;</span> &gt; <span class="string">&#x27;A&#x27;</span>            &gt;&gt;&gt; t1 &gt;= t3                    &gt;&gt;&gt; s1&gt;=s3</span><br><span class="line"><span class="literal">True</span>                     <span class="literal">False</span>                           <span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;a&#x27;</span> &gt;= <span class="string">&#x27;&#x27;</span>            &gt;&gt;&gt; t4 &gt; t3                     &gt;&gt;&gt; s4&gt;s3</span><br><span class="line"><span class="literal">True</span>                     <span class="literal">True</span>                            <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>序列的排序操作</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s1=<span class="string">&#x27;axd&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">sorted</span>(s1)</span><br><span class="line">[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;x&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s2=(<span class="number">1</span>,<span class="number">4</span>,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">sorted</span>(s2)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">sorted</span>(s2,reverse=<span class="literal">True</span>)</span><br><span class="line">[<span class="number">4</span>, <span class="number">2</span>, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s3=<span class="string">&#x27;abAC&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">sorted</span>(s3, key=<span class="built_in">str</span>.lower)</span><br><span class="line">[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;C&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>列表解析表达式</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[i**<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)] <span class="comment">#平方值</span></span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>, <span class="number">49</span>, <span class="number">64</span>, <span class="number">81</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[(i,i**<span class="number">2</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)] <span class="comment">#序号, 平方值</span></span><br><span class="line">[(<span class="number">0</span>, <span class="number">0</span>), (<span class="number">1</span>, <span class="number">1</span>), (<span class="number">2</span>, <span class="number">4</span>), (<span class="number">3</span>, <span class="number">9</span>), (<span class="number">4</span>, <span class="number">16</span>), (<span class="number">5</span>, <span class="number">25</span>), (<span class="number">6</span>, <span class="number">36</span>), (<span class="number">7</span>, <span class="number">49</span>), (<span class="number">8</span>, <span class="number">64</span>), (<span class="number">9</span>, <span class="number">81</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>) <span class="keyword">if</span> i%<span class="number">2</span>==<span class="number">0</span>] <span class="comment">#取偶数</span></span><br><span class="line">[<span class="number">0</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[(x, y, x*y) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">4</span>) <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">4</span>) <span class="keyword">if</span> x&gt;=y] <span class="comment">#二重循环</span></span><br><span class="line">[(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>), (<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>), (<span class="number">2</span>, <span class="number">2</span>, <span class="number">4</span>), (<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>), (<span class="number">3</span>, <span class="number">2</span>, <span class="number">6</span>), (<span class="number">3</span>, <span class="number">3</span>, <span class="number">9</span>)]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>列表的序列操作</p>
+<p>索引访问、切片操作、连接操作、重复操作、成员关系操作、比较运算操作，</p>
+<p>以及求列表长度、最大值、最小值等</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[<span class="number">1</span>]=<span class="string">&#x27;a&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s</span><br><span class="line">[<span class="number">1</span>, <span class="string">&#x27;a&#x27;</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[<span class="number">2</span>]=[]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s</span><br><span class="line">[<span class="number">1</span>, <span class="string">&#x27;a&#x27;</span>, [], <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> s[<span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s</span><br><span class="line">[<span class="number">1</span>, <span class="string">&#x27;a&#x27;</span>, [], <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[:<span class="number">2</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="string">&#x27;a&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[<span class="number">2</span>:<span class="number">3</span>]=[]  <span class="comment"># 表示删除位置为2的这个元素</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s</span><br><span class="line">[<span class="number">1</span>, <span class="string">&#x27;a&#x27;</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[:<span class="number">1</span>]=[]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s</span><br><span class="line">[<span class="string">&#x27;a&#x27;</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[:<span class="number">2</span>]=<span class="string">&#x27;b&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s</span><br><span class="line">[<span class="string">&#x27;b&#x27;</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> s[:<span class="number">1</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s</span><br><span class="line">[<span class="number">6</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>list对象的方法-选择填空判断</p>
+<p><img src="/img/loading.gif" data-original="https://i.imgloc.com/2023/06/13/VHJjKV.png" alt="VHJjKV.png"></p>
+<p>使用tuple对象创建元组实例对象</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>t1=<span class="built_in">tuple</span>()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t2=<span class="built_in">tuple</span>(<span class="string">&quot;abc&quot;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t3=<span class="built_in">tuple</span>([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t4=<span class="built_in">tuple</span>(<span class="built_in">range</span>(<span class="number">3</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(t1,t2,t3,t4) <span class="comment">#输出：() (&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;) (1, 2, 3) (0, 1, 2)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>字典的定义</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">dict</span>()-----------创建一个空字典</span><br><span class="line"><span class="built_in">dict</span>(**kwargs)---使用关键字参数，创建一个新的字典。此方法最紧凑</span><br><span class="line"><span class="built_in">dict</span>(mapping)----从一个字典对象创建一个新的字典，相当于复制，mapping是已经有的字典</span><br><span class="line"><span class="built_in">dict</span>(iterable)---使用序列，创建一个新的字典</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;&#125;</span><br><span class="line">&#123;&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;<span class="string">&#x27;a&#x27;</span>:<span class="string">&#x27;apple&#x27;</span>,<span class="string">&#x27;b&#x27;</span>:<span class="string">&#x27;boy&#x27;</span>&#125;</span><br><span class="line">&#123;<span class="string">&#x27;a&#x27;</span>: <span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;b&#x27;</span>: <span class="string">&#x27;boy&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">dict</span>()</span><br><span class="line">&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">dict</span>(&#123;<span class="number">1</span>:<span class="string">&#x27;food&#x27;</span>, <span class="number">2</span>:<span class="string">&#x27;drink&#x27;</span>&#125;)</span><br><span class="line">&#123;<span class="number">1</span>: <span class="string">&#x27;food&#x27;</span>, <span class="number">2</span>: <span class="string">&#x27;drink&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">dict</span>([(<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;1001&#x27;</span>),(<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;Jenny&#x27;</span>)])</span><br><span class="line">&#123;<span class="string">&#x27;id&#x27;</span>: <span class="string">&#x27;1001&#x27;</span>, <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Jenny&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">dict</span>(baidu=<span class="string">&#x27;baidu.com&#x27;</span>, google=<span class="string">&#x27;google.com&#x27;</span>)</span><br><span class="line">&#123;<span class="string">&#x27;baidu&#x27;</span>: <span class="string">&#x27;baidu.com&#x27;</span>, <span class="string">&#x27;google&#x27;</span>: <span class="string">&#x27;google.com&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>字典的访问操作</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">d[Key]--------返回键为key的value；如果key不存在，则导致KeyError</span><br><span class="line">d[Key]=value--设置d[key]的值为value；如果key不存在，则添加键/值对</span><br><span class="line"><span class="keyword">del</span> d[Key]----删除字典元素；如果key不存在，则导致KeyError</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d=&#123;<span class="number">1</span>:<span class="string">&#x27;food&#x27;</span>, <span class="number">2</span>:<span class="string">&#x27;drink&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">&#123;<span class="number">1</span>: <span class="string">&#x27;food&#x27;</span>, <span class="number">2</span>: <span class="string">&#x27;drink&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d[<span class="number">1</span>]</span><br><span class="line"><span class="string">&#x27;food&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d[<span class="number">3</span>]=<span class="string">&#x27;fruit&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">&#123;<span class="number">1</span>: <span class="string">&#x27;food&#x27;</span>, <span class="number">2</span>: <span class="string">&#x27;drink&#x27;</span>, <span class="number">3</span>: <span class="string">&#x27;fruit&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> d[<span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">&#123;<span class="number">1</span>: <span class="string">&#x27;food&#x27;</span>, <span class="number">3</span>: <span class="string">&#x27;fruit&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d[<span class="number">2</span>]</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">File <span class="string">&quot;&lt;pyshell#100&gt;&quot;</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">d[<span class="number">2</span>]</span><br><span class="line">KeyError: <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>字典的视图对象</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">d.key()-----返回字典d的键key的列表</span><br><span class="line">d.values()--返回字典d的值value的列表</span><br><span class="line">d.items()---返回字典d的(key,value)对的列表</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d=&#123;<span class="number">1</span>:<span class="string">&#x27;food&#x27;</span>, <span class="number">2</span>:<span class="string">&#x27;drink&#x27;</span>,<span class="number">3</span>:<span class="string">&#x27;fruit&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d.keys()</span><br><span class="line">dict_keys([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> k <span class="keyword">in</span> d.keys():</span><br><span class="line"><span class="built_in">print</span>(k, end=<span class="string">&quot; &quot;</span>)</span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d.values()</span><br><span class="line">dict_values([<span class="string">&#x27;food&#x27;</span>, <span class="string">&#x27;drink&#x27;</span>, <span class="string">&#x27;fruit&#x27;</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> v <span class="keyword">in</span> d.values():</span><br><span class="line"><span class="built_in">print</span>(v, end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">food drink fruit</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d.items()</span><br><span class="line">dict_items([(<span class="number">1</span>, <span class="string">&#x27;food&#x27;</span>), (<span class="number">2</span>,<span class="string">&#x27;drink&#x27;</span>), (<span class="number">3</span>, <span class="string">&#x27;fruit&#x27;</span>)])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> item <span class="keyword">in</span> d.items():</span><br><span class="line"><span class="built_in">print</span>(item, end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">(<span class="number">1</span>, <span class="string">&#x27;food&#x27;</span>) (<span class="number">2</span>, <span class="string">&#x27;drink&#x27;</span>) (<span class="number">3</span>, <span class="string">&#x27;fruit&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>字典对象的方法</p>
+<p><img src="/img/loading.gif" data-original="https://i.imgloc.com/2023/06/13/VHJIDd.png" alt="VHJIDd.png"></p>
+<p>字典示例：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">编写程序实现如下功能：找出任意字符串中只出现一次的字符，如果有多个这样的字符，请全部找出</span><br><span class="line">• s=<span class="built_in">input</span>(<span class="string">&quot;请输入一个英文字符串：&quot;</span>)</span><br><span class="line">• dict1=&#123;&#125;</span><br><span class="line">• <span class="keyword">for</span> ch <span class="keyword">in</span> s:</span><br><span class="line">•     dict1[ch]=dict1.get(ch,<span class="number">0</span>) +<span class="number">1</span></span><br><span class="line">• list1=[k <span class="keyword">for</span> k,v <span class="keyword">in</span> dict1.items() <span class="keyword">if</span> v==<span class="number">1</span>]</span><br><span class="line">• <span class="built_in">print</span>(list1)</span><br><span class="line"></span><br><span class="line">有字符串 “k:<span class="number">1</span>|k1:<span class="number">2</span>|k2:<span class="number">3</span>|k3:<span class="number">4</span>”，请处理成字典&#123;<span class="string">&#x27;k&#x27;</span>:<span class="number">1</span>,<span class="string">&#x27;k1&#x27;</span>:<span class="number">2</span> ,<span class="string">&#x27;k2&#x27;</span>:<span class="number">3</span> ,<span class="string">&#x27;k3&#x27;</span>:<span class="number">4</span>&#125;</span><br><span class="line">• str1 = <span class="string">&quot;k:1|k1:2|k2:3|k3:4&quot;</span></span><br><span class="line">• dic = &#123;&#125;</span><br><span class="line">• lst = str1.split(<span class="string">&quot;|&quot;</span>)</span><br><span class="line">• <span class="keyword">for</span> l <span class="keyword">in</span> lst:</span><br><span class="line">•     lst2 = l.split(<span class="string">&quot;:&quot;</span>)</span><br><span class="line">•     dic[lst2[<span class="number">0</span>]] = <span class="built_in">eval</span>(lst2[<span class="number">1</span>])</span><br><span class="line">• <span class="built_in">print</span>(dic)</span><br></pre></td></tr></table></figure>
+
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/ForMikasaEver">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E5%BE%AA%E7%8E%AF%E4%B8%8E%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">9.循环与分支结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%A8%8B%E5%9B%BE-%E9%80%89%E6%8B%A9%E5%A1%AB%E7%A9%BA%E5%88%A4%E6%96%AD"><span class="toc-number">1.1.</span> <span class="toc-text">程序流程图-选择填空判断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for-%E5%BE%AA%E7%8E%AF-while%E5%BE%AA%E7%8E%AF-break-continue%EF%BC%88%E9%80%89%E6%8B%A9%E5%A1%AB%E7%A9%BA%E5%88%A4%E6%96%AD%E4%BB%A3%E7%A0%81%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">for 循环 while循环 break continue（选择填空判断代码）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E9%87%8D%E7%82%B9%E6%B3%A8%E6%84%8Frange%E5%AF%B9%E8%B1%A1%E7%9B%B8%E5%85%B3%E7%9A%84%E7%82%B9"><span class="toc-number">1.3.</span> <span class="toc-text">请重点注意range对象相关的点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8try%E2%80%A6except%E2%80%A6else%E2%80%A6finally%E8%AF%AD%E5%8F%A5%E6%8D%95%E8%8E%B7%E5%A4%84%E7%90%86%E5%BC%82%E5%B8%B8-%E4%B8%80%E8%88%AC%E4%B8%BA%E9%80%89%E6%8B%A9%E5%A1%AB%E7%A9%BA%E5%88%A4%E6%96%AD%EF%BC%8C%E4%B9%9F%E6%9C%89%E5%B0%91%E9%87%8F%E7%9A%84%E5%8F%AF%E8%83%BD%E5%87%BA%E4%BB%A3%E7%A0%81%E9%A2%98%E7%9B%AE"><span class="toc-number">1.4.</span> <span class="toc-text">使用try…except…else…finally语句捕获处理异常-一般为选择填空判断，也有少量的可能出代码题目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-Python%E5%86%85%E7%BD%AE%E7%9A%84%E5%BA%8F%E5%88%97%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">10.Python内置的序列数据类型</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://formikasaever.github.io./post/92cc9a62.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://formikasaever.github.io./post/92cc9a62.html&text=python复习总结2"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://formikasaever.github.io./post/92cc9a62.html&title=python复习总结2"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://formikasaever.github.io./post/92cc9a62.html&is_video=false&description=python复习总结2"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=python复习总结2&body=Check out this article: https://formikasaever.github.io./post/92cc9a62.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://formikasaever.github.io./post/92cc9a62.html&title=python复习总结2"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://formikasaever.github.io./post/92cc9a62.html&title=python复习总结2"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://formikasaever.github.io./post/92cc9a62.html&title=python复习总结2"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://formikasaever.github.io./post/92cc9a62.html&title=python复习总结2"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://formikasaever.github.io./post/92cc9a62.html&name=python复习总结2&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://formikasaever.github.io./post/92cc9a62.html&t=python复习总结2"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+      <div class="footer-left">
+        Copyright &copy;
+        
+        
+        2023
+        ForMikasaEver
+      </div>
+      <div class="footer-right">
+        <nav>
+          <ul>
+            <!--
+          --><li><a href="/">Home</a></li><!--
+        --><!--
+          --><li><a href="/about/">About</a></li><!--
+        --><!--
+          --><li><a href="/search/">Search</a></li><!--
+        --><!--
+          --><li><a href="/archives/">Writing</a></li><!--
+        --><!--
+          --><li><a target="_blank" rel="noopener" href="https://github.com/ForMikasaEver">Projects</a></li><!--
+        -->
+          </ul>
+          <ul>
+            
+              <!-- 不蒜子统计 -->
+              <span id="busuanzi_container_site_pv">
+                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+              </span>
+              <span class="post-meta-divider">|</span>
+              <span id="busuanzi_container_site_uv" style='display:none'>
+                      本站访客数<span id="busuanzi_value_site_uv"></span>人
+              </span>
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            
+          </ul>
+        </nav>
+      </div>
+      
+</footer>
+
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'formikasaever';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>
