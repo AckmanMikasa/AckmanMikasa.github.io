@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>go语言期末复习笔记</title>
+      <link href="/post/3f22f381.html"/>
+      <url>/post/3f22f381.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="go语言期末复习笔记"><a href="#go语言期末复习笔记" class="headerlink" title="go语言期末复习笔记"></a>go语言期末复习笔记</h1><h2 id="填空"><a href="#填空" class="headerlink" title="填空"></a>填空</h2><h2 id="单选"><a href="#单选" class="headerlink" title="单选"></a>单选</h2><h2 id="多选"><a href="#多选" class="headerlink" title="多选"></a>多选</h2><h2 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h2><p>1.数组是一个值类型（）</p><p>2.使用map不需要引入任何库（）</p><p>3.内置函数delete可以删除数组切片内的元素（）</p><p>4.指针是基础类型（）</p><p>5.interface{}是可以指向任意对象的Any类型（）</p><p>6.Golang不支持自动垃圾回收（F）</p><p>7.下面代码中两个斜点之间的代码，比如json:”x”，作用是X字段在从结构体实例编码到JSON数据格式的时候，使用x作为名字，这可以看作是一种重命名的方式（T）</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">type Position struct &#123;</span><br><span class="line">        X int `json:&quot;x&quot;`</span><br><span class="line">        Y int `json:&quot;y&quot;`</span><br><span class="line">        Z int `json:&quot;z&quot;`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>8.通过成员变量或函数首字母的大小写来决定其作用域（）</p><p>9.对于常量定义zero (const zero &#x3D; 0.0)，zero是浮点型常量（）</p><p>10.对变量x的取反操作是~x（）</p><p>1.golang支持goto语句（）</p><p>2.匿名函数可以直接赋值给一个变量或者直接执行（）</p><p>3.如果调用方调用了一个具有多返回值的方法，但是却不想关心其中的某个返回值，可以简单地用一个下划线“_”来跳过这个返回值，该下划线对应的变量叫匿名变量（）</p><p>4.错误是业务过程的一部分，而异常不是（）</p><p>5.golang虽然没有显式的提供继承语法，但是通过匿名组合实现了继承（）</p><p>6.使用for range迭代map时每次迭代的顺序可能不一样，因为map的迭代是随机的（）</p><p>7.import后面的最后一个元素是包名（）</p><h2 id="编程"><a href="#编程" class="headerlink" title="编程"></a>编程</h2>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>python复习总结2</title>
       <link href="/post/92cc9a62.html"/>
       <url>/post/92cc9a62.html</url>
