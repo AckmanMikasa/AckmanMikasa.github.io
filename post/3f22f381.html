@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="go语言期末复习笔记填空单选多选判断1.数组是一个值类型（） 2.使用map不需要引入任何库（） 3.内置函数delete可以删除数组切片内的元素（） 4.指针是基础类型（） 5.interface{}是可以指向任意对象的Any类型（） 6.Golang不支持自动垃圾回收（F） 7.下面代码中两个斜点之间的代码，比如json:”x”，作用是X字段在从结构体实例编码到JSON数据格式的时候，使用x作">
+    <meta name="description" content="go语言期末复习笔记填空1.变量声明 声明一个整型变量i__________var i int 2.声明数组 声明一个含有10个元素的整型数组a__________var a [10]int 3.指针变量声明 声明一个整型指针变量p__________var p *int 4.map声明 声明一个key为字符串型value为整型的map变量m__________var m map[string]i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="go语言期末复习笔记">
 <meta property="og:url" content="https://formikasaever.github.io./post/3f22f381.html">
 <meta property="og:site_name" content="ForMikasaEver&#39;s blog">
-<meta property="og:description" content="go语言期末复习笔记填空单选多选判断1.数组是一个值类型（） 2.使用map不需要引入任何库（） 3.内置函数delete可以删除数组切片内的元素（） 4.指针是基础类型（） 5.interface{}是可以指向任意对象的Any类型（） 6.Golang不支持自动垃圾回收（F） 7.下面代码中两个斜点之间的代码，比如json:”x”，作用是X字段在从结构体实例编码到JSON数据格式的时候，使用x作">
+<meta property="og:description" content="go语言期末复习笔记填空1.变量声明 声明一个整型变量i__________var i int 2.声明数组 声明一个含有10个元素的整型数组a__________var a [10]int 3.指针变量声明 声明一个整型指针变量p__________var p *int 4.map声明 声明一个key为字符串型value为整型的map变量m__________var m map[string]i">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-16T16:18:54.000Z">
-<meta property="article:modified_time" content="2023-06-16T16:24:53.258Z">
+<meta property="article:modified_time" content="2023-06-18T16:05:46.944Z">
 <meta property="article:author" content="ForMikasaEver">
 <meta name="twitter:card" content="summary">
     
@@ -112,7 +112,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#go%E8%AF%AD%E8%A8%80%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">go语言期末复习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A1%AB%E7%A9%BA"><span class="toc-number">1.1.</span> <span class="toc-text">填空</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E9%80%89"><span class="toc-number">1.2.</span> <span class="toc-text">单选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E9%80%89"><span class="toc-number">1.3.</span> <span class="toc-text">多选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E6%96%AD"><span class="toc-number">1.4.</span> <span class="toc-text">判断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B"><span class="toc-number">1.5.</span> <span class="toc-text">编程</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#go%E8%AF%AD%E8%A8%80%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">go语言期末复习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A1%AB%E7%A9%BA"><span class="toc-number">1.1.</span> <span class="toc-text">填空</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E9%80%89"><span class="toc-number">1.2.</span> <span class="toc-text">单选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E9%80%89"><span class="toc-number">1.3.</span> <span class="toc-text">多选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E6%96%AD"><span class="toc-number">1.4.</span> <span class="toc-text">判断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B"><span class="toc-number">1.5.</span> <span class="toc-text">编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.5.1.</span> <span class="toc-text">输入格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.5.2.</span> <span class="toc-text">输出格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B"><span class="toc-number">1.5.3.</span> <span class="toc-text">输入样例:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B"><span class="toc-number">1.5.4.</span> <span class="toc-text">输出样例:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-1"><span class="toc-number">1.5.5.</span> <span class="toc-text">输入格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-1"><span class="toc-number">1.5.6.</span> <span class="toc-text">输出格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B-1"><span class="toc-number">1.5.7.</span> <span class="toc-text">输入样例:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-1"><span class="toc-number">1.5.8.</span> <span class="toc-text">输出样例:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-2"><span class="toc-number">1.5.9.</span> <span class="toc-text">输入格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-2"><span class="toc-number">1.5.10.</span> <span class="toc-text">输出格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B-2"><span class="toc-number">1.5.11.</span> <span class="toc-text">输入样例:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-2"><span class="toc-number">1.5.12.</span> <span class="toc-text">输出样例:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-3"><span class="toc-number">1.5.13.</span> <span class="toc-text">输入格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-3"><span class="toc-number">1.5.14.</span> <span class="toc-text">输出格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B-3"><span class="toc-number">1.5.15.</span> <span class="toc-text">输入样例:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-3"><span class="toc-number">1.5.16.</span> <span class="toc-text">输出样例:</span></a></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -151,28 +151,280 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h1 id="go语言期末复习笔记"><a href="#go语言期末复习笔记" class="headerlink" title="go语言期末复习笔记"></a>go语言期末复习笔记</h1><h2 id="填空"><a href="#填空" class="headerlink" title="填空"></a>填空</h2><h2 id="单选"><a href="#单选" class="headerlink" title="单选"></a>单选</h2><h2 id="多选"><a href="#多选" class="headerlink" title="多选"></a>多选</h2><h2 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h2><p>1.数组是一个值类型（）</p>
-<p>2.使用map不需要引入任何库（）</p>
-<p>3.内置函数delete可以删除数组切片内的元素（）</p>
-<p>4.指针是基础类型（）</p>
-<p>5.interface{}是可以指向任意对象的Any类型（）</p>
+    <h1 id="go语言期末复习笔记"><a href="#go语言期末复习笔记" class="headerlink" title="go语言期末复习笔记"></a>go语言期末复习笔记</h1><h2 id="填空"><a href="#填空" class="headerlink" title="填空"></a>填空</h2><p>1.变量声明</p>
+<p>声明一个整型变量i__________var i int</p>
+<p>2.声明数组</p>
+<p>声明一个含有10个元素的整型数组a__________var a [10]int</p>
+<p>3.指针变量声明</p>
+<p>声明一个整型指针变量p__________var p *int</p>
+<p>4.map声明</p>
+<p>声明一个key为字符串型value为整型的map变量m__________var m map[string]int</p>
+<h2 id="单选"><a href="#单选" class="headerlink" title="单选"></a>单选</h2><p>1.关于函数声明,下面语法错误的是。C</p>
+<p>A.func f(a,b int) (value int, err error)</p>
+<p>B.func f(a int,b int) (value int, err error)</p>
+<p>C.func f(a,b int) (value int, error)</p>
+<p>D.func f(a int,b int) (int, error)</p>
+<p>2.golang中的引用类型不包括。B</p>
+<p>A.map</p>
+<p>B.数组</p>
+<p>C.channel</p>
+<p>D.interface</p>
+<p>3.关于select机制,下面说法不正确的是()。D</p>
+<p>A.select用来处理异步IO问题</p>
+<p>B.select机制最大的一条限制就是每个case语句里必须是一个IO操作</p>
+<p>C.golang在语言级别支持select关键字</p>
+<p>D.select关键字的用法与switch语句非常类似,后面要带判断条件</p>
+<p>4.以下哪个不属于Go的关键字。D</p>
+<p>A.break</p>
+<p>B.func</p>
+<p>C.struct</p>
+<p>D.channel</p>
+<p>5.关于变量的声明,以下错误的是。B</p>
+<p>A.var name &#x3D; “fmt”</p>
+<p>B.var name,sex int&#x3D; “明明”,19</p>
+<p>C.var name string &#x3D; “红红”</p>
+<p>D.name :&#x3D; “明明”</p>
+<p>6.下列关于数组声明中错误的是。B</p>
+<p>A.var arr0 [5]int &#x3D; [5]int{1, 2, 3}</p>
+<p>B.var arr1 &#x3D; []int{1, 2, 3, 4, 5}</p>
+<p>C.var arr2 &#x3D; […]int{1, 2, 3, 4, 5, 6}</p>
+<p>D.var str &#x3D; [5]string{3: “hello world”, 4: “tom”}</p>
+<p>7.下列有关数组声明的使用错误的是。D</p>
+<p>A.<code>a := [2][3]int&#123;&#123;1, 2, 3&#125;, &#123;4, 5, 6&#125;&#125;</code></p>
+<p>B.<code>var str = [5]string&#123;3: &quot;hello world&quot;, 4: &quot;tom&quot;&#125;</code></p>
+<p>C.<code>var arr0 [5][3]int</code></p>
+<p>D.<code>b := [...][...]int&#123;&#123;1, 1&#125;, &#123;2, 2&#125;, &#123;3, 3&#125;&#125;</code></p>
+<p>8.b :&#x3D; 123 a :&#x3D; (b &#x2F; 10) % 10.最后a的值为。B</p>
+<p>A.3</p>
+<p>B.2</p>
+<p>C.12</p>
+<p>D.1</p>
+<p>9.关于类型转化，下面语法正确的是（）。C</p>
+<p>A. type MyInt int var i int &#x3D; 1 var j MyInt &#x3D; i</p>
+<p>B. type MyInt int var i int &#x3D; 1 var j MyInt &#x3D; (MyInt)i</p>
+<p>C. type MyInt int var i int &#x3D; 1 var j MyInt &#x3D; MyInt(i)</p>
+<p>D. type MyInt int var i int &#x3D; 1 var j MyInt &#x3D; i.(MyInt)</p>
+<p>在Go语言中，类型转化可以通过将值从一种类型转换为另一种类型来完成。在这个选项中，使用了类型转化操作符<code>MyInt(i)</code>将<code>i</code>从<code>int</code>类型转换为<code>MyInt</code>类型，然后将结果赋值给<code>j</code>。</p>
+<p>其他选项中存在语法错误或不合法的类型转化操作：</p>
+<ul>
+<li>选项A中，<code>i</code>是<code>int</code>类型，无法直接赋值给<code>MyInt</code>类型的变量<code>j</code>。</li>
+<li>选项B中，类型转化语法错误，应该使用<code>MyInt(i)</code>而不是<code>(MyInt)i</code>。</li>
+<li>选项D中，<code>.()</code>语法用于类型断言，而不是类型转化，因此是错误的语法。</li>
+</ul>
+<p>10.下面的程序的运行结果是（）。C</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">defer</span> fmt.Printf(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">defer</span> fmt.Printf(<span class="string">&quot;2&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        fmt.Printf(<span class="string">&quot;3&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>A.321</p>
+<p>B.32</p>
+<p>C.31</p>
+<p>D.13</p>
+<p>1.从切片中删除一个元素，下面的算法实现正确的是（）。</p>
+<p>A.func (s *Slice)Remove(value interface{}) error { for i, v :&#x3D; range *s { if isEqual(value, v) { if i&#x3D;&#x3D; len(*s) - 1 { *s &#x3D; (*s)[:i] }else { *s &#x3D; append((*s)[:i],(*s)[i + 2:]…) } return nil } } return ERR_ELEM_NT_EXIST }</p>
+<p>B.func (s *Slice)Remove(value interface{}) error { for i, v :&#x3D; range *s { if isEqual(value, v) { *s &#x3D; append((*s)[:i],(*s)[i + 1:]) return nil } } return ERR_ELEM_NT_EXIST }</p>
+<p>C.func (s *Slice)Remove(value interface{}) error { for i, v :&#x3D; range *s { if isEqual(value, v) { delete(*s, v) return nil } } return ERR_ELEM_NT_EXIST }</p>
+<p>D.func (s *Slice)Remove(value interface{}) error { for i, v :&#x3D; range *s { if isEqual(value, v) { *s &#x3D; append((*s)[:i],(*s)[i + 1:]…) return nil } } return ERR_ELEM_NT_EXIST }</p>
+<p>2.如果Add函数的调用代码为：。</p>
+<p>func main() {        var a Integer &#x3D; 1        var b Integer &#x3D; 2        var i interface{} &#x3D; a        sum :&#x3D; i.(Integer).Add(b)        fmt.Println(sum) } 则Add函数定义正确的是（）</p>
+<p>A. type Integer int func (a Integer) Add(b Integer) Integer { return a + b }</p>
+<p>B. type Integer int func (a Integer) Add(b *Integer) Integer { return a + *b }</p>
+<p>C.type Integer int func (a *Integer) Add(b Integer) Integer { return *a + b }</p>
+<p>D. type Integer int func (a *Integer) Add(b *Integer) Integer { return *a + *b }</p>
+<p>3.关于无缓冲和有冲突的channel，下面说法正确的是（）。</p>
+<p>A.无缓冲的channel是默认的缓冲为1的channel</p>
+<p>B.无缓冲的channel和有缓冲的channel都是同步的</p>
+<p>C.无缓冲的channel和有缓冲的channel都是非同步的</p>
+<p>D.无缓冲的channel是同步的，而有缓冲的channel是非同步的</p>
+<p>4.关于map，下面说法正确的是（）。</p>
+<p>A.map反序列化时json.unmarshal的入参必须为map的地址</p>
+<p>B.在函数调用中传递map，则子函数中对map元素的增加不会导致父函数中map的修改</p>
+<p>C.在函数调用中传递map，则子函数中对map元素的修改不会导致父函数中map的修改</p>
+<p>D.不能使用内置函数delete删除map的元素</p>
+<p>5.以下标识符命名不正确的是。</p>
+<p>A.mahesh</p>
+<p>B.a_123</p>
+<p>C._crash</p>
+<p>D.defer</p>
+<p>6.下面关于标识符的命名,正确的是。</p>
+<p>A.switch</p>
+<p>B.a+b</p>
+<p>C.move_name</p>
+<p>D.3sa</p>
+<p>7.关于Go 中切片的特性 下列说明正确的是：。</p>
+<p>A.一个空切片长度和容量都是0，并且不存在底层数组</p>
+<p>B.每次调用 append 时都会创建一个新的切片值</p>
+<p>C.在容量增长的时候每次都将容量翻倍</p>
+<p>D.将切片赋值给其它变量，会创建一个新的切片值</p>
+<p>8.下面关于Go语言中goroutine的描述中，正确的是：。</p>
+<p>A.goroutine是由操作系统调度的线程</p>
+<p>B.goroutine的栈大小是固定的</p>
+<p>C.goroutine可以通过channel来同步和通信</p>
+<p>D.goroutine可以通过mutex来实现互斥访问</p>
+<p>9.下面关于Go语言中接口的描述中，正确的是：。</p>
+<p>A.接口类型可以被实例化</p>
+<p>B.接口类型可以包含私有成员</p>
+<p>C.实现接口时，必须显式声明实现了哪些接口</p>
+<p>D.实现接口时，必须实现接口中所有的方法</p>
+<p>10.关于Go语言中的defer语句，以下描述正确的是：。</p>
+<p>A.defer语句必须在函数的最后一行执行</p>
+<p>B.defer语句可以用于关闭文件、释放资源等操作</p>
+<p>C.defer语句可以使用闭包访问外部变量</p>
+<p>D.在defer语句中修改返回值不会影响函数的返回值</p>
+<p>1.golang中的指针运算包括（C）。</p>
+<p>A.可以对指针进行自增或自减运算</p>
+<p>B.可以通过“&amp;”取指针指向的数据</p>
+<p>C.可以通过“*”取指针指向的数据</p>
+<p>D.可以对指针进行下标运算</p>
+<h2 id="多选"><a href="#多选" class="headerlink" title="多选"></a>多选</h2><p>1.value是整型变量,下面if表达式符合编码规范的是(AC)</p>
+<p>A.if value &#x3D;&#x3D;0</p>
+<p>B.if value</p>
+<p>C.if value !&#x3D; 0</p>
+<p>D.if !value</p>
+<p>2.关于协程,下面说法正确的是(AD)</p>
+<p>A.协程和线程都可以实现程序的并发执行</p>
+<p>B.线程比协程更轻量级</p>
+<p>C.协程不存在死锁问题</p>
+<p>D.可以通过channel来进行协程间的通信</p>
+<p>3.关于字符串连接,下面语法正确的是(BD)</p>
+<p>A.str :&#x3D; ‘abc’ + ‘123’</p>
+<p>B.str :&#x3D; “abc” + “123”</p>
+<p>C.str :&#x3D; ‘abc’ + “123”</p>
+<p>D.fmt.Sprintf(“abc%d”,123)</p>
+<p>4.关于整形切片的初始化,下面正确的是(BCD)</p>
+<p>A.s :&#x3D; make([]int)</p>
+<p>B.s :&#x3D; make([]int,0)</p>
+<p>C.s :&#x3D; make([]int,5,10)</p>
+<p>D.s :&#x3D; []int{1,2,3,4,5}</p>
+<p>5.关于变量的自增和自减操作，下面语句正确的是（AD）</p>
+<p>A.i :&#x3D; 1 i++</p>
+<p>B.i :&#x3D; 1 j &#x3D; i++</p>
+<p>C.i :&#x3D;1 ++i</p>
+<p>D.i :&#x3D; 1 i–</p>
+<p>6.关于字符串格式化符号,说法正确的是(BC)</p>
+<p>A.%v,字符串类型显示</p>
+<p>B.%d,整形以十进制类型显示</p>
+<p>C.%s,字符串类型显示</p>
+<p>D.%T,指针,十六进制显示</p>
+<p>7.下面属于关键字的是（AC）</p>
+<p>A.func</p>
+<p>B.def</p>
+<p>C.struct</p>
+<p>D.class</p>
+<p>8.定义一个包内全局字符串变量，下面语法正确的是(AD)</p>
+<p>A.var str string</p>
+<p>B.str :&#x3D; “”</p>
+<p>C. str &#x3D; “”</p>
+<p>D.var str &#x3D; “”</p>
+<p>9.通过指针变量 p 访问其成员变量 name，下面语法正确的是（AB）</p>
+<p>A.p.name</p>
+<p>B.(*p).name</p>
+<p>C. (&amp;p).name</p>
+<p>D.p-&gt;name</p>
+<p>10.关于接口和类的说法，下面说法正确的是（ABD）</p>
+<p>A.一个类只需要实现了接口要求的所有函数，我们就说这个类实现了该接口</p>
+<p>B.实现类的时候，只需要关心自己应该提供哪些方法，不用再纠结接口需要拆得多细才合理</p>
+<p>C. 类实现接口时，需要导入接口所在的包</p>
+<p>D. 接口由使用方按自身需求来定义，使用方无需关心是否有其他模块定义过类似的接口</p>
+<p>3.关于init函数，下面说法正确的是（AB）</p>
+<p>A. 一个包中，可以包含多个init函数</p>
+<p>B.程序编译时，先执行导入包的init函数，再执行本包内的init函数</p>
+<p>C.main包中，不能有init函数</p>
+<p>D.init函数可以被其他函数调用</p>
+<p>4.关于循环语句，下面说法正确的有（CD）</p>
+<p>A.循环语句既支持for关键字，也支持while和do-while</p>
+<p>B.关键字for的基本使用方法与C&#x2F;C++中没有任何差异</p>
+<p>C.for循环支持continue和break来控制循环，但是它提供了一个更高级的break，可以选择中断哪一个循环</p>
+<p>D. for循环不支持以逗号为间隔的多个赋值语句，必须使用平行赋值的方式来初始化多个变量</p>
+<p>5.对于函数定义：</p>
+<p>func add(args …int) int {        sum :&#x3D; 0        for _, arg :&#x3D; range args {            sum +&#x3D; arg        }        return sum } 下面对add函数调用正确的是（ABD）</p>
+<p>A.add(1, 2)</p>
+<p>B.add(1, 3, 7)</p>
+<p>C.add([]int{1, 2})</p>
+<p>D.add([]int{1, 3, 7}…)</p>
+<p>6.关于局部变量的初始化，下面正确的使用方式是（ABC）</p>
+<p>A.var i int &#x3D; 10</p>
+<p>B.var i &#x3D; 10</p>
+<p>C.i :&#x3D; 10</p>
+<p>D.i &#x3D; 10</p>
+<p>8.下面哪些是 Golang 的特性？（多选）BCD</p>
+<p>A. 支持面向对象编程</p>
+<p>B.支持并发编程</p>
+<p>C.垃圾回收机制</p>
+<p>D.静态类型检查</p>
+<p>9.在 Go Modules 中，如何更新一个依赖的版本？ABD</p>
+<p>A.手动编辑go.mod文件</p>
+<p>B. 使用go get命令</p>
+<p>C.使用go mod vendor命令</p>
+<p>D.使用go mod tidy命令</p>
+<h2 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h2><p>1.数组是一个值类型（T）</p>
+<p>2.使用map不需要引入任何库（T）</p>
+<p>3.内置函数delete可以删除数组切片内的元素（F）</p>
+<p>4.指针是基础类型（F）</p>
+<p>5.interface{}是可以指向任意对象的Any类型（T）</p>
 <p>6.Golang不支持自动垃圾回收（F）</p>
 <p>7.下面代码中两个斜点之间的代码，比如json:”x”，作用是X字段在从结构体实例编码到JSON数据格式的时候，使用x作为名字，这可以看作是一种重命名的方式（T）</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">type Position struct &#123;</span><br><span class="line">        X int `json:&quot;x&quot;`</span><br><span class="line">        Y int `json:&quot;y&quot;`</span><br><span class="line">        Z int `json:&quot;z&quot;`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<p>8.通过成员变量或函数首字母的大小写来决定其作用域（）</p>
-<p>9.对于常量定义zero (const zero &#x3D; 0.0)，zero是浮点型常量（）</p>
-<p>10.对变量x的取反操作是~x（）</p>
-<p>1.golang支持goto语句（）</p>
-<p>2.匿名函数可以直接赋值给一个变量或者直接执行（）</p>
-<p>3.如果调用方调用了一个具有多返回值的方法，但是却不想关心其中的某个返回值，可以简单地用一个下划线“_”来跳过这个返回值，该下划线对应的变量叫匿名变量（）</p>
-<p>4.错误是业务过程的一部分，而异常不是（）</p>
-<p>5.golang虽然没有显式的提供继承语法，但是通过匿名组合实现了继承（）</p>
-<p>6.使用for range迭代map时每次迭代的顺序可能不一样，因为map的迭代是随机的（）</p>
-<p>7.import后面的最后一个元素是包名（）</p>
-<h2 id="编程"><a href="#编程" class="headerlink" title="编程"></a>编程</h2>
+<p>8.通过成员变量或函数首字母的大小写来决定其作用域（T）</p>
+<p>9.对于常量定义zero (const zero &#x3D; 0.0)，zero是浮点型常量（F）</p>
+<p>10.对变量x的取反操作是~x（F）</p>
+<p>1.golang支持goto语句（T）</p>
+<p>2.匿名函数可以直接赋值给一个变量或者直接执行（T）</p>
+<p>3.如果调用方调用了一个具有多返回值的方法，但是却不想关心其中的某个返回值，可以简单地用一个下划线“_”来跳过这个返回值，该下划线对应的变量叫匿名变量（T）</p>
+<p>4.错误是业务过程的一部分，而异常不是（T）</p>
+<p>5.golang虽然没有显式的提供继承语法，但是通过匿名组合实现了继承（T）</p>
+<p>6.使用for range迭代map时每次迭代的顺序可能不一样，因为map的迭代是随机的（T）</p>
+<p>7.import后面的最后一个元素是包名（F）</p>
+<h2 id="编程"><a href="#编程" class="headerlink" title="编程"></a>编程</h2><p>1.字符串变化大小写</p>
+<p>将字符串变化大小写并输出</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入一行字符串，长度无上限，中间无空格</p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>输出为一行，先将字符串转换为大写，再将字符串转化成小写，中间用空格隔开</p>
+<h3 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例:"></a>输入样例:</h3><p>CuitCBIYes!</p>
+<h3 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例:"></a>输出样例:</h3><p>CUITCBIYES! cuitcbiyes!</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;strings&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> str <span class="type">string</span></span><br><span class="line">	fmt.Scanln(&amp;str)</span><br><span class="line"></span><br><span class="line">	strU := strings.ToUpper(str)</span><br><span class="line">	strL := strings.ToLower(str)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;%s %s&quot;</span>, strU, strL)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>2.画梯形</p>
+<p>输入一个数字，根据数字画梯形</p>
+<h3 id="输入格式-1"><a href="#输入格式-1" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入：</p>
+<h3 id="输出格式-1"><a href="#输出格式-1" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>一个小于10的数字</p>
+<h3 id="输入样例-1"><a href="#输入样例-1" class="headerlink" title="输入样例:"></a>输入样例:</h3><p>5</p>
+<h3 id="输出样例-1"><a href="#输出样例-1" class="headerlink" title="输出样例:"></a>输出样例:</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">********************</span><br><span class="line"> ******************</span><br><span class="line">  ****************</span><br><span class="line">   **************</span><br><span class="line">    ************</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;os&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> n <span class="type">int</span></span><br><span class="line">	fmt.Scanln(&amp;n)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> n &lt; <span class="number">10</span> &#123;</span><br><span class="line">		<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; n; i++ &#123;</span><br><span class="line">			<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; i; j++ &#123;</span><br><span class="line">				fmt.Print(<span class="string">&quot; &quot;</span>)</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">for</span> j := <span class="number">20</span> - i*<span class="number">2</span>; j &gt; <span class="number">0</span>; j = j - <span class="number">1</span> &#123;</span><br><span class="line">				fmt.Printf(<span class="string">&quot;%s&quot;</span>, <span class="string">&quot;*&quot;</span>)</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			fmt.Println()</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		os.Exit(<span class="number">0</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>3.输出“水仙花数”</p>
+<p>输出介于a,b（含a,b，且a&lt;&#x3D;b）的所有“水仙花数”。所谓“水仙花数”是指一个数，其各位数字立方和等于该数本身。例如，153是一个“水仙花数”，因为153&#x3D;13+53+33。  </p>
+<h3 id="输入格式-2"><a href="#输入格式-2" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>100 200</p>
+<h3 id="输出格式-2"><a href="#输出格式-2" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>153</p>
+<h3 id="输入样例-2"><a href="#输入样例-2" class="headerlink" title="输入样例:"></a>输入样例:</h3><p>100 900</p>
+<h3 id="输出样例-2"><a href="#输出样例-2" class="headerlink" title="输出样例:"></a>输出样例:</h3><p>153 </p>
+<p>370 </p>
+<p>371 </p>
+<p>407</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;math&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">answer</span><span class="params">(x <span class="type">int</span>)</span></span> <span class="type">bool</span> &#123;</span><br><span class="line">	<span class="keyword">var</span> bai = x % <span class="number">10</span></span><br><span class="line">	<span class="keyword">var</span> shi = (x / <span class="number">10</span>) % <span class="number">10</span></span><br><span class="line">	<span class="keyword">var</span> ge = (x / <span class="number">100</span>) % <span class="number">10</span></span><br><span class="line">	<span class="keyword">var</span> result = math.Pow(<span class="type">float64</span>(bai), <span class="number">3</span>) + math.Pow(<span class="type">float64</span>(shi), <span class="number">3</span>) + math.Pow(<span class="type">float64</span>(ge), <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> <span class="type">float64</span>(x) == result &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> a <span class="type">int</span></span><br><span class="line">	<span class="keyword">var</span> b <span class="type">int</span></span><br><span class="line">	fmt.Scanf(<span class="string">&quot;%d %d&quot;</span>, &amp;a, &amp;b)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i := a; i &lt; b+<span class="number">1</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> answer(i) == <span class="literal">true</span> &#123;</span><br><span class="line">			fmt.Println(i)</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>4.输入三角形的三边长a、b、c(边长可以是小数)，求三角形面积area，并输出,结果保留两位小数</p>
+<p>输入三角形的三边长a、b、c(边长可以是小数)，求三角形面积area，并输出。如果输入的三边构不成三角形，应给出“data error”的信息提示。注：根据“海伦－秦九韶”公式，area＝√p(p-a)(p-b)(p-c)，其中p＝(a+b+c)&#x2F;2。编程可用素材：printf(“\nplease input triange sides:”)…、printf(“Output:\ndata error\n”)…、printf(“Output:\narea&#x3D;…\n”…。</p>
+<h3 id="输入格式-3"><a href="#输入格式-3" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>3 4 5</p>
+<h3 id="输出格式-3"><a href="#输出格式-3" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>6.00</p>
+<h3 id="输入样例-3"><a href="#输入样例-3" class="headerlink" title="输入样例:"></a>输入样例:</h3><p>4 5 8</p>
+<h3 id="输出样例-3"><a href="#输出样例-3" class="headerlink" title="输出样例:"></a>输出样例:</h3><p>8.18</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
   </div>
 </article>
 
@@ -205,7 +457,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#go%E8%AF%AD%E8%A8%80%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">go语言期末复习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A1%AB%E7%A9%BA"><span class="toc-number">1.1.</span> <span class="toc-text">填空</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E9%80%89"><span class="toc-number">1.2.</span> <span class="toc-text">单选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E9%80%89"><span class="toc-number">1.3.</span> <span class="toc-text">多选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E6%96%AD"><span class="toc-number">1.4.</span> <span class="toc-text">判断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B"><span class="toc-number">1.5.</span> <span class="toc-text">编程</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#go%E8%AF%AD%E8%A8%80%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">go语言期末复习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A1%AB%E7%A9%BA"><span class="toc-number">1.1.</span> <span class="toc-text">填空</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E9%80%89"><span class="toc-number">1.2.</span> <span class="toc-text">单选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E9%80%89"><span class="toc-number">1.3.</span> <span class="toc-text">多选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E6%96%AD"><span class="toc-number">1.4.</span> <span class="toc-text">判断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B"><span class="toc-number">1.5.</span> <span class="toc-text">编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.5.1.</span> <span class="toc-text">输入格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.5.2.</span> <span class="toc-text">输出格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B"><span class="toc-number">1.5.3.</span> <span class="toc-text">输入样例:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B"><span class="toc-number">1.5.4.</span> <span class="toc-text">输出样例:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-1"><span class="toc-number">1.5.5.</span> <span class="toc-text">输入格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-1"><span class="toc-number">1.5.6.</span> <span class="toc-text">输出格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B-1"><span class="toc-number">1.5.7.</span> <span class="toc-text">输入样例:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-1"><span class="toc-number">1.5.8.</span> <span class="toc-text">输出样例:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-2"><span class="toc-number">1.5.9.</span> <span class="toc-text">输入格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-2"><span class="toc-number">1.5.10.</span> <span class="toc-text">输出格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B-2"><span class="toc-number">1.5.11.</span> <span class="toc-text">输入样例:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-2"><span class="toc-number">1.5.12.</span> <span class="toc-text">输出样例:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-3"><span class="toc-number">1.5.13.</span> <span class="toc-text">输入格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-3"><span class="toc-number">1.5.14.</span> <span class="toc-text">输出格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B-3"><span class="toc-number">1.5.15.</span> <span class="toc-text">输入样例:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-3"><span class="toc-number">1.5.16.</span> <span class="toc-text">输出样例:</span></a></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
